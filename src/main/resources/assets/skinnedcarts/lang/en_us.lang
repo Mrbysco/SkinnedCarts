@@ -1,0 +1,11 @@
+#Creative Tab Name
+itemGroup.skinnedcarts=Skinned Carts
+
+#Config name
+skinnedcarts.config.title=Skinned Carts config
+
+#Items
+item.skinnedcarts:frog_minecart.name=Frog Minecart
+
+#Entity
+entity.skinnedcarts:FrogMinecart.name=Frog Minecart

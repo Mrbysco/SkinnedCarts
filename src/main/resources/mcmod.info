@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "skinnedcarts",
+  "name": "Skinned Carts",
+  "description": "Adding Minecarts with skins.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["Mrbysco"],
+  "credits": "Gentleman_Gnu for the idea",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

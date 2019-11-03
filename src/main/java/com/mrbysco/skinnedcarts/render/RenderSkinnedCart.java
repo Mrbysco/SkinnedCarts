@@ -8,7 +8,6 @@ import net.minecraft.client.model.ModelMinecart;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RenderMinecart;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -41,7 +40,6 @@ public class RenderSkinnedCart<T extends EntitySkinnedCart> extends Render<T>
     public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         GlStateManager.pushMatrix();
-        System.out.println(getEntityTexture(entity));
         this.bindEntityTexture(entity);
         long i = (long)entity.getEntityId() * 493286711L;
         i = i * i * 4392167121L + i * 98761L;
@@ -79,11 +77,28 @@ public class RenderSkinnedCart<T extends EntitySkinnedCart> extends Render<T>
             if (vec3d3.length() != 0.0D)
             {
                 vec3d3 = vec3d3.normalize();
-                entityYaw = (float)(Math.atan2(vec3d3.z, vec3d3.x) * 180.0D / Math.PI);
+                entityYaw = (float)(Math.atan2(vec3d3.z, vec3d3.x) / Math.PI) * 180F;
                 f3 = (float)(Math.atan(vec3d3.y) * 73.0D);
             }
         }
 
+        entityYaw %= 360;
+        if (entityYaw < 0)
+        	entityYaw += 360;
+        entityYaw += 360;
+        
+        double serverYaw = entity.rotationYaw;
+        serverYaw += 180;
+        serverYaw %= 360;
+        if (serverYaw < 0)
+            serverYaw += 360;
+        serverYaw += 360;
+
+        if (Math.abs(entityYaw - serverYaw) > 90) {
+        	entityYaw += 180;
+        	f3 = -f3;
+        }
+        
         GlStateManager.translate((float)x, (float)y + 0.375F, (float)z);
         GlStateManager.rotate(180.0F - entityYaw, 0.0F, 1.0F, 0.0F);
         GlStateManager.rotate(-f3, 0.0F, 0.0F, 1.0F);
@@ -97,7 +112,11 @@ public class RenderSkinnedCart<T extends EntitySkinnedCart> extends Render<T>
 
         if (f5 > 0.0F)
         {
-            GlStateManager.rotate(MathHelper.sin(f5) * f5 * f6 / 10.0F * (float)entity.getRollingDirection(), 1.0F, 0.0F, 0.0F);
+
+            float angle = (MathHelper.sin(f5) * f5 * f6) / 10F;
+            angle = Math.min(angle, 0.8f);
+            angle = Math.copySign(angle, ((EntitySkinnedCart)entity).getRollingDirection());
+            GlStateManager.rotate(angle * f5 * f6 / 10.0F * (float)entity.getRollingDirection(), 1.0F, 0.0F, 0.0F);
         }
 
         int j = entity.getDisplayTileOffset();

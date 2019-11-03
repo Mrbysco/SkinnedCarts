@@ -38,7 +38,8 @@ public class SkinnedCarts {
 	{
 		logger.info("Registering Skinned Cart Config");
 		MinecraftForge.EVENT_BUS.register(new CartConfigGen());
-		
+
+		logger.info("Registering Skinned Cart Entities");
 		CartEntities.register();
 		
 		proxy.Preinit();

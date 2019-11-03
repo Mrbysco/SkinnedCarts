@@ -2,7 +2,14 @@ package com.mrbysco.skinnedcarts.items;
 
 import com.mrbysco.skinnedcarts.Reference;
 import com.mrbysco.skinnedcarts.SkinnedCarts;
+import com.mrbysco.skinnedcarts.entity.EntityElephantCart;
+import com.mrbysco.skinnedcarts.entity.EntityFrogCart;
+import com.mrbysco.skinnedcarts.entity.EntityPandaCart;
+import com.mrbysco.skinnedcarts.entity.EntityPelicanCart;
+import com.mrbysco.skinnedcarts.entity.EntityPufferFishCart;
 import com.mrbysco.skinnedcarts.entity.EntitySkinnedCart;
+import com.mrbysco.skinnedcarts.entity.EntitySnailCart;
+import com.mrbysco.skinnedcarts.entity.EntityTurtleCart;
 
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockRailBase;
@@ -12,14 +19,12 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
 import net.minecraft.dispenser.IBehaviorDispenseItem;
 import net.minecraft.dispenser.IBlockSource;
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
@@ -97,12 +102,9 @@ public class ItemCustomCart extends Item {
             source.getWorld().playEvent(1000, source.getBlockPos(), 0);
         }
     };
-    
-    public static ResourceLocation minecartName;
 
     public ItemCustomCart(String cartName)
     {
-        this.minecartName = new ResourceLocation(Reference.MOD_ID, cartName);
 		setTranslationKey(Reference.MOD_PREFIX + cartName);
 		setRegistryName(cartName);
         this.maxStackSize = 1;
@@ -130,6 +132,7 @@ public class ItemCustomCart extends Item {
         else
         {
             ItemStack itemstack = player.getHeldItem(hand);
+        	String cartName = itemstack.getItem().getRegistryName().getPath();
 
             if (!worldIn.isRemote)
             {
@@ -152,7 +155,7 @@ public class ItemCustomCart extends Item {
                     worldIn.spawnEntity(entityminecart);
                 } else {
                 	cartExists = false;
-                	player.sendMessage(new TextComponentString("Entity: " + this.minecartName + " does not exist."));
+                	player.sendMessage(new TextComponentString("Entity: " + cartName + " does not exist."));
                 }
             }
             if(cartExists) {
@@ -164,16 +167,37 @@ public class ItemCustomCart extends Item {
     }
     
     public static EntitySkinnedCart getMinecartEntity(World worldIn, double x, double y, double z, Item stack) {
-    	if(EntityList.isRegistered(minecartName)) {
-    		EntitySkinnedCart cart = (EntitySkinnedCart)EntityList.createEntityByIDFromName(minecartName, worldIn);
-    		if(cart != null ) {
-        		cart.setPosition(x, y, z);
-        		cart.setReturnItem(stack.getRegistryName().toString());
-    		}
-    		
-    		return cart;
-    	} else {
-    		return null;
+    	String cartName = stack.getRegistryName().getPath();
+    	EntitySkinnedCart cart = null;
+    	switch(cartName) {
+    		default:
+    			cart = new EntityFrogCart(worldIn);
+    			break;
+    		case "elephant_minecart":
+    			cart = new EntityElephantCart(worldIn);
+    			break;
+    		case "panda_minecart":
+    			cart = new EntityPandaCart(worldIn);
+    			break;
+    		case "pelican_minecart":
+    			cart = new EntityPelicanCart(worldIn);
+    			break;
+    		case "pufferfish_minecart":
+    			cart = new EntityPufferFishCart(worldIn);
+    			break;
+    		case "snail_minecart":
+    			cart = new EntitySnailCart(worldIn);
+    			break;
+    		case "turtle_minecart":
+    			cart = new EntityTurtleCart(worldIn);
+    			break;
     	}
+    	
+    	if(cart != null ) {
+    		cart.setPosition(x, y, z);
+    		cart.setReturnItem(stack.getRegistryName().toString());
+		}
+    	
+    	return cart;
     }
 }

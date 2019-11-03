@@ -8,7 +8,14 @@ import com.mrbysco.skinnedcarts.entity.EntityPelicanCart;
 import com.mrbysco.skinnedcarts.entity.EntityPufferFishCart;
 import com.mrbysco.skinnedcarts.entity.EntitySnailCart;
 import com.mrbysco.skinnedcarts.entity.EntityTurtleCart;
+import com.mrbysco.skinnedcarts.render.RenderElephantCart;
+import com.mrbysco.skinnedcarts.render.RenderFrogCart;
+import com.mrbysco.skinnedcarts.render.RenderPandaCart;
+import com.mrbysco.skinnedcarts.render.RenderPelicanCart;
+import com.mrbysco.skinnedcarts.render.RenderPufferFishCart;
 import com.mrbysco.skinnedcarts.render.RenderSkinnedCart;
+import com.mrbysco.skinnedcarts.render.RenderSnailCart;
+import com.mrbysco.skinnedcarts.render.RenderTurtleCart;
 import com.mrbysco.skinnedcarts.render.model.ModelElephant;
 import com.mrbysco.skinnedcarts.render.model.ModelFrog;
 import com.mrbysco.skinnedcarts.render.model.ModelPanda;
@@ -29,13 +36,13 @@ public class ClientProxy extends ServerProxy{
 	@Override
 	public void registerRender() {
 		SkinnedCarts.logger.info("Registering Skinned Cart Renders");
-		RenderingRegistry.registerEntityRenderingHandler(EntityElephantCart.class, renderManager -> new RenderSkinnedCart<EntityElephantCart>(renderManager, new ModelElephant(), "minecart_elephant"));
-		RenderingRegistry.registerEntityRenderingHandler(EntityFrogCart.class, renderManager -> new RenderSkinnedCart<EntityFrogCart>(renderManager, new ModelFrog(), "minecart_frog"));
-		RenderingRegistry.registerEntityRenderingHandler(EntityPandaCart.class, renderManager -> new RenderSkinnedCart<EntityPandaCart>(renderManager, new ModelPanda(), "minecart_panda"));
-		RenderingRegistry.registerEntityRenderingHandler(EntityPelicanCart.class, renderManager -> new RenderSkinnedCart<EntityPelicanCart>(renderManager, new ModelPelican(), "minecart_pelican"));
-		RenderingRegistry.registerEntityRenderingHandler(EntityPufferFishCart.class, renderManager -> new RenderSkinnedCart<EntityPufferFishCart>(renderManager, new ModelPufferFish(), "minecart_puffer_fish"));
-		RenderingRegistry.registerEntityRenderingHandler(EntitySnailCart.class, renderManager -> new RenderSkinnedCart<EntitySnailCart>(renderManager, new ModelSnail(), "minecart_snail"));
-		RenderingRegistry.registerEntityRenderingHandler(EntityTurtleCart.class, renderManager -> new RenderSkinnedCart<EntityTurtleCart>(renderManager, new ModelTurtle(), "minecart_turtle"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityElephantCart.class, renderManager -> new RenderElephantCart(renderManager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityFrogCart.class, renderManager -> new RenderFrogCart(renderManager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityPandaCart.class, renderManager -> new RenderPandaCart(renderManager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityPelicanCart.class, renderManager -> new RenderPelicanCart(renderManager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityPufferFishCart.class, renderManager -> new RenderPufferFishCart(renderManager));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySnailCart.class, renderManager -> new RenderSnailCart(renderManager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTurtleCart.class, renderManager -> new RenderTurtleCart(renderManager));
 	}
 	
 	@Override

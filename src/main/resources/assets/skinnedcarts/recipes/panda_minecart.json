@@ -1,0 +1,24 @@
+{
+  "result": {
+    "item": "skinnedcarts:panda_minecart"
+  },
+  "pattern": [
+	"BWB",
+    "WMW",
+    "BWB"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": {
+      "item": "minecraft:minecart"
+    },
+	"B": {
+      "item": "minecraft:wool",
+      "data": 15
+    },
+	"W": {
+      "item": "minecraft:wool",
+      "data": 0
+    }
+  }
+}

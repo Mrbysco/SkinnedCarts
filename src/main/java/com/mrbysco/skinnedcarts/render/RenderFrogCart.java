@@ -95,6 +95,7 @@ public class RenderFrogCart extends RenderSkinnedCart<EntityFrogCart>
         GlStateManager.translate((float)x, (float)y + 0.375F, (float)z);
         GlStateManager.rotate(180.0F - entityYaw, 0.0F, 1.0F, 0.0F);
         GlStateManager.rotate(-f3, 0.0F, 0.0F, 1.0F);
+        GlStateManager.rotate(180, 0, 1, 0);
         float f5 = (float)entity.getRollingAmplitude() - partialTicks;
         float f6 = entity.getDamage() - partialTicks;
 

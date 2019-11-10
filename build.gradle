@@ -20,6 +20,13 @@ compileJava {
     sourceCompatibility = targetCompatibility = '1.8'
 }
 
+repositories {
+    maven {
+        name 'DVS1 Maven FS'
+        url 'http://dvs1.progwml6.com/files/maven'
+    }
+}
+
 minecraft {
     version = "1.12.2-14.23.5.2768"
     runDir = "run"
@@ -29,7 +36,7 @@ minecraft {
 }
 
 dependencies {
-
+	deobfCompile "mezz.jei:jei_1.12.2:4.13.1.+"
 }
 
 processResources {

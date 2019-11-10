@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "skinnedcarts:elephant_minecart"
+  },
+  "pattern": [
+	"GGG",
+    "GMG",
+    "GGG"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": {
+      "item": "minecraft:minecart"
+    },
+	"G": {
+      "item": "minecraft:wool",
+      "data": 7
+    }
+  }
+}

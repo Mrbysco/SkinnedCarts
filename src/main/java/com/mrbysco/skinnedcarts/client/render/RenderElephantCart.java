@@ -23,7 +23,6 @@ public class RenderElephantCart<T extends AbstractSkinnedCart> extends RenderSki
     public RenderElephantCart(EntityRendererManager renderManagerIn)
     {
         super(renderManagerIn);
-        this.shadowSize = 0.5F;
     }
 
     /**

@@ -17,7 +17,7 @@ public class RenderSkinnedCart<T extends AbstractMinecartEntity> extends EntityR
     public RenderSkinnedCart(EntityRendererManager renderManagerIn)
     {
         super(renderManagerIn);
-        this.shadowSize = 0.5F;
+        this.shadowSize = 0.7F;
     }
     
     public static ResourceLocation createLocation(String cartName) {

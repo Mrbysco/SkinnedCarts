@@ -1,6 +1,6 @@
 {
     "_comment": "Creative Tab Name",
-    "itemGroup.skinnedcarts": "Skinned Carts",
+    "itemGroup.skinnedcarts.tab": "Skinned Carts",
 
     "_comment": "Config name",
     "skinnedcarts.config.title": "Skinned Carts config",

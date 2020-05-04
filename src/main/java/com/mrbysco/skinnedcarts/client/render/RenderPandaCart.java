@@ -23,7 +23,6 @@ public class RenderPandaCart<T extends AbstractSkinnedCart> extends RenderSkinne
     public RenderPandaCart(EntityRendererManager renderManagerIn)
     {
         super(renderManagerIn);
-        this.shadowSize = 0.5F;
     }
 
     /**

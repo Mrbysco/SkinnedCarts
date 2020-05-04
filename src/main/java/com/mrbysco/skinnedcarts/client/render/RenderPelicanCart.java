@@ -23,7 +23,6 @@ public class RenderPelicanCart<T extends AbstractSkinnedCart> extends RenderSkin
     public RenderPelicanCart(EntityRendererManager renderManagerIn)
     {
         super(renderManagerIn);
-        this.shadowSize = 0.5F;
     }
 
     /**

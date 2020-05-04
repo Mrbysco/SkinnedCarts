@@ -2,8 +2,8 @@ package com.mrbysco.skinnedcarts.client.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.mrbysco.skinnedcarts.entity.AbstractSkinnedCart;
 import com.mrbysco.skinnedcarts.client.render.model.ModelSnail;
+import com.mrbysco.skinnedcarts.entity.AbstractSkinnedCart;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -23,7 +23,6 @@ public class RenderSnailCart<T extends AbstractSkinnedCart> extends RenderSkinne
     public RenderSnailCart(EntityRendererManager renderManagerIn)
     {
         super(renderManagerIn);
-        this.shadowSize = 0.5F;
     }
 
     /**

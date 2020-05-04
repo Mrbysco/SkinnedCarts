@@ -23,7 +23,6 @@ public class RenderFrogCart<T extends AbstractSkinnedCart> extends RenderSkinned
     public RenderFrogCart(EntityRendererManager renderManagerIn)
     {
         super(renderManagerIn);
-        this.shadowSize = 0.5F;
     }
 
     /**
@@ -81,10 +80,10 @@ public class RenderFrogCart<T extends AbstractSkinnedCart> extends RenderSkinned
             f3 = -f3;
         }
 
-        matrixStackIn.translate(0.0D, 0.375D, 0.0D);
+        matrixStackIn.translate(0.0D, 0.7D, 0.0D);
         matrixStackIn.rotate(Vector3f.YP.rotationDegrees(180.0F - entityYaw));
         matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(-f3));
-        matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(180.0F));
+        matrixStackIn.rotate(Vector3f.YP.rotationDegrees(180.0F));
         float f5 = (float)entityIn.getRollingAmplitude() - partialTicks;
         float f6 = entityIn.getDamage() - partialTicks;
         if (f6 < 0.0F) {

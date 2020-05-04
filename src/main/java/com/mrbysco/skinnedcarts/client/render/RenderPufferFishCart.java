@@ -23,7 +23,6 @@ public class RenderPufferFishCart<T extends AbstractSkinnedCart> extends RenderS
     public RenderPufferFishCart(EntityRendererManager renderManagerIn)
     {
         super(renderManagerIn);
-        this.shadowSize = 0.5F;
     }
 
     /**

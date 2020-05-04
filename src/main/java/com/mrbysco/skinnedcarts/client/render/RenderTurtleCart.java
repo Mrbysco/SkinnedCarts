@@ -23,7 +23,6 @@ public class RenderTurtleCart<T extends AbstractSkinnedCart> extends RenderSkinn
     public RenderTurtleCart(EntityRendererManager renderManagerIn)
     {
         super(renderManagerIn);
-        this.shadowSize = 0.5F;
     }
 
     /**

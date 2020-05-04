@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "skinnedcarts:pufferfish_minecart"
+  },
+  "pattern": [
+	"YWY",
+    "WMW",
+    "YWY"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": {
+      "item": "minecraft:minecart"
+    },
+	"W": {
+      "item": "minecraft:white_wool"
+    },
+	"Y": {
+      "item": "minecraft:yellow_wool"
+    }
+  }
+}

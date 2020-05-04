@@ -1,0 +1,14 @@
+modLoader="javafml"
+loaderVersion="[31,)"
+issueTrackerURL="https://github.com/Mrbysco/SkinnedCarts"
+
+[[mods]]
+modId="skinnedcarts"
+version="${file.jarVersion}"
+displayName="Skinned Carts"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/skinned-carts"
+authors="Mrbysco"
+description='''
+Adding Minecarts with skins.
+'''
+credits="Gentleman_Gnu for the idea"

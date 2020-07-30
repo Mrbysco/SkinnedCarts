@@ -6,6 +6,7 @@ import net.minecraft.entity.item.minecart.AbstractMinecartEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.RayTraceResult;
@@ -66,18 +67,17 @@ public abstract class AbstractSkinnedCart extends AbstractMinecartEntity {
 		return false;
 	}
 	
-	public boolean processInitialInteract(PlayerEntity player, Hand hand) {
-        if (super.processInitialInteract(player, hand)) return true;
-        if (player.func_226563_dT_()) {
-            return false;
+	public ActionResultType processInitialInteract(PlayerEntity player, Hand hand) {
+        ActionResultType ret = super.processInitialInteract(player, hand);
+        if (ret.isSuccessOrConsume()) return ret;
+        if (player.isSecondaryUseActive()) {
+            return ActionResultType.PASS;
         } else if (this.isBeingRidden()) {
-            return true;
+            return ActionResultType.PASS;
+        } else if (!this.world.isRemote) {
+            return player.startRiding(this) ? ActionResultType.CONSUME : ActionResultType.PASS;
         } else {
-            if (!this.world.isRemote) {
-                player.startRiding(this);
-            }
-
-            return true;
+            return ActionResultType.SUCCESS;
         }
     }
 
@@ -129,7 +129,7 @@ public abstract class AbstractSkinnedCart extends AbstractMinecartEntity {
         return cart;
     }
 
-    public static enum Type {
+    public enum Type {
         ELEPHANT(CartRegistry.ELEPHANT_CART_ITEM),
         FROG(CartRegistry.FROG_CART_ITEM),
         PANDA(CartRegistry.PANDA_CART_ITEM),

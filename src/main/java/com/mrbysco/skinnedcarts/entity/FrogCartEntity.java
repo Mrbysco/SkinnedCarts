@@ -9,7 +9,7 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.FMLPlayMessages;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -61,7 +61,7 @@ public class FrogCartEntity extends AbstractSkinnedCart {
 	}
 
 	@Override
-	public ActionResultType applyPlayerInteraction(PlayerEntity player, Vec3d vec, Hand hand) {
+	public ActionResultType applyPlayerInteraction(PlayerEntity player, Vector3d vec, Hand hand) {
 		if(CartConfig.SERVER.WednesdayFrogCart.get() && itsWednesday()) {
 			if (!world.isRemote) {
 				this.playLivingSound();

@@ -7,13 +7,13 @@ import com.mrbysco.skinnedcarts.entity.AbstractSkinnedCart;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.Vector3f;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 
 public class RenderPandaCart<T extends AbstractSkinnedCart> extends RenderSkinnedCart<T> {
     private static ResourceLocation CART_TEXTURES = createLocation("minecart_panda");
@@ -41,25 +41,25 @@ public class RenderPandaCart<T extends AbstractSkinnedCart> extends RenderSkinne
         double d1 = MathHelper.lerp((double)partialTicks, entityIn.lastTickPosY, entityIn.getPosY());
         double d2 = MathHelper.lerp((double)partialTicks, entityIn.lastTickPosZ, entityIn.getPosZ());
         double d3 = (double)0.3F;
-        Vec3d vec3d = entityIn.getPos(d0, d1, d2);
+        Vector3d Vector3d = entityIn.getPos(d0, d1, d2);
         float f3 = MathHelper.lerp(partialTicks, entityIn.prevRotationPitch, entityIn.rotationPitch);
-        if (vec3d != null) {
-            Vec3d vec3d1 = entityIn.getPosOffset(d0, d1, d2, (double)0.3F);
-            Vec3d vec3d2 = entityIn.getPosOffset(d0, d1, d2, (double)-0.3F);
-            if (vec3d1 == null) {
-                vec3d1 = vec3d;
+        if (Vector3d != null) {
+            Vector3d Vector3d1 = entityIn.getPosOffset(d0, d1, d2, (double)0.3F);
+            Vector3d Vector3d2 = entityIn.getPosOffset(d0, d1, d2, (double)-0.3F);
+            if (Vector3d1 == null) {
+                Vector3d1 = Vector3d;
             }
 
-            if (vec3d2 == null) {
-                vec3d2 = vec3d;
+            if (Vector3d2 == null) {
+                Vector3d2 = Vector3d;
             }
 
-            matrixStackIn.translate(vec3d.x - d0, (vec3d1.y + vec3d2.y) / 2.0D - d1, vec3d.z - d2);
-            Vec3d vec3d3 = vec3d2.add(-vec3d1.x, -vec3d1.y, -vec3d1.z);
-            if (vec3d3.length() != 0.0D) {
-                vec3d3 = vec3d3.normalize();
-                entityYaw = (float)(Math.atan2(vec3d3.z, vec3d3.x) * 180.0D / Math.PI);
-                f3 = (float)(Math.atan(vec3d3.y) * 73.0D);
+            matrixStackIn.translate(Vector3d.x - d0, (Vector3d1.y + Vector3d2.y) / 2.0D - d1, Vector3d.z - d2);
+            Vector3d Vector3d3 = Vector3d2.add(-Vector3d1.x, -Vector3d1.y, -Vector3d1.z);
+            if (Vector3d3.length() != 0.0D) {
+                Vector3d3 = Vector3d3.normalize();
+                entityYaw = (float)(Math.atan2(Vector3d3.z, Vector3d3.x) * 180.0D / Math.PI);
+                f3 = (float)(Math.atan(Vector3d3.y) * 73.0D);
             }
         }
 

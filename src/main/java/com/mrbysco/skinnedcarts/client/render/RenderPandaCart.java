@@ -7,13 +7,13 @@ import com.mrbysco.skinnedcarts.entity.AbstractSkinnedCart;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.vector.Vector3f;
 
 public class RenderPandaCart<T extends AbstractSkinnedCart> extends RenderSkinnedCart<T> {
     private static ResourceLocation CART_TEXTURES = createLocation("minecart_panda");

@@ -2,7 +2,7 @@ package com.mrbysco.skinnedcarts.client.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.mrbysco.skinnedcarts.client.render.model.ModelPelican;
+import com.mrbysco.skinnedcarts.client.render.model.ModelPenguin;
 import com.mrbysco.skinnedcarts.entity.AbstractSkinnedCart;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -15,12 +15,12 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3f;
 
-public class RenderPelicanCart<T extends AbstractSkinnedCart> extends RenderSkinnedCart<T> {
-    private static ResourceLocation CART_TEXTURES = createLocation("minecart_pelican");
+public class RenderPenguinCart<T extends AbstractSkinnedCart> extends RenderSkinnedCart<T> {
+    private static ResourceLocation CART_TEXTURES = createLocation("minecart_penguin");
     /** instance of ModelMinecart for rendering */
-    private final EntityModel<T> modelMinecart = new ModelPelican<>();
+    private final EntityModel<T> modelMinecart = new ModelPenguin<>();
 
-    public RenderPelicanCart(EntityRendererManager renderManagerIn)
+    public RenderPenguinCart(EntityRendererManager renderManagerIn)
     {
         super(renderManagerIn);
     }

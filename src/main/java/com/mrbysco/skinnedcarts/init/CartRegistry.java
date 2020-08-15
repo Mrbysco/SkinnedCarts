@@ -2,13 +2,18 @@ package com.mrbysco.skinnedcarts.init;
 
 import com.mrbysco.skinnedcarts.Reference;
 import com.mrbysco.skinnedcarts.entity.AbstractSkinnedCart.Type;
+import com.mrbysco.skinnedcarts.entity.BeeCartEntity;
 import com.mrbysco.skinnedcarts.entity.ElephantCartEntity;
 import com.mrbysco.skinnedcarts.entity.FrogCartEntity;
+import com.mrbysco.skinnedcarts.entity.GreenFrogCartEntity;
+import com.mrbysco.skinnedcarts.entity.LadybugCartEntity;
 import com.mrbysco.skinnedcarts.entity.PandaCartEntity;
 import com.mrbysco.skinnedcarts.entity.PelicanCartEntity;
+import com.mrbysco.skinnedcarts.entity.PenguinCartEntity;
 import com.mrbysco.skinnedcarts.entity.PufferFishCartEntity;
 import com.mrbysco.skinnedcarts.entity.SnailCartEntity;
 import com.mrbysco.skinnedcarts.entity.TurtleCartEntity;
+import com.mrbysco.skinnedcarts.entity.WombatCartEntity;
 import com.mrbysco.skinnedcarts.items.CustomCartItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
@@ -32,9 +37,13 @@ public class CartRegistry {
     public static final RegistryObject<Item> PUFFERFISH_CART_ITEM = ITEMS.register("pufferfish_minecart", () -> new CustomCartItem(Type.PUFFERFISH, itemBuilder()));
     public static final RegistryObject<Item> SNAIL_CART_ITEM = ITEMS.register("snail_minecart", () -> new CustomCartItem(Type.SNAIL, itemBuilder()));
     public static final RegistryObject<Item> TURTLE_CART_ITEM = ITEMS.register("turtle_minecart", () -> new CustomCartItem(Type.TURTLE, itemBuilder()));
+    public static final RegistryObject<Item> BEE_CART_ITEM = ITEMS.register("bee_minecart", () -> new CustomCartItem(Type.BEE, itemBuilder()));
+    public static final RegistryObject<Item> GREEN_FROG_CART_ITEM = ITEMS.register("green_frog_minecart", () -> new CustomCartItem(Type.GREEN_FROG, itemBuilder()));
+    public static final RegistryObject<Item> LADYBUG_CART_ITEM = ITEMS.register("ladybug_minecart", () -> new CustomCartItem(Type.LADYBUG, itemBuilder()));
+    public static final RegistryObject<Item> PENGUIN_CART_ITEM = ITEMS.register("penguin_minecart", () -> new CustomCartItem(Type.PENGUIN, itemBuilder()));
+    public static final RegistryObject<Item> WOMBAT_CART_ITEM = ITEMS.register("wombat_minecart", () -> new CustomCartItem(Type.WOMBAT, itemBuilder()));
 
     public static final RegistryObject<SoundEvent> WEDNESDAY_FROG_CART = SOUND_EVENTS.register("minecart.wednesday.frog", () -> new SoundEvent(new ResourceLocation(Reference.MOD_ID, "minecart.wednesday.frog")));
-
 
     private static Item.Properties itemBuilder() { return new Item.Properties(); }
 
@@ -52,6 +61,16 @@ public class CartRegistry {
             .size(0.98F, 0.7F).setCustomClientFactory(SnailCartEntity::new)));
     public static final RegistryObject<EntityType<TurtleCartEntity>> TURTLE_CART = ENTITIES.register("turtle_minecart", () -> register("turtle_minecart", EntityType.Builder.<TurtleCartEntity>create(TurtleCartEntity::new, EntityClassification.MISC)
             .size(0.98F, 0.7F).setCustomClientFactory(TurtleCartEntity::new)));
+    public static final RegistryObject<EntityType<BeeCartEntity>> BEE_CART = ENTITIES.register("bee_minecart", () -> register("bee_minecart", EntityType.Builder.<BeeCartEntity>create(BeeCartEntity::new, EntityClassification.MISC)
+            .size(0.98F, 0.7F).setCustomClientFactory(BeeCartEntity::new)));
+    public static final RegistryObject<EntityType<GreenFrogCartEntity>> GREEN_FROG_CART = ENTITIES.register("green_frog_minecart", () -> register("green_frog_minecart", EntityType.Builder.<GreenFrogCartEntity>create(GreenFrogCartEntity::new, EntityClassification.MISC)
+            .size(0.98F, 0.7F).setCustomClientFactory(GreenFrogCartEntity::new)));
+    public static final RegistryObject<EntityType<LadybugCartEntity>> LADYBUG_CART = ENTITIES.register("ladybug_minecart", () -> register("ladybug_minecart", EntityType.Builder.<LadybugCartEntity>create(LadybugCartEntity::new, EntityClassification.MISC)
+            .size(0.98F, 0.7F).setCustomClientFactory(LadybugCartEntity::new)));
+    public static final RegistryObject<EntityType<PenguinCartEntity>> PENGUIN_CART = ENTITIES.register("penguin_minecart", () -> register("penguin_minecart", EntityType.Builder.<PenguinCartEntity>create(PenguinCartEntity::new, EntityClassification.MISC)
+            .size(0.98F, 0.7F).setCustomClientFactory(PenguinCartEntity::new)));
+    public static final RegistryObject<EntityType<WombatCartEntity>> WOMBAT_CART = ENTITIES.register("wombat_minecart", () -> register("wombat_minecart", EntityType.Builder.<WombatCartEntity>create(WombatCartEntity::new, EntityClassification.MISC)
+            .size(0.98F, 0.7F).setCustomClientFactory(WombatCartEntity::new)));
 
     public static <T extends Entity> EntityType<T> register(String id, EntityType.Builder<T> builder) {
         return builder.build(id);

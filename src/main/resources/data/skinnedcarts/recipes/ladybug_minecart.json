@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "skinnedcarts:ladybug_minecart"
+  },
+  "pattern": [
+	"RRR",
+    "RMR",
+    "BBB"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": {
+      "item": "minecraft:minecart"
+    },
+    "R": {
+      "item": "minecraft:red_wool"
+    },
+    "B": {
+      "item": "minecraft:black_wool"
+    }
+  }
+}

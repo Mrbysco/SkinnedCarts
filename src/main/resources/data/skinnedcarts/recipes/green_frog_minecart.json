@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "skinnedcarts:green_frog_minecart"
+  },
+  "pattern": [
+    "GGG",
+    "GMG",
+    "WWW"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": {
+      "item": "minecraft:minecart"
+    },
+    "G": {
+      "item": "minecraft:green_wool"
+    },
+    "W": {
+      "item": "minecraft:white_wool"
+    }
+  }
+}

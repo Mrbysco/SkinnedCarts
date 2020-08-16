@@ -30,5 +30,4 @@ public class ElephantCartEntity extends AbstractSkinnedCart {
 	Type getSkinCartType() {
 		return Type.ELEPHANT;
 	}
-
 }

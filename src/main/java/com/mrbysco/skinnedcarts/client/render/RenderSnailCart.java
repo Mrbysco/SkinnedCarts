@@ -83,14 +83,15 @@ public class RenderSnailCart<T extends AbstractSkinnedCart> extends RenderSkinne
         matrixStackIn.translate(0.0D, 0.375D, 0.0D);
         matrixStackIn.rotate(Vector3f.YP.rotationDegrees(180.0F - entityYaw));
         matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(-f3));
-        float f5 = (float)entityIn.getRollingAmplitude() - partialTicks;
-        float f6 = entityIn.getDamage() - partialTicks;
-        if (f6 < 0.0F) {
-            f6 = 0.0F;
+
+        float roll = (float)entityIn.getRollingAmplitude() - partialTicks;
+        float damage = entityIn.getDamage() - partialTicks;
+        if (damage < 0.0F) {
+            damage = 0.0F;
         }
 
-        if (f5 > 0.0F) {
-            matrixStackIn.rotate(Vector3f.XP.rotationDegrees(MathHelper.sin(f5) * f5 * f6 / 10.0F * (float)entityIn.getRollingDirection()));
+        if (roll > 0.0F) {
+            matrixStackIn.rotate(Vector3f.XP.rotationDegrees(MathHelper.sin(roll) * roll * damage / 10.0F * (float)entityIn.getRollingDirection()));
         }
 //        if (f5 > 0.0F) {
 //            float angle = (MathHelper.sin(f5) * f5 * f6) / 10F;

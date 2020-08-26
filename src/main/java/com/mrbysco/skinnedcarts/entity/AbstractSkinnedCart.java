@@ -20,8 +20,7 @@ public abstract class AbstractSkinnedCart extends AbstractMinecartEntity {
 		super(type, worldIn);
 	}
 	
-	public AbstractSkinnedCart(EntityType<?> type, World worldIn, double x, double y, double z)
-    {
+	public AbstractSkinnedCart(EntityType<?> type, World worldIn, double x, double y, double z) {
         super(type, worldIn, x, y, z);
     }
 
@@ -85,8 +84,7 @@ public abstract class AbstractSkinnedCart extends AbstractMinecartEntity {
     /**
      * Called every tick the minecart is on an activator rail.
      */
-    public void onActivatorRailPass(int x, int y, int z, boolean receivingPower)
-    {
+    public void onActivatorRailPass(int x, int y, int z, boolean receivingPower) {
         if (receivingPower) {
             if (this.isBeingRidden()) {
                 this.removePassengers();

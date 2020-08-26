@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "skinnedcarts:wombat_minecart"
+  },
+  "pattern": [
+    "BBB",
+    "BMB",
+    "BBB"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": {
+      "item": "minecraft:minecart"
+    },
+    "B": {
+      "item": "minecraft:brown_wool"
+    }
+  }
+}

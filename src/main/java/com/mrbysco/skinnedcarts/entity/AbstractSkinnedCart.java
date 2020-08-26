@@ -65,10 +65,11 @@ public abstract class AbstractSkinnedCart extends AbstractMinecartEntity {
 	public boolean isPoweredCart() {
 		return false;
 	}
-	
-	public boolean processInitialInteract(PlayerEntity player, Hand hand) {
+
+    @Override
+    public boolean processInitialInteract(PlayerEntity player, Hand hand) {
         if (super.processInitialInteract(player, hand)) return true;
-        if (player.func_226563_dT_()) {
+        if (player.isSecondaryUseActive()) {
             return false;
         } else if (this.isBeingRidden()) {
             return true;
@@ -124,19 +125,39 @@ public abstract class AbstractSkinnedCart extends AbstractMinecartEntity {
             case SNAIL:
                 cart = new SnailCartEntity(CartRegistry.SNAIL_CART.get(), worldIn, x, y, z);
                 break;
+            case BEE:
+                cart = new SnailCartEntity(CartRegistry.BEE_CART.get(), worldIn, x, y, z);
+                break;
+            case GREEN_FROG:
+                cart = new SnailCartEntity(CartRegistry.GREEN_FROG_CART.get(), worldIn, x, y, z);
+                break;
+            case LADYBUG:
+                cart = new SnailCartEntity(CartRegistry.LADYBUG_CART.get(), worldIn, x, y, z);
+                break;
+            case PENGUIN:
+                cart = new SnailCartEntity(CartRegistry.PENGUIN_CART.get(), worldIn, x, y, z);
+                break;
+            case WOMBAT:
+                cart = new SnailCartEntity(CartRegistry.WOMBAT_CART.get(), worldIn, x, y, z);
+                break;
         }
 
         return cart;
     }
 
-    public static enum Type {
+    public enum Type {
         ELEPHANT(CartRegistry.ELEPHANT_CART_ITEM),
         FROG(CartRegistry.FROG_CART_ITEM),
         PANDA(CartRegistry.PANDA_CART_ITEM),
         PELICAN(CartRegistry.PELICAN_CART_ITEM),
         PUFFERFISH(CartRegistry.PUFFERFISH_CART_ITEM),
         SNAIL(CartRegistry.SNAIL_CART_ITEM),
-        TURTLE(CartRegistry.TURTLE_CART_ITEM);
+        TURTLE(CartRegistry.TURTLE_CART_ITEM),
+        BEE(CartRegistry.BEE_CART_ITEM),
+        GREEN_FROG(CartRegistry.GREEN_FROG_CART_ITEM),
+        LADYBUG(CartRegistry.LADYBUG_CART_ITEM),
+        PENGUIN(CartRegistry.PENGUIN_CART_ITEM),
+        WOMBAT(CartRegistry.WOMBAT_CART_ITEM);
 
         private final Supplier<Item> returnItem;
         Type(Supplier<Item> itemSupplier) {

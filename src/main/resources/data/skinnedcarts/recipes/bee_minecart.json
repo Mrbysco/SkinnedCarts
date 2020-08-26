@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "skinnedcarts:bee_minecart"
+  },
+  "pattern": [
+    "YBY",
+    "BMB",
+    "YBY"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": {
+      "item": "minecraft:minecart"
+    },
+    "B": {
+      "item": "minecraft:black_wool"
+    },
+    "Y": {
+      "item": "minecraft:yellow_wool"
+    }
+  }
+}

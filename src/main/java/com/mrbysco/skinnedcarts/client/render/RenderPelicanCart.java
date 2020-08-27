@@ -1,16 +1,10 @@
 package com.mrbysco.skinnedcarts.client.render;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mrbysco.skinnedcarts.client.render.model.ModelPelican;
 import com.mrbysco.skinnedcarts.entity.AbstractSkinnedCart;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -28,24 +22,25 @@ public class RenderPelicanCart<T extends AbstractSkinnedCart> extends RenderSkin
     /**
      * Renders the desired {@code T} type Entity.
      */
-    public void render(T entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
-        super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
-        matrixStackIn.push();
-        long i = (long)entityIn.getEntityId() * 493286711L;
+    public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
+        super.doRender(entity, x, y, z, entityYaw, partialTicks);
+        GlStateManager.pushMatrix();
+        this.bindEntityTexture(entity);
+        long i = (long)entity.getEntityId() * 493286711L;
         i = i * i * 4392167121L + i * 98761L;
         float f = (((float)(i >> 16 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
         float f1 = (((float)(i >> 20 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
         float f2 = (((float)(i >> 24 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
-        matrixStackIn.translate((double)f, (double)f1, (double)f2);
-        double d0 = MathHelper.lerp((double)partialTicks, entityIn.lastTickPosX, entityIn.getPosX());
-        double d1 = MathHelper.lerp((double)partialTicks, entityIn.lastTickPosY, entityIn.getPosY());
-        double d2 = MathHelper.lerp((double)partialTicks, entityIn.lastTickPosZ, entityIn.getPosZ());
+        GlStateManager.translatef(f, f1, f2);
+        double d0 = MathHelper.lerp((double)partialTicks, entity.lastTickPosX, entity.posX);
+        double d1 = MathHelper.lerp((double)partialTicks, entity.lastTickPosY, entity.posY);
+        double d2 = MathHelper.lerp((double)partialTicks, entity.lastTickPosZ, entity.posZ);
         double d3 = (double)0.3F;
-        Vec3d vec3d = entityIn.getPos(d0, d1, d2);
-        float f3 = MathHelper.lerp(partialTicks, entityIn.prevRotationPitch, entityIn.rotationPitch);
+        Vec3d vec3d = entity.getPos(d0, d1, d2);
+        float f3 = MathHelper.lerp(partialTicks, entity.prevRotationPitch, entity.rotationPitch);
         if (vec3d != null) {
-            Vec3d vec3d1 = entityIn.getPosOffset(d0, d1, d2, (double)0.3F);
-            Vec3d vec3d2 = entityIn.getPosOffset(d0, d1, d2, (double)-0.3F);
+            Vec3d vec3d1 = entity.getPosOffset(d0, d1, d2, (double)0.3F);
+            Vec3d vec3d2 = entity.getPosOffset(d0, d1, d2, (double)-0.3F);
             if (vec3d1 == null) {
                 vec3d1 = vec3d;
             }
@@ -54,7 +49,9 @@ public class RenderPelicanCart<T extends AbstractSkinnedCart> extends RenderSkin
                 vec3d2 = vec3d;
             }
 
-            matrixStackIn.translate(vec3d.x - d0, (vec3d1.y + vec3d2.y) / 2.0D - d1, vec3d.z - d2);
+            x += vec3d.x - d0;
+            y += (vec3d1.y + vec3d2.y) / 2.0D - d1;
+            z += vec3d.z - d2;
             Vec3d vec3d3 = vec3d2.add(-vec3d1.x, -vec3d1.y, -vec3d1.z);
             if (vec3d3.length() != 0.0D) {
                 vec3d3 = vec3d3.normalize();
@@ -68,7 +65,7 @@ public class RenderPelicanCart<T extends AbstractSkinnedCart> extends RenderSkin
             entityYaw += 360;
         entityYaw += 360;
 
-        double serverYaw = entityIn.rotationYaw;
+        double serverYaw = entity.rotationYaw;
         serverYaw += 180;
         serverYaw %= 360;
         if (serverYaw < 0)
@@ -80,43 +77,32 @@ public class RenderPelicanCart<T extends AbstractSkinnedCart> extends RenderSkin
             f3 = -f3;
         }
 
-        matrixStackIn.translate(0.0D, 0.375D, 0.0D);
-        matrixStackIn.rotate(Vector3f.YP.rotationDegrees(180.0F - entityYaw));
-        matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(-f3));
-        float f5 = (float)entityIn.getRollingAmplitude() - partialTicks;
-        float f6 = entityIn.getDamage() - partialTicks;
+        GlStateManager.translatef((float)x, (float)y + 0.375F, (float)z);
+        GlStateManager.rotatef(180.0F - entityYaw, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotatef(-f3, 0.0F, 0.0F, 1.0F);
+        float f5 = (float)entity.getRollingAmplitude() - partialTicks;
+        float f6 = entity.getDamage() - partialTicks;
         if (f6 < 0.0F) {
             f6 = 0.0F;
         }
 
         if (f5 > 0.0F) {
-            matrixStackIn.rotate(Vector3f.XP.rotationDegrees(MathHelper.sin(f5) * f5 * f6 / 10.0F * (float)entityIn.getRollingDirection()));
-        }
-//        if (f5 > 0.0F) {
-//            float angle = (MathHelper.sin(f5) * f5 * f6) / 10F;
-//            angle = Math.min(angle, 0.8f);
-//            angle = Math.copySign(angle, ((EntitySkinnedCart)entity).getRollingDirection());
-//            GlStateManager.rotate(angle * f5 * f6 / 10.0F * (float)entity.getRollingDirection(), 1.0F, 0.0F, 0.0F);
-//            matrixStackIn.rotate(Vector3f.XP.rotationDegrees(angle));
-//        }
-
-        int j = entityIn.getDisplayTileOffset();
-        BlockState blockstate = entityIn.getDisplayTile();
-        if (blockstate.getRenderType() != BlockRenderType.INVISIBLE) {
-            matrixStackIn.push();
-            float f4 = 0.75F;
-            matrixStackIn.scale(0.75F, 0.75F, 0.75F);
-            matrixStackIn.translate(-0.5D, (double)((float)(j - 8) / 16.0F), 0.5D);
-            matrixStackIn.rotate(Vector3f.YP.rotationDegrees(90.0F));
-            this.renderBlockState(entityIn, partialTicks, blockstate, matrixStackIn, bufferIn, packedLightIn);
-            matrixStackIn.pop();
+            GlStateManager.rotatef(MathHelper.sin(f5) * f5 * f6 / 10.0F * (float)entity.getRollingDirection(), 1.0F, 0.0F, 0.0F);
         }
 
-        matrixStackIn.scale(-1.0F, -1.0F, 1.0F);
-        this.modelMinecart.setRotationAngles(entityIn, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F);
-        IVertexBuilder ivertexbuilder = bufferIn.getBuffer(this.modelMinecart.getRenderType(this.getEntityTexture(entityIn)));
-        this.modelMinecart.render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
-        matrixStackIn.pop();
+        if (this.renderOutlines) {
+            GlStateManager.enableColorMaterial();
+            GlStateManager.setupSolidRenderingTextureCombine(this.getTeamColor(entity));
+        }
+
+        this.modelMinecart.setRotationAngles(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+        GlStateManager.scalef(-1.0F, -1.0F, 1.0F);
+        this.modelMinecart.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+        GlStateManager.popMatrix();
+        if (this.renderOutlines) {
+            GlStateManager.tearDownSolidRenderingTextureCombine();
+            GlStateManager.disableColorMaterial();
+        }
     }
 
     /**

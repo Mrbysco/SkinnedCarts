@@ -37,7 +37,7 @@ public class CartConfig {
 	}
 
 	@SubscribeEvent
-	public static void onFileChange(final ModConfig.Reloading configEvent) {
+	public static void onFileChange(final ModConfig.ConfigReloading configEvent) {
 		SkinnedCarts.logger.debug("SkinnedCart's config just got changed on the file system!");
 	}
 }

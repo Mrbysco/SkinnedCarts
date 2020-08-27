@@ -12,23 +12,34 @@ import com.mrbysco.skinnedcarts.client.render.RenderPufferFishCart;
 import com.mrbysco.skinnedcarts.client.render.RenderSnailCart;
 import com.mrbysco.skinnedcarts.client.render.RenderTurtleCart;
 import com.mrbysco.skinnedcarts.client.render.RenderWombatCart;
-import com.mrbysco.skinnedcarts.init.CartRegistry;
+import com.mrbysco.skinnedcarts.entity.BeeCartEntity;
+import com.mrbysco.skinnedcarts.entity.ElephantCartEntity;
+import com.mrbysco.skinnedcarts.entity.FrogCartEntity;
+import com.mrbysco.skinnedcarts.entity.GreenFrogCartEntity;
+import com.mrbysco.skinnedcarts.entity.LadybugCartEntity;
+import com.mrbysco.skinnedcarts.entity.PandaCartEntity;
+import com.mrbysco.skinnedcarts.entity.PelicanCartEntity;
+import com.mrbysco.skinnedcarts.entity.PenguinCartEntity;
+import com.mrbysco.skinnedcarts.entity.PufferFishCartEntity;
+import com.mrbysco.skinnedcarts.entity.SnailCartEntity;
+import com.mrbysco.skinnedcarts.entity.TurtleCartEntity;
+import com.mrbysco.skinnedcarts.entity.WombatCartEntity;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class ClientHandler {
-    public static void doClientStuff(final FMLClientSetupEvent event) {
-        RenderingRegistry.registerEntityRenderingHandler(CartRegistry.ELEPHANT_CART.get(), RenderElephantCart::new);
-        RenderingRegistry.registerEntityRenderingHandler(CartRegistry.FROG_CART.get(), RenderFrogCart::new);
-        RenderingRegistry.registerEntityRenderingHandler(CartRegistry.PANDA_CART.get(), RenderPandaCart::new);
-        RenderingRegistry.registerEntityRenderingHandler(CartRegistry.PELICAN_CART.get(), RenderPelicanCart::new);
-        RenderingRegistry.registerEntityRenderingHandler(CartRegistry.PUFFERFISH_CART.get(), RenderPufferFishCart::new);
-        RenderingRegistry.registerEntityRenderingHandler(CartRegistry.SNAIL_CART.get(), RenderSnailCart::new);
-        RenderingRegistry.registerEntityRenderingHandler(CartRegistry.TURTLE_CART.get(), RenderTurtleCart::new);
-        RenderingRegistry.registerEntityRenderingHandler(CartRegistry.BEE_CART.get(), RenderBeeCart::new);
-        RenderingRegistry.registerEntityRenderingHandler(CartRegistry.GREEN_FROG_CART.get(), RenderGreenFrogCart::new);
-        RenderingRegistry.registerEntityRenderingHandler(CartRegistry.LADYBUG_CART.get(), RenderLadybugCart::new);
-        RenderingRegistry.registerEntityRenderingHandler(CartRegistry.PENGUIN_CART.get(), RenderPenguinCart::new);
-        RenderingRegistry.registerEntityRenderingHandler(CartRegistry.WOMBAT_CART.get(), RenderWombatCart::new);
+    public static void registerRenders(ModelRegistryEvent event) {
+        RenderingRegistry.registerEntityRenderingHandler(ElephantCartEntity.class, RenderElephantCart::new);
+        RenderingRegistry.registerEntityRenderingHandler(FrogCartEntity.class, RenderFrogCart::new);
+        RenderingRegistry.registerEntityRenderingHandler(PandaCartEntity.class, RenderPandaCart::new);
+        RenderingRegistry.registerEntityRenderingHandler(PelicanCartEntity.class, RenderPelicanCart::new);
+        RenderingRegistry.registerEntityRenderingHandler(PufferFishCartEntity.class, RenderPufferFishCart::new);
+        RenderingRegistry.registerEntityRenderingHandler(SnailCartEntity.class, RenderSnailCart::new);
+        RenderingRegistry.registerEntityRenderingHandler(TurtleCartEntity.class, RenderTurtleCart::new);
+        RenderingRegistry.registerEntityRenderingHandler(BeeCartEntity.class, RenderBeeCart::new);
+        RenderingRegistry.registerEntityRenderingHandler(GreenFrogCartEntity.class, RenderGreenFrogCart::new);
+        RenderingRegistry.registerEntityRenderingHandler(LadybugCartEntity.class, RenderLadybugCart::new);
+        RenderingRegistry.registerEntityRenderingHandler(PenguinCartEntity.class, RenderPenguinCart::new);
+        RenderingRegistry.registerEntityRenderingHandler(WombatCartEntity.class, RenderWombatCart::new);
     }
 }

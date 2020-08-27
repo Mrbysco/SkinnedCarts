@@ -4,6 +4,7 @@ import com.mrbysco.skinnedcarts.client.ClientHandler;
 import com.mrbysco.skinnedcarts.config.CartConfig;
 import com.mrbysco.skinnedcarts.init.CartRegistry;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -28,7 +29,8 @@ public class SkinnedCarts {
 		CartRegistry.SOUND_EVENTS.register(eventBus);
 
 		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
-			eventBus.addListener(ClientHandler::doClientStuff);
+			MinecraftForge.EVENT_BUS.addListener(ClientHandler::registerRenders);
+			eventBus.addListener(ClientHandler::registerRenders);
 		});
 	}
 }

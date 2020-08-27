@@ -68,7 +68,7 @@ public abstract class AbstractSkinnedCart extends AbstractMinecartEntity {
     @Override
     public boolean processInitialInteract(PlayerEntity player, Hand hand) {
         if (super.processInitialInteract(player, hand)) return true;
-        if (player.isSecondaryUseActive()) {
+        if (player.isSneaking()) {
             return false;
         } else if (this.isBeingRidden()) {
             return true;

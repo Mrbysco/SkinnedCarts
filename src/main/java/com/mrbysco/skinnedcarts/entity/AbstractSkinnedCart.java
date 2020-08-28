@@ -124,19 +124,19 @@ public abstract class AbstractSkinnedCart extends AbstractMinecartEntity {
                 cart = new SnailCartEntity(CartRegistry.SNAIL_CART.get(), worldIn, x, y, z);
                 break;
             case BEE:
-                cart = new SnailCartEntity(CartRegistry.BEE_CART.get(), worldIn, x, y, z);
+                cart = new BeeCartEntity(CartRegistry.BEE_CART.get(), worldIn, x, y, z);
                 break;
             case GREEN_FROG:
-                cart = new SnailCartEntity(CartRegistry.GREEN_FROG_CART.get(), worldIn, x, y, z);
+                cart = new GreenFrogCartEntity(CartRegistry.GREEN_FROG_CART.get(), worldIn, x, y, z);
                 break;
             case LADYBUG:
-                cart = new SnailCartEntity(CartRegistry.LADYBUG_CART.get(), worldIn, x, y, z);
+                cart = new LadybugCartEntity(CartRegistry.LADYBUG_CART.get(), worldIn, x, y, z);
                 break;
             case PENGUIN:
-                cart = new SnailCartEntity(CartRegistry.PENGUIN_CART.get(), worldIn, x, y, z);
+                cart = new PenguinCartEntity(CartRegistry.PENGUIN_CART.get(), worldIn, x, y, z);
                 break;
             case WOMBAT:
-                cart = new SnailCartEntity(CartRegistry.WOMBAT_CART.get(), worldIn, x, y, z);
+                cart = new WombatCartEntity(CartRegistry.WOMBAT_CART.get(), worldIn, x, y, z);
                 break;
         }
 

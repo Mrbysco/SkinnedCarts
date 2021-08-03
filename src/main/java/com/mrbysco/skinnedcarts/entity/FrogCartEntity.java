@@ -31,7 +31,7 @@ public class FrogCartEntity extends AbstractSkinnedCart {
 	}
 
 	@Override
-	public IPacket<?> createSpawnPacket() {
+	public IPacket<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
@@ -52,22 +52,22 @@ public class FrogCartEntity extends AbstractSkinnedCart {
 	
 	protected float getSoundPitch()
     {
-        return (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F;
+        return (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F;
     }
 	
 	@Override
-	public SoundCategory getSoundCategory() {
+	public SoundCategory getSoundSource() {
 		return SoundCategory.NEUTRAL;
 	}
 
 	@Override
-	public ActionResultType applyPlayerInteraction(PlayerEntity player, Vector3d vec, Hand hand) {
+	public ActionResultType interactAt(PlayerEntity player, Vector3d vec, Hand hand) {
 		if(CartConfig.SERVER.WednesdayFrogCart.get() && itsWednesday()) {
-			if (!world.isRemote) {
+			if (!level.isClientSide) {
 				this.playLivingSound();
 			}
 		}
-		return super.applyPlayerInteraction(player, vec, hand);
+		return super.interactAt(player, vec, hand);
 	}
 	
 	private boolean itsWednesday() {

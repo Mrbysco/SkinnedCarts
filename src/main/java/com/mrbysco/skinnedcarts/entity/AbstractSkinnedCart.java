@@ -27,15 +27,15 @@ public abstract class AbstractSkinnedCart extends AbstractMinecartEntity {
     }
 
 	@Override
-	public void killMinecart(DamageSource source) {
+	public void destroy(DamageSource source) {
         this.remove();
-        if (this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
+        if (this.level.getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
             ItemStack itemstack = this.getReturnItem();
             if (this.hasCustomName()) {
-                itemstack.setDisplayName(this.getCustomName());
+                itemstack.setHoverName(this.getCustomName());
             }
 
-            this.entityDropItem(itemstack);
+            this.spawnAtLocation(itemstack);
         }
 	}
 	
@@ -67,14 +67,14 @@ public abstract class AbstractSkinnedCart extends AbstractMinecartEntity {
 		return false;
 	}
 	
-	public ActionResultType processInitialInteract(PlayerEntity player, Hand hand) {
-        ActionResultType ret = super.processInitialInteract(player, hand);
-        if (ret.isSuccessOrConsume()) return ret;
+	public ActionResultType interact(PlayerEntity player, Hand hand) {
+        ActionResultType ret = super.interact(player, hand);
+        if (ret.consumesAction()) return ret;
         if (player.isSecondaryUseActive()) {
             return ActionResultType.PASS;
-        } else if (this.isBeingRidden()) {
+        } else if (this.isVehicle()) {
             return ActionResultType.PASS;
-        } else if (!this.world.isRemote) {
+        } else if (!this.level.isClientSide) {
             return player.startRiding(this) ? ActionResultType.CONSUME : ActionResultType.PASS;
         } else {
             return ActionResultType.SUCCESS;
@@ -84,18 +84,18 @@ public abstract class AbstractSkinnedCart extends AbstractMinecartEntity {
     /**
      * Called every tick the minecart is on an activator rail.
      */
-    public void onActivatorRailPass(int x, int y, int z, boolean receivingPower)
+    public void activateMinecart(int x, int y, int z, boolean receivingPower)
     {
         if (receivingPower) {
-            if (this.isBeingRidden()) {
-                this.removePassengers();
+            if (this.isVehicle()) {
+                this.ejectPassengers();
             }
 
-            if (this.getRollingAmplitude() == 0) {
-                this.setRollingDirection(-this.getRollingDirection());
-                this.setRollingAmplitude(10);
+            if (this.getHurtTime() == 0) {
+                this.setHurtDir(-this.getHurtDir());
+                this.setHurtTime(10);
                 this.setDamage(50.0F);
-                this.markVelocityChanged();
+                this.markHurt();
             }
         }
     }

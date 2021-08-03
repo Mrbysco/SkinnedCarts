@@ -22,7 +22,7 @@ public class ElephantCartEntity extends AbstractSkinnedCart {
 	}
 
 	@Override
-	public IPacket<?> createSpawnPacket() {
+	public IPacket<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 

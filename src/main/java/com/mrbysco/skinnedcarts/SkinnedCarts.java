@@ -27,7 +27,7 @@ public class SkinnedCarts {
 		CartRegistry.ENTITIES.register(eventBus);
 		CartRegistry.SOUND_EVENTS.register(eventBus);
 
-		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
+		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
 			eventBus.addListener(ClientHandler::doClientStuff);
 		});
 	}

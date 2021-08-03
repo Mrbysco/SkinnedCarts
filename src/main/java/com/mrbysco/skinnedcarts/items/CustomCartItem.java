@@ -30,18 +30,18 @@ public class CustomCartItem extends Item {
         /**
          * Dispense the specified stack, play the dispense sound and spawn particles.
          */
-        public ItemStack dispenseStack(IBlockSource source, ItemStack stack)
+        public ItemStack execute(IBlockSource source, ItemStack stack)
         {
-            Direction direction = source.getBlockState().get(DispenserBlock.FACING);
-            World world = source.getWorld();
-            double d0 = source.getX() + (double)direction.getXOffset() * 1.125D;
-            double d1 = Math.floor(source.getY()) + (double)direction.getYOffset();
-            double d2 = source.getZ() + (double)direction.getZOffset() * 1.125D;
-            BlockPos blockpos = source.getBlockPos().offset(direction);
+            Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
+            World world = source.getLevel();
+            double d0 = source.x() + (double)direction.getStepX() * 1.125D;
+            double d1 = Math.floor(source.y()) + (double)direction.getStepY();
+            double d2 = source.z() + (double)direction.getStepZ() * 1.125D;
+            BlockPos blockpos = source.getPos().relative(direction);
             BlockState blockstate = world.getBlockState(blockpos);
             RailShape railshape = blockstate.getBlock() instanceof AbstractRailBlock ? ((AbstractRailBlock)blockstate.getBlock()).getRailDirection(blockstate, world, blockpos, null) : RailShape.NORTH_SOUTH;
             double d3;
-            if (blockstate.isIn(BlockTags.RAILS)) {
+            if (blockstate.is(BlockTags.RAILS)) {
                 if (railshape.isAscending()) {
                     d3 = 0.6D;
                 } else {
@@ -50,12 +50,12 @@ public class CustomCartItem extends Item {
             }
             else
             {
-                if (!blockstate.isAir(world, blockpos) || !world.getBlockState(blockpos.down()).isIn(BlockTags.RAILS)) {
+                if (!blockstate.isAir(world, blockpos) || !world.getBlockState(blockpos.below()).is(BlockTags.RAILS)) {
                     return this.behaviourDefaultDispenseItem.dispense(source, stack);
                 }
 
-                BlockState blockstate1 = world.getBlockState(blockpos.down());
-                RailShape railshape1 = blockstate1.getBlock() instanceof AbstractRailBlock ? ((AbstractRailBlock)blockstate1.getBlock()).getRailDirection(blockstate1, world, blockpos.down(), null) : RailShape.NORTH_SOUTH;
+                BlockState blockstate1 = world.getBlockState(blockpos.below());
+                RailShape railshape1 = blockstate1.getBlock() instanceof AbstractRailBlock ? ((AbstractRailBlock)blockstate1.getBlock()).getRailDirection(blockstate1, world, blockpos.below(), null) : RailShape.NORTH_SOUTH;
                 if (direction != Direction.DOWN && railshape1.isAscending()) {
                     d3 = -0.4D;
                 } else {
@@ -64,10 +64,10 @@ public class CustomCartItem extends Item {
             }
 
             AbstractSkinnedCart skinnedCart = AbstractSkinnedCart.create(world, d0, d1 + d3, d2, ((CustomCartItem)stack.getItem()).cartType);
-            if (stack.hasDisplayName()) {
-                skinnedCart.setCustomName(stack.getDisplayName());
+            if (stack.hasCustomHoverName()) {
+                skinnedCart.setCustomName(stack.getHoverName());
             }
-            world.addEntity(skinnedCart);
+            world.addFreshEntity(skinnedCart);
             stack.shrink(1);
             
             return stack;
@@ -75,37 +75,37 @@ public class CustomCartItem extends Item {
         /**
          * Play the dispense sound from the specified block.
          */
-        protected void playDispenseSound(IBlockSource source)
+        protected void playSound(IBlockSource source)
         {
-            source.getWorld().playEvent(1000, source.getBlockPos(), 0);
+            source.getLevel().levelEvent(1000, source.getPos(), 0);
         }
     };
     private final AbstractSkinnedCart.Type cartType;
 
     public CustomCartItem(AbstractSkinnedCart.Type minecartTypeIn, Item.Properties builder)
     {
-        super(builder.maxStackSize(1));
+        super(builder.stacksTo(1));
         this.cartType = minecartTypeIn;
-        DispenserBlock.registerDispenseBehavior(this, MINECART_DISPENSER_BEHAVIOR);
+        DispenserBlock.registerBehavior(this, MINECART_DISPENSER_BEHAVIOR);
     }
 
     @Override
     public Collection<ItemGroup> getCreativeTabs() {
-        return Arrays.asList(ItemGroup.TRANSPORTATION, CartTab.CART_TAB);
+        return Arrays.asList(ItemGroup.TAB_TRANSPORTATION, CartTab.CART_TAB);
     }
 
     /**
      * Called when a Block is right-clicked with this Item
      */
-    public ActionResultType onItemUse(ItemUseContext context) {
-        World world = context.getWorld();
-        BlockPos blockpos = context.getPos();
+    public ActionResultType useOn(ItemUseContext context) {
+        World world = context.getLevel();
+        BlockPos blockpos = context.getClickedPos();
         BlockState blockstate = world.getBlockState(blockpos);
-        if (!blockstate.isIn(BlockTags.RAILS)) {
+        if (!blockstate.is(BlockTags.RAILS)) {
             return ActionResultType.FAIL;
         } else {
-            ItemStack itemstack = context.getItem();
-            if (!world.isRemote) {
+            ItemStack itemstack = context.getItemInHand();
+            if (!world.isClientSide) {
                 RailShape railshape = blockstate.getBlock() instanceof AbstractRailBlock ? ((AbstractRailBlock)blockstate.getBlock()).getRailDirection(blockstate, world, blockpos, null) : RailShape.NORTH_SOUTH;
                 double d0 = 0.0D;
                 if (railshape.isAscending()) {
@@ -113,11 +113,11 @@ public class CustomCartItem extends Item {
                 }
 
                 AbstractSkinnedCart abstractminecartentity = AbstractSkinnedCart.create(world, (double)blockpos.getX() + 0.5D, (double)blockpos.getY() + 0.0625D + d0, (double)blockpos.getZ() + 0.5D, this.cartType);
-                if (itemstack.hasDisplayName()) {
-                    abstractminecartentity.setCustomName(itemstack.getDisplayName());
+                if (itemstack.hasCustomHoverName()) {
+                    abstractminecartentity.setCustomName(itemstack.getHoverName());
                 }
 
-                world.addEntity(abstractminecartentity);
+                world.addFreshEntity(abstractminecartentity);
             }
 
             itemstack.shrink(1);

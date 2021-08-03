@@ -17,7 +17,7 @@ public class RenderSkinnedCart<T extends AbstractMinecartEntity> extends EntityR
     public RenderSkinnedCart(EntityRendererManager renderManagerIn)
     {
         super(renderManagerIn);
-        this.shadowSize = 0.7F;
+        this.shadowRadius = 0.7F;
     }
     
     public static ResourceLocation createLocation(String cartName) {
@@ -25,14 +25,14 @@ public class RenderSkinnedCart<T extends AbstractMinecartEntity> extends EntityR
     }
 
     protected void renderBlockState(T entityIn, float partialTicks, BlockState stateIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
-        Minecraft.getInstance().getBlockRendererDispatcher().renderBlock(stateIn, matrixStackIn, bufferIn, packedLightIn, OverlayTexture.NO_OVERLAY);
+        Minecraft.getInstance().getBlockRenderer().renderSingleBlock(stateIn, matrixStackIn, bufferIn, packedLightIn, OverlayTexture.NO_OVERLAY);
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
     @Override
-    public ResourceLocation getEntityTexture(T entity) {
+    public ResourceLocation getTextureLocation(T entity) {
         return this.CART_TEXTURES;
     }
 }

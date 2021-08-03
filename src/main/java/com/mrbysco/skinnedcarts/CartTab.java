@@ -9,7 +9,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class CartTab {
 	public static final ItemGroup CART_TAB = new ItemGroup(Reference.MOD_ID + ".tab") {
 		@OnlyIn(Dist.CLIENT)
-		public ItemStack createIcon() {
+		public ItemStack makeIcon() {
 			return new ItemStack(Items.MINECART);
 		}
 	};

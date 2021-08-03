@@ -30,22 +30,22 @@ public class RenderPenguinCart<T extends AbstractSkinnedCart> extends RenderSkin
      */
     public void render(T entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
-        matrixStackIn.push();
-        long i = (long)entityIn.getEntityId() * 493286711L;
+        matrixStackIn.pushPose();
+        long i = (long)entityIn.getId() * 493286711L;
         i = i * i * 4392167121L + i * 98761L;
         float f = (((float)(i >> 16 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
         float f1 = (((float)(i >> 20 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
         float f2 = (((float)(i >> 24 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
         matrixStackIn.translate((double)f, (double)f1, (double)f2);
-        double d0 = MathHelper.lerp((double)partialTicks, entityIn.lastTickPosX, entityIn.getPosX());
-        double d1 = MathHelper.lerp((double)partialTicks, entityIn.lastTickPosY, entityIn.getPosY());
-        double d2 = MathHelper.lerp((double)partialTicks, entityIn.lastTickPosZ, entityIn.getPosZ());
+        double d0 = MathHelper.lerp((double)partialTicks, entityIn.xOld, entityIn.getX());
+        double d1 = MathHelper.lerp((double)partialTicks, entityIn.yOld, entityIn.getY());
+        double d2 = MathHelper.lerp((double)partialTicks, entityIn.zOld, entityIn.getZ());
         double d3 = (double)0.3F;
         Vector3d Vector3d = entityIn.getPos(d0, d1, d2);
-        float f3 = MathHelper.lerp(partialTicks, entityIn.prevRotationPitch, entityIn.rotationPitch);
+        float f3 = MathHelper.lerp(partialTicks, entityIn.xRotO, entityIn.xRot);
         if (Vector3d != null) {
-            Vector3d Vector3d1 = entityIn.getPosOffset(d0, d1, d2, (double)0.3F);
-            Vector3d Vector3d2 = entityIn.getPosOffset(d0, d1, d2, (double)-0.3F);
+            Vector3d Vector3d1 = entityIn.getPosOffs(d0, d1, d2, (double)0.3F);
+            Vector3d Vector3d2 = entityIn.getPosOffs(d0, d1, d2, (double)-0.3F);
             if (Vector3d1 == null) {
                 Vector3d1 = Vector3d;
             }
@@ -68,7 +68,7 @@ public class RenderPenguinCart<T extends AbstractSkinnedCart> extends RenderSkin
             entityYaw += 360;
         entityYaw += 360;
 
-        double serverYaw = entityIn.rotationYaw;
+        double serverYaw = entityIn.yRot;
         serverYaw += 180;
         serverYaw %= 360;
         if (serverYaw < 0)
@@ -81,16 +81,16 @@ public class RenderPenguinCart<T extends AbstractSkinnedCart> extends RenderSkin
         }
 
         matrixStackIn.translate(0.0D, 0.375D, 0.0D);
-        matrixStackIn.rotate(Vector3f.YP.rotationDegrees(180.0F - entityYaw));
-        matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(-f3));
-        float f5 = (float)entityIn.getRollingAmplitude() - partialTicks;
+        matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(180.0F - entityYaw));
+        matrixStackIn.mulPose(Vector3f.ZP.rotationDegrees(-f3));
+        float f5 = (float)entityIn.getHurtTime() - partialTicks;
         float f6 = entityIn.getDamage() - partialTicks;
         if (f6 < 0.0F) {
             f6 = 0.0F;
         }
 
         if (f5 > 0.0F) {
-            matrixStackIn.rotate(Vector3f.XP.rotationDegrees(MathHelper.sin(f5) * f5 * f6 / 10.0F * (float)entityIn.getRollingDirection()));
+            matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(MathHelper.sin(f5) * f5 * f6 / 10.0F * (float)entityIn.getHurtDir()));
         }
 //        if (f5 > 0.0F) {
 //            float angle = (MathHelper.sin(f5) * f5 * f6) / 10F;
@@ -100,30 +100,30 @@ public class RenderPenguinCart<T extends AbstractSkinnedCart> extends RenderSkin
 //            matrixStackIn.rotate(Vector3f.XP.rotationDegrees(angle));
 //        }
 
-        int j = entityIn.getDisplayTileOffset();
-        BlockState blockstate = entityIn.getDisplayTile();
-        if (blockstate.getRenderType() != BlockRenderType.INVISIBLE) {
-            matrixStackIn.push();
+        int j = entityIn.getDisplayOffset();
+        BlockState blockstate = entityIn.getDisplayBlockState();
+        if (blockstate.getRenderShape() != BlockRenderType.INVISIBLE) {
+            matrixStackIn.pushPose();
             float f4 = 0.75F;
             matrixStackIn.scale(0.75F, 0.75F, 0.75F);
             matrixStackIn.translate(-0.5D, (double)((float)(j - 8) / 16.0F), 0.5D);
-            matrixStackIn.rotate(Vector3f.YP.rotationDegrees(90.0F));
+            matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(90.0F));
             this.renderBlockState(entityIn, partialTicks, blockstate, matrixStackIn, bufferIn, packedLightIn);
-            matrixStackIn.pop();
+            matrixStackIn.popPose();
         }
 
         matrixStackIn.scale(-1.0F, -1.0F, 1.0F);
-        this.modelMinecart.setRotationAngles(entityIn, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F);
-        IVertexBuilder ivertexbuilder = bufferIn.getBuffer(this.modelMinecart.getRenderType(this.getEntityTexture(entityIn)));
-        this.modelMinecart.render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
-        matrixStackIn.pop();
+        this.modelMinecart.setupAnim(entityIn, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F);
+        IVertexBuilder ivertexbuilder = bufferIn.getBuffer(this.modelMinecart.renderType(this.getTextureLocation(entityIn)));
+        this.modelMinecart.renderToBuffer(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        matrixStackIn.popPose();
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
     @Override
-    public ResourceLocation getEntityTexture(T entity)
+    public ResourceLocation getTextureLocation(T entity)
     {
         return CART_TEXTURES;
     }

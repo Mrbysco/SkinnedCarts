@@ -1,28 +1,28 @@
 package com.mrbysco.skinnedcarts.entity;
 
 import com.mrbysco.skinnedcarts.init.CartRegistry;
-import net.minecraft.entity.EntityType;
-import net.minecraft.network.IPacket;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.FMLPlayMessages;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.fmllegacy.network.FMLPlayMessages;
+import net.minecraftforge.fmllegacy.network.NetworkHooks;
 
 public class WombatCartEntity extends AbstractSkinnedCart {
 
-	public WombatCartEntity(EntityType<?> type, World worldIn) {
+	public WombatCartEntity(EntityType<?> type, Level worldIn) {
 		super(type, worldIn);
 	}
 
-	public WombatCartEntity(EntityType<?> type, World worldIn, double x, double y, double z) {
+	public WombatCartEntity(EntityType<?> type, Level worldIn, double x, double y, double z) {
 		super(type, worldIn, x, y, z);
 	}
 
-	public WombatCartEntity(FMLPlayMessages.SpawnEntity spawnEntity, World worldIn) {
+	public WombatCartEntity(FMLPlayMessages.SpawnEntity spawnEntity, Level worldIn) {
 		this(CartRegistry.WOMBAT_CART.get(), worldIn);
 	}
 
 	@Override
-	public IPacket<?> getAddEntityPacket() {
+	public Packet<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 

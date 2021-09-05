@@ -1,28 +1,28 @@
 package com.mrbysco.skinnedcarts.entity;
 
 import com.mrbysco.skinnedcarts.init.CartRegistry;
-import net.minecraft.entity.EntityType;
-import net.minecraft.network.IPacket;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.FMLPlayMessages;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.fmllegacy.network.FMLPlayMessages;
+import net.minecraftforge.fmllegacy.network.NetworkHooks;
 
 public class PufferFishCartEntity extends AbstractSkinnedCart {
 	
-	public PufferFishCartEntity(EntityType<?> type, World worldIn) {
+	public PufferFishCartEntity(EntityType<?> type, Level worldIn) {
 		super(type, worldIn);
 	}
 
-	public PufferFishCartEntity(EntityType<?> type, World worldIn, double x, double y, double z) {
+	public PufferFishCartEntity(EntityType<?> type, Level worldIn, double x, double y, double z) {
 		super(type, worldIn, x, y, z);
 	}
 
-	public PufferFishCartEntity(FMLPlayMessages.SpawnEntity spawnEntity, World worldIn) {
+	public PufferFishCartEntity(FMLPlayMessages.SpawnEntity spawnEntity, Level worldIn) {
 		this(CartRegistry.PUFFERFISH_CART.get(), worldIn);
 	}
 
 	@Override
-	public IPacket<?> getAddEntityPacket() {
+	public Packet<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 

@@ -1,34 +1,35 @@
 package com.mrbysco.skinnedcarts.entity;
 
 import com.mrbysco.skinnedcarts.init.CartRegistry;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.item.minecart.AbstractMinecartEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.vehicle.AbstractMinecart;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.HitResult;
 
 import java.util.function.Supplier;
 
-public abstract class AbstractSkinnedCart extends AbstractMinecartEntity {
+public abstract class AbstractSkinnedCart extends AbstractMinecart {
     
-	public AbstractSkinnedCart(EntityType<?> type, World worldIn) {
+	public AbstractSkinnedCart(EntityType<?> type, Level worldIn) {
 		super(type, worldIn);
 	}
 	
-	public AbstractSkinnedCart(EntityType<?> type, World worldIn, double x, double y, double z)
+	public AbstractSkinnedCart(EntityType<?> type, Level worldIn, double x, double y, double z)
     {
         super(type, worldIn, x, y, z);
     }
 
 	@Override
 	public void destroy(DamageSource source) {
-        this.remove();
+        this.remove(Entity.RemovalReason.KILLED);
         if (this.level.getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
             ItemStack itemstack = this.getReturnItem();
             if (this.hasCustomName()) {
@@ -46,14 +47,14 @@ public abstract class AbstractSkinnedCart extends AbstractMinecartEntity {
     }
 
     @Override
-    public AbstractMinecartEntity.Type getMinecartType() {
-        return AbstractMinecartEntity.Type.RIDEABLE;
+    public AbstractMinecart.Type getMinecartType() {
+        return AbstractMinecart.Type.RIDEABLE;
     }
 
     abstract AbstractSkinnedCart.Type getSkinCartType();
 
     @Override
-	public ItemStack getPickedResult(RayTraceResult target) {
+	public ItemStack getPickedResult(HitResult target) {
 		return this.getCartItem();
 	}
 	
@@ -67,17 +68,17 @@ public abstract class AbstractSkinnedCart extends AbstractMinecartEntity {
 		return false;
 	}
 	
-	public ActionResultType interact(PlayerEntity player, Hand hand) {
-        ActionResultType ret = super.interact(player, hand);
+	public InteractionResult interact(Player player, InteractionHand hand) {
+        InteractionResult ret = super.interact(player, hand);
         if (ret.consumesAction()) return ret;
         if (player.isSecondaryUseActive()) {
-            return ActionResultType.PASS;
+            return InteractionResult.PASS;
         } else if (this.isVehicle()) {
-            return ActionResultType.PASS;
+            return InteractionResult.PASS;
         } else if (!this.level.isClientSide) {
-            return player.startRiding(this) ? ActionResultType.CONSUME : ActionResultType.PASS;
+            return player.startRiding(this) ? InteractionResult.CONSUME : InteractionResult.PASS;
         } else {
-            return ActionResultType.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
     }
 
@@ -100,7 +101,7 @@ public abstract class AbstractSkinnedCart extends AbstractMinecartEntity {
         }
     }
 
-    public static AbstractSkinnedCart create(World worldIn, double x, double y, double z, AbstractSkinnedCart.Type typeIn) {
+    public static AbstractSkinnedCart create(Level worldIn, double x, double y, double z, AbstractSkinnedCart.Type typeIn) {
         AbstractSkinnedCart cart;
         switch(typeIn) {
             default:

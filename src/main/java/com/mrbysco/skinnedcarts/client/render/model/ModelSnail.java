@@ -1,118 +1,101 @@
 package com.mrbysco.skinnedcarts.client.render.model;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.world.entity.Entity;
 
-public class ModelSnail<E extends Entity> extends EntityModel<E> {
-	public ModelRenderer cart;
-	public ModelRenderer back_wall;
-	public ModelRenderer front_wall;
-	public ModelRenderer right_wall;
-	public ModelRenderer left_wall;
-	public ModelRenderer bottom;
-	public ModelRenderer inner;
-	public ModelRenderer head;
-	public ModelRenderer left_eye;
-	public ModelRenderer right_eye;
-	public ModelRenderer foot;
-	public ModelRenderer left_antennae;
-	public ModelRenderer right_antennae;
+public class ModelSnail<T extends Entity> extends HierarchicalModel<T> {
+	private final ModelPart root;
+	private final ModelPart cart;
 
-	public ModelSnail() {
-		texWidth = 96;
-		texHeight = 96;
+	public ModelSnail(final ModelPart part) {
+		this.root = part;
+		this.cart = part.getChild("cart");
+	}
 
-		cart = new ModelRenderer(this);
-		cart.setPos(-6.0F, 5.0F, 2.0F);
-		setRotationAngle(cart, 0.0F, -1.5708F, 0.0F);
+	public static LayerDefinition createMesh() {
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition partDefinition = meshdefinition.getRoot();
 
-		back_wall = new ModelRenderer(this, 0, 52);
-		back_wall.setPos(-2.0F, 19.0F, 0.0F);
-		cart.addChild(back_wall);
-		back_wall.addBox(-8.0F, -29.0F, 2.0F, 16, 8, 2, 0.0F, true);
+		PartDefinition cartDefinition = partDefinition.addOrReplaceChild("cart",
+				CubeListBuilder.create()
+				, PartPose.offsetAndRotation(8.0F, 24.0F, 0.0F,  0.0F, -1.5708F, 0.0F));
 
-		front_wall = new ModelRenderer(this, 46, 22);
-		front_wall.setPos(-2.0F, 13.0F, -9.0F);
-		setRotationAngle(front_wall, 0.0F, -3.1416F, 0.0F);
-		cart.addChild(front_wall);
-		front_wall.addBox(-8.0F, -23.0F, 5.0F, 16, 8, 2, 0.0F, true);
+		cartDefinition.addOrReplaceChild("back_wall",
+				CubeListBuilder.create()
+						.texOffs(0, 52).addBox(-8.0F, -10.0F, 8.0F, 16.0F, 8.0F, 2.0F)
+				, PartPose.offset(0.0F, 0.0F, 8.0F));
 
-		left_wall = new ModelRenderer(this, 36, 42);
-		left_wall.setPos(5.0F, 13.0F, 0.0F);
-		setRotationAngle(left_wall, 0.0F, 1.5708F, 0.0F);
-		cart.addChild(left_wall);
-		left_wall.addBox(-2.0F, -23.0F, -1.0F, 16, 8, 2, 0.0F, true);
+		cartDefinition.addOrReplaceChild("front_wall",
+				CubeListBuilder.create()
+						.texOffs(46, 22).addBox(-8.0F, -4.0F, -1.0F, 16.0F, 8.0F, 2.0F)
+				, PartPose.offsetAndRotation(0.0F, -6.0F, -1.0F,  0.0F, 3.1416F, 0.0F));
 
-		right_wall = new ModelRenderer(this, 0, 42);
-		right_wall.setPos(-9.0F, 13.0F, 0.0F);
-		setRotationAngle(right_wall, 0.0F, -1.5708F, 0.0F);
-		cart.addChild(right_wall);
-		right_wall.addBox(-14.0F, -23.0F, -1.0F, 16, 8, 2, 0.0F, true);
+		cartDefinition.addOrReplaceChild("right_wall",
+				CubeListBuilder.create()
+						.texOffs(36, 42).addBox(-8.0F, -4.0F, -1.0F, 16.0F, 8.0F, 2.0F)
+				, PartPose.offsetAndRotation(-7.0F, -6.0F, 8.0F,  0.0F, -1.5708F, 0.0F));
 
-		bottom = new ModelRenderer(this, 0, 0);
-		bottom.setPos(-2.0F, 19.0F, 0.0F);
-		cart.addChild(bottom);
-		bottom.addBox(-8.0F, -21.0F, -16.0F, 16, 2, 20, 0.0F, true);
+		cartDefinition.addOrReplaceChild("left_wall",
+				CubeListBuilder.create()
+						.texOffs(0, 42).addBox(-8.0F, -4.0F, -1.0F, 16.0F, 8.0F, 2.0F)
+				, PartPose.offsetAndRotation(7.0F, -6.0F, 8.0F,  0.0F, 1.5708F, 0.0F));
 
-		inner = new ModelRenderer(this, 0, 22);
-		inner.setPos(-2.0F, 19.0F, 0.0F);
-		cart.addChild(inner);
-		inner.addBox(-7.0F, -21.9F, -15.0F, 14, 2, 18, 0.0F, true);
+		cartDefinition.addOrReplaceChild("bottom",
+				CubeListBuilder.create()
+						.texOffs(0, 0).addBox(-8.0F, -2.0F, -10.0F, 16.0F, 2.0F, 20.0F)
+				, PartPose.offset(0.0F, 0.0F, 8.0F));
 
-		head = new ModelRenderer(this, 0, 62);
-		head.setPos(-2.0F, 9.0F, -10.0F);
-		setRotationAngle(head, 0.1745F, 0.0F, 0.0F);
-		cart.addChild(head);
-		head.addBox(-4.0F, -22.7532F, -7.6095F, 8, 12, 5, 0.0F, true);
+		cartDefinition.addOrReplaceChild("inner",
+				CubeListBuilder.create()
+						.texOffs(0, 22).addBox(-7.0F, -2.9F, -9.0F, 14.0F, 2.0F, 18.0F)
+				, PartPose.offset(0.0F, 0.0F, 8.0F));
 
-		right_eye = new ModelRenderer(this, 0, 0);
-		right_eye.setPos(-0.5F, 7.0F, -12.0F);
-		setRotationAngle(right_eye, -0.3491F, 0.0F, 0.0F);
-		cart.addChild(right_eye);
-		right_eye.addBox(0.0F, -21.802F, -12.1365F, 1, 6, 1, 0.0F, true);
+		cartDefinition.addOrReplaceChild("head",
+				CubeListBuilder.create()
+						.texOffs(0, 62).addBox(-4.0F, -3.0F, -5.0F, 8.0F, 12.0F, 5.0F)
+				, PartPose.offsetAndRotation(0.0F, -10.0F, -2.0F,  0.1745F, 0.0F, 0.0F));
 
-		left_eye = new ModelRenderer(this, 0, 0);
-		left_eye.setPos(-3.5F, 7.0F, -12.0F);
-		setRotationAngle(left_eye, -0.3491F, 0.0F, 0.0F);
-		cart.addChild(left_eye);
-		left_eye.addBox(-1.0F, -21.802F, -12.1365F, 1, 6, 1, 0.0F, false);
+		cartDefinition.addOrReplaceChild("left_eye",
+				CubeListBuilder.create()
+						.texOffs(0, 0).addBox(-1.0F, -6.0F, 0.0F, 1.0F, 6.0F, 1.0F)
+				, PartPose.offsetAndRotation(-1.5F, -12.0F, -4.0F,  -0.3491F, 0.0F, 0.0F));
 
-		foot = new ModelRenderer(this, 36, 52);
-		foot.setPos(-2.0F, 19.0F, -8.0F);
-		cart.addChild(foot);
-		foot.addBox(-4.0F, -22.0F, 12.0F, 8, 3, 4, 0.0F, true);
+		cartDefinition.addOrReplaceChild("right_eye",
+				CubeListBuilder.create()
+						.texOffs(0, 0).addBox(0.0F, -6.0F, 0.0F, 1.0F, 6.0F, 1.0F).mirror()
+				, PartPose.offsetAndRotation(1.5F, -12.0F, -4.0F,  -0.3491F, 0.0F, 0.0F));
 
-		right_antennae = new ModelRenderer(this, 4, 0);
-		right_antennae.setPos(0.5F, 11.0F, -13.0F);
-		setRotationAngle(right_antennae, -0.9599F, -0.1745F, -0.0873F);
-		cart.addChild(right_antennae);
-		right_antennae.addBox(0.1564F, -5.4147F, -22.0471F, 1, 2, 1, 0.0F, false);
+		cartDefinition.addOrReplaceChild("foot",
+				CubeListBuilder.create()
+						.texOffs(36, 52).addBox(-4.0F, -3.0F, 18.0F, 8.0F, 3.0F, 4.0F)
+				, PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		left_antennae = new ModelRenderer(this, 4, 0);
-		left_antennae.setPos(-4.5F, 11.0F, -13.0F);
-		setRotationAngle(left_antennae, -0.9599F, 0.1745F, 0.0873F);
-		cart.addChild(left_antennae);
-		left_antennae.addBox(-1.1564F, -5.4147F, -22.0471F, 1, 2, 1, 0.0F, true);
+		cartDefinition.addOrReplaceChild("right_antennae",
+				CubeListBuilder.create()
+						.texOffs(4, 0).addBox(-0.4325F, 0.366F, -2.9883F, 1.0F, 2.0F, 1.0F)
+				, PartPose.offsetAndRotation(2.5F, -8.0F, -5.0F,  -0.9599F, -0.1745F, -0.0873F));
 
+		cartDefinition.addOrReplaceChild("left_antennae",
+				CubeListBuilder.create()
+						.texOffs(4, 0).addBox(-0.5675F, 0.366F, -2.9883F, 1.0F, 2.0F, 1.0F).mirror()
+				, PartPose.offsetAndRotation(-2.5F, -8.0F, -5.0F,  -0.9599F, 0.1745F, 0.0873F));
 
+		return LayerDefinition.create(meshdefinition,  96,  96 );
 	}
 
 	@Override
-	public void setupAnim(E entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setupAnim(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.cart.y = 4.0F - ageInTicks;
 	}
 
 	@Override
-	public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		cart.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-	}
-
-	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-		modelRenderer.xRot = x;
-		modelRenderer.yRot = y;
-		modelRenderer.zRot = z;
+	public ModelPart root() {
+		return this.root;
 	}
 }

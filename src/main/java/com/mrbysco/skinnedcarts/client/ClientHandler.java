@@ -61,16 +61,16 @@ public class ClientHandler {
 
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(BEE_CART, () -> ModelBee.createMesh());
-        event.registerLayerDefinition(ELEPHANT_CART, () -> ModelBee.createMesh()); //ModelElephant.createMesh()
-        event.registerLayerDefinition(FROG_CART, () -> ModelBee.createMesh()); //ModelFrog.createMesh()
-        event.registerLayerDefinition(GREEN_FROG_CART, () -> ModelBee.createMesh()); //ModelGreenFrog.createMesh()
-        event.registerLayerDefinition(LADYBUG_CART, () -> ModelBee.createMesh()); //ModelLadybug.createMesh()
-        event.registerLayerDefinition(PANDA_CART, () -> ModelBee.createMesh()); //ModelPanda.createMesh()
-        event.registerLayerDefinition(PELICAN_CART, () -> ModelBee.createMesh()); //ModelPelican.createMesh()
-        event.registerLayerDefinition(PENGUIN_CART, () -> ModelBee.createMesh()); //ModelPenguin.createMesh()
-        event.registerLayerDefinition(PUFFERFISH_CART, () -> ModelBee.createMesh()); //ModelPufferFish.createMesh()
-        event.registerLayerDefinition(SNAIL_CART, () -> ModelBee.createMesh()); //ModelSnail.createMesh()
-        event.registerLayerDefinition(TURTLE_CART, () -> ModelBee.createMesh()); //ModelTurtle.createMesh()
-        event.registerLayerDefinition(WOMBAT_CART, () -> ModelBee.createMesh()); //ModelWombat.createMesh()
+        event.registerLayerDefinition(ELEPHANT_CART, () -> ModelElephant.createMesh());
+        event.registerLayerDefinition(FROG_CART, () -> ModelFrog.createMesh());
+        event.registerLayerDefinition(GREEN_FROG_CART, () -> ModelGreenFrog.createMesh());
+        event.registerLayerDefinition(LADYBUG_CART, () -> ModelLadybug.createMesh());
+        event.registerLayerDefinition(PANDA_CART, () -> ModelPanda.createMesh());
+        event.registerLayerDefinition(PELICAN_CART, () -> ModelPelican.createMesh());
+        event.registerLayerDefinition(PENGUIN_CART, () -> ModelPenguin.createMesh());
+        event.registerLayerDefinition(PUFFERFISH_CART, () -> ModelPufferFish.createMesh());
+        event.registerLayerDefinition(SNAIL_CART, () -> ModelSnail.createMesh());
+        event.registerLayerDefinition(TURTLE_CART, () -> ModelTurtle.createMesh());
+        event.registerLayerDefinition(WOMBAT_CART, () -> ModelWombat.createMesh());
     }
 }

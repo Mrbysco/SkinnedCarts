@@ -14,11 +14,6 @@ public class RenderBeeCart<T extends AbstractSkinnedCart> extends RenderSkinnedC
         super(context, new ModelBee<>(context.bakeLayer(ClientHandler.BEE_CART)));
     }
 
-    @Override
-    public Vec3 getRenderOffset(T p_114483_, float p_114484_) {
-        return new Vec3(0, 1.4375D, 0);
-    }
-
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */

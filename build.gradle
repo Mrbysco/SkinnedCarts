@@ -78,15 +78,17 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-//    maven {
-//        name = "jei"
-//        url =  "https://dvs1.progwml6.com/files/maven"
-//    }
+    maven {
+        name = "jei"
+        url =  "https://dvs1.progwml6.com/files/maven"
+    }
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
-//    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${version_jei}")
+
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${version_jei}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${version_jei}")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

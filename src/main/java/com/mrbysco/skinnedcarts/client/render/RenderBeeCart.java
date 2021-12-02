@@ -5,7 +5,6 @@ import com.mrbysco.skinnedcarts.client.render.model.ModelBee;
 import com.mrbysco.skinnedcarts.entity.AbstractSkinnedCart;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.phys.Vec3;
 
 public class RenderBeeCart<T extends AbstractSkinnedCart> extends RenderSkinnedCart<T> {
     private static ResourceLocation CART_TEXTURES = createLocation("minecart_bee");

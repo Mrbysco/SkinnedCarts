@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[37,)"
+loaderVersion="[38,)"
 issueTrackerURL="https://github.com/Mrbysco/SkinnedCarts"
 license="MIT"
 
@@ -13,3 +13,9 @@ description='''
 Adding Minecarts with skins.
 '''
 credits="Gentleman_Gnu for the idea"
+[[dependencies.skinnedcarts]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.18,1.19)"
+ordering="NONE"
+side="BOTH"

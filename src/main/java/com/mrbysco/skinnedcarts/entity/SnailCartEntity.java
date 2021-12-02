@@ -4,8 +4,8 @@ import com.mrbysco.skinnedcarts.init.CartRegistry;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.fmllegacy.network.FMLPlayMessages;
-import net.minecraftforge.fmllegacy.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
+import net.minecraftforge.network.PlayMessages.SpawnEntity;
 
 public class SnailCartEntity extends AbstractSkinnedCart {
 	
@@ -17,7 +17,7 @@ public class SnailCartEntity extends AbstractSkinnedCart {
 		super(type, worldIn, x, y, z);
 	}
 
-	public SnailCartEntity(FMLPlayMessages.SpawnEntity spawnEntity, Level worldIn) {
+	public SnailCartEntity(SpawnEntity spawnEntity, Level worldIn) {
 		this(CartRegistry.SNAIL_CART.get(), worldIn);
 	}
 

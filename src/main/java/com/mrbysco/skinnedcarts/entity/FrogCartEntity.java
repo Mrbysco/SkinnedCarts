@@ -11,8 +11,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.fmllegacy.network.FMLPlayMessages;
-import net.minecraftforge.fmllegacy.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
+import net.minecraftforge.network.PlayMessages.SpawnEntity;
 
 import java.util.Calendar;
 
@@ -26,7 +26,7 @@ public class FrogCartEntity extends AbstractSkinnedCart {
 		super(type, worldIn, x, y, z);
 	}
 
-	public FrogCartEntity(FMLPlayMessages.SpawnEntity spawnEntity, Level worldIn) {
+	public FrogCartEntity(SpawnEntity spawnEntity, Level worldIn) {
 		this(CartRegistry.FROG_CART.get(), worldIn);
 	}
 

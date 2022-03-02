@@ -25,6 +25,7 @@ public class CartConfig {
 
 	public static final ForgeConfigSpec serverSpec;
 	public static final CartConfig.Server SERVER;
+
 	static {
 		final Pair<Server, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(CartConfig.Server::new);
 		serverSpec = specPair.getRight();

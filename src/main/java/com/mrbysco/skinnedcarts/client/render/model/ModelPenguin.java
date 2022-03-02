@@ -24,7 +24,7 @@ public class ModelPenguin<T extends Entity> extends HierarchicalModel<T> {
 
 		PartDefinition cartDefinition = partDefinition.addOrReplaceChild("cart",
 				CubeListBuilder.create()
-				, PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F,  0.0F, -1.5708F, 0.0F));
+				, PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.0F, -1.5708F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("back_wall",
 				CubeListBuilder.create()
@@ -34,17 +34,17 @@ public class ModelPenguin<T extends Entity> extends HierarchicalModel<T> {
 		cartDefinition.addOrReplaceChild("front_wall",
 				CubeListBuilder.create()
 						.texOffs(46, 22).addBox(-8.0F, -4.0F, -1.0F, 16.0F, 8.0F, 2.0F)
-				, PartPose.offsetAndRotation(0.0F, -6.0F, -9.0F,  0.0F, 3.1416F, 0.0F));
+				, PartPose.offsetAndRotation(0.0F, -6.0F, -9.0F, 0.0F, 3.1416F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("right_wall",
 				CubeListBuilder.create()
 						.texOffs(36, 42).addBox(-8.0F, -4.0F, -1.0F, 16.0F, 8.0F, 2.0F)
-				, PartPose.offsetAndRotation(-7.0F, -6.0F, 0.0F,  0.0F, -1.5708F, 0.0F));
+				, PartPose.offsetAndRotation(-7.0F, -6.0F, 0.0F, 0.0F, -1.5708F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("left_wall",
 				CubeListBuilder.create()
 						.texOffs(0, 42).addBox(-8.0F, -4.0F, -1.0F, 16.0F, 8.0F, 2.0F)
-				, PartPose.offsetAndRotation(7.0F, -6.0F, 0.0F,  0.0F, 1.5708F, 0.0F));
+				, PartPose.offsetAndRotation(7.0F, -6.0F, 0.0F, 0.0F, 1.5708F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("bottom",
 				CubeListBuilder.create()
@@ -60,34 +60,34 @@ public class ModelPenguin<T extends Entity> extends HierarchicalModel<T> {
 				CubeListBuilder.create()
 						.texOffs(36, 52).addBox(-3.0F, -13.0F, -5.0F, 6.0F, 4.0F, 5.0F)
 						.texOffs(58, 58).addBox(-2.0F, -9.7081F, -8.6858F, 4.0F, 1.0F, 6.0F)
-				, PartPose.offsetAndRotation(0.0F, 0.0F, -8.0F,  -0.0873F, 0.0F, 0.0F));
+				, PartPose.offsetAndRotation(0.0F, 0.0F, -8.0F, -0.0873F, 0.0F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("left_wing",
 				CubeListBuilder.create()
 						.texOffs(0, 62).addBox(0.0F, -3.0F, 0.0F, 2.0F, 5.0F, 11.0F)
-				, PartPose.offsetAndRotation(-8.0F, -6.0F, -6.0F,  0.0F, -0.1745F, 0.0F));
+				, PartPose.offsetAndRotation(-8.0F, -6.0F, -6.0F, 0.0F, -0.1745F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("right_wing",
 				CubeListBuilder.create()
 						.texOffs(26, 62).addBox(-2.0F, -3.0F, 0.0F, 2.0F, 5.0F, 11.0F)
-				, PartPose.offsetAndRotation(8.0F, -6.0F, -6.0F,  0.0F, 0.1745F, 0.0F));
+				, PartPose.offsetAndRotation(8.0F, -6.0F, -6.0F, 0.0F, 0.1745F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("tail",
 				CubeListBuilder.create()
 						.texOffs(0, 79).addBox(-4.0F, -3.0F, 0.0F, 8.0F, 2.0F, 4.0F)
-				, PartPose.offsetAndRotation(0.0F, -6.0F, 10.0F,  0.3927F, 0.0F, 0.0F));
+				, PartPose.offsetAndRotation(0.0F, -6.0F, 10.0F, 0.3927F, 0.0F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("foot2",
 				CubeListBuilder.create()
 						.texOffs(58, 58).addBox(0.0F, -3.1913F, -0.4619F, 4.0F, 2.0F, 5.0F)
-				, PartPose.offsetAndRotation(3.0F, -0.5F, 10.0F,  0.3927F, 0.0F, 0.0F));
+				, PartPose.offsetAndRotation(3.0F, -0.5F, 10.0F, 0.3927F, 0.0F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("foot",
 				CubeListBuilder.create()
 						.texOffs(58, 58).addBox(0.0F, -3.1913F, -0.4619F, 4.0F, 2.0F, 5.0F)
-				, PartPose.offsetAndRotation(-7.0F, -0.5F, 10.0F,  0.3927F, 0.0F, 0.0F));
+				, PartPose.offsetAndRotation(-7.0F, -0.5F, 10.0F, 0.3927F, 0.0F, 0.0F));
 
-		return LayerDefinition.create(meshdefinition,  96,  96 );
+		return LayerDefinition.create(meshdefinition, 96, 96);
 	}
 
 	@Override

@@ -24,7 +24,7 @@ public class ModelPanda<T extends Entity> extends HierarchicalModel<T> {
 
 		PartDefinition cartDefinition = partDefinition.addOrReplaceChild("cart",
 				CubeListBuilder.create()
-				, PartPose.offsetAndRotation(8.0F, 24.0F, 0.0F,  0.0F, -1.5708F, 0.0F));
+				, PartPose.offsetAndRotation(8.0F, 24.0F, 0.0F, 0.0F, -1.5708F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("back_wall",
 				CubeListBuilder.create()
@@ -34,17 +34,17 @@ public class ModelPanda<T extends Entity> extends HierarchicalModel<T> {
 		cartDefinition.addOrReplaceChild("front_wall",
 				CubeListBuilder.create()
 						.texOffs(46, 22).addBox(-8.0F, -4.0F, -1.0F, 16.0F, 8.0F, 2.0F)
-				, PartPose.offsetAndRotation(0.0F, -6.0F, -1.0F,  0.0F, 3.1416F, 0.0F));
+				, PartPose.offsetAndRotation(0.0F, -6.0F, -1.0F, 0.0F, 3.1416F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("right_wall",
 				CubeListBuilder.create()
 						.texOffs(36, 42).addBox(-8.0F, -4.0F, -1.0F, 16.0F, 8.0F, 2.0F)
-				, PartPose.offsetAndRotation(-7.0F, -6.0F, 8.0F,  0.0F, -1.5708F, 0.0F));
+				, PartPose.offsetAndRotation(-7.0F, -6.0F, 8.0F, 0.0F, -1.5708F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("left_wall",
 				CubeListBuilder.create()
 						.texOffs(0, 42).addBox(-8.0F, -4.0F, -1.0F, 16.0F, 8.0F, 2.0F)
-				, PartPose.offsetAndRotation(7.0F, -6.0F, 8.0F,  0.0F, 1.5708F, 0.0F));
+				, PartPose.offsetAndRotation(7.0F, -6.0F, 8.0F, 0.0F, 1.5708F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("bottom",
 				CubeListBuilder.create()
@@ -76,7 +76,7 @@ public class ModelPanda<T extends Entity> extends HierarchicalModel<T> {
 						.texOffs(0, 74).addBox(-2.5F, -6.0F, -9.0F, 5.0F, 3.0F, 2.0F)
 				, PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		return LayerDefinition.create(meshdefinition,  96,  96 );
+		return LayerDefinition.create(meshdefinition, 96, 96);
 	}
 
 	@Override

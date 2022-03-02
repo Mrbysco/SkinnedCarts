@@ -8,7 +8,7 @@ import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.network.PlayMessages.SpawnEntity;
 
 public class PandaCartEntity extends AbstractSkinnedCart {
-	
+
 	public PandaCartEntity(EntityType<?> type, Level worldIn) {
 		super(type, worldIn);
 	}

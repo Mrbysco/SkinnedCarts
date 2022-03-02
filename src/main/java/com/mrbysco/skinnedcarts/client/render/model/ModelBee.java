@@ -25,7 +25,7 @@ public class ModelBee<T extends Entity> extends HierarchicalModel<T> {
 
 		PartDefinition cartDefinition = partDefinition.addOrReplaceChild("cart",
 				CubeListBuilder.create()
-				, PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F,  0.0F, -1.5708F, 0.0F));
+				, PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -1.5708F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("back_wall",
 				CubeListBuilder.create()
@@ -70,33 +70,33 @@ public class ModelBee<T extends Entity> extends HierarchicalModel<T> {
 		PartDefinition Wings3Definition = cartDefinition.addOrReplaceChild("Wings3",
 				CubeListBuilder.create()
 						.texOffs(56, 52).addBox(-6.9627F, 0.8434F, -6.0F, 8.0F, 0.0F, 12.0F).mirror()
-				, PartPose.offsetAndRotation(-8.0F, -8.5F, 0.0F,  0.0F, 0.0F, 0.5672F));
+				, PartPose.offsetAndRotation(-8.0F, -8.5F, 0.0F, 0.0F, 0.0F, 0.5672F));
 
 		Wings3Definition.addOrReplaceChild("Wings4",
 				CubeListBuilder.create()
 						.texOffs(56, 52).addBox(-7.7588F, 0.9659F, -6.0F, 8.0F, 0.0F, 12.0F).mirror()
-				, PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F,  0.0F, 0.0F, -0.829F));
+				, PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.829F));
 
 		PartDefinition WingsDefinition = cartDefinition.addOrReplaceChild("Wings",
 				CubeListBuilder.create()
 						.texOffs(56, 0).addBox(-1.0373F, 0.8434F, -6.0F, 8.0F, 0.0F, 12.0F)
-				, PartPose.offsetAndRotation(8.0F, -8.5F, 0.0F,  0.0F, 0.0F, -0.5672F));
+				, PartPose.offsetAndRotation(8.0F, -8.5F, 0.0F, 0.0F, 0.0F, -0.5672F));
 
 		WingsDefinition.addOrReplaceChild("Wings2",
 				CubeListBuilder.create()
 						.texOffs(56, 0).addBox(-0.2412F, 0.9659F, -6.0F, 8.0F, 0.0F, 12.0F)
-				, PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F,  0.0F, 0.0F, 0.829F));
+				, PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.829F));
 
 		cartDefinition.addOrReplaceChild("bone",
 				CubeListBuilder.create()
 						.texOffs(1, 9).addBox(-1.0F, -1.0F, 0.0F, 2.0F, 2.0F, 3.0F)
-				, PartPose.offsetAndRotation(0.0F, -7.0F, 9.5F,  0.3927F, 0.0F, 0.0F));
+				, PartPose.offsetAndRotation(0.0F, -7.0F, 9.5F, 0.3927F, 0.0F, 0.0F));
 
-		return LayerDefinition.create(meshdefinition,  96,  96 );
+		return LayerDefinition.create(meshdefinition, 96, 96);
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.cart.y = 4.0F - ageInTicks;
 	}
 

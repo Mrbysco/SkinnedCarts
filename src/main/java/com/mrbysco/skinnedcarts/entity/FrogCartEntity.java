@@ -17,7 +17,7 @@ import net.minecraftforge.network.PlayMessages.SpawnEntity;
 import java.util.Calendar;
 
 public class FrogCartEntity extends AbstractSkinnedCart {
-	
+
 	public FrogCartEntity(EntityType<?> type, Level worldIn) {
 		super(type, worldIn);
 	}
@@ -39,22 +39,20 @@ public class FrogCartEntity extends AbstractSkinnedCart {
 	Type getSkinCartType() {
 		return Type.FROG;
 	}
-	
+
 	private void playLivingSound() {
 		SoundEvent sound = CartRegistry.WEDNESDAY_FROG_CART.get();
-        this.playSound(sound, this.getSoundVolume() , this.getSoundPitch());
+		this.playSound(sound, this.getSoundVolume(), this.getSoundPitch());
 	}
-	
-	protected float getSoundVolume()
-    {
-        return 1.0F;
-    }
-	
-	protected float getSoundPitch()
-    {
-        return (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F;
-    }
-	
+
+	protected float getSoundVolume() {
+		return 1.0F;
+	}
+
+	protected float getSoundPitch() {
+		return (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F;
+	}
+
 	@Override
 	public SoundSource getSoundSource() {
 		return SoundSource.NEUTRAL;
@@ -62,14 +60,14 @@ public class FrogCartEntity extends AbstractSkinnedCart {
 
 	@Override
 	public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
-		if(CartConfig.SERVER.WednesdayFrogCart.get() && itsWednesday()) {
+		if (CartConfig.SERVER.WednesdayFrogCart.get() && itsWednesday()) {
 			if (!level.isClientSide) {
 				this.playLivingSound();
 			}
 		}
 		return super.interactAt(player, vec, hand);
 	}
-	
+
 	private boolean itsWednesday() {
 		return Calendar.getInstance().get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY;
 	}

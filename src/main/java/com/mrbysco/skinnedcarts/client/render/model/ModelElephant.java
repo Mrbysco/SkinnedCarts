@@ -24,7 +24,7 @@ public class ModelElephant<T extends Entity> extends HierarchicalModel<T> {
 
 		PartDefinition cartDefinition = partDefinition.addOrReplaceChild("cart",
 				CubeListBuilder.create()
-				, PartPose.offsetAndRotation(2.0F, 5.0F, 0.0F,  0.0F, -1.5708F, 0.0F));
+				, PartPose.offsetAndRotation(2.0F, 5.0F, 0.0F, 0.0F, -1.5708F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("back_wall",
 				CubeListBuilder.create()
@@ -39,12 +39,12 @@ public class ModelElephant<T extends Entity> extends HierarchicalModel<T> {
 		cartDefinition.addOrReplaceChild("left_wall",
 				CubeListBuilder.create()
 						.texOffs(36, 42).addBox(-8.0F, -4.0F, -1.0F, 16, 8, 2).mirror()
-				, PartPose.offsetAndRotation(7.0F, -6.0F, 2.0F,  0.0F, 1.5708F, 0.0F));
+				, PartPose.offsetAndRotation(7.0F, -6.0F, 2.0F, 0.0F, 1.5708F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("right_wall",
 				CubeListBuilder.create()
 						.texOffs(0, 42).addBox(-8.0F, -4.0F, -1.0F, 16, 8, 2).mirror()
-				, PartPose.offsetAndRotation(-7.0F, -6.0F, 2.0F,  0.0F, -1.5708F, 0.0F));
+				, PartPose.offsetAndRotation(-7.0F, -6.0F, 2.0F, 0.0F, -1.5708F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("bottom",
 				CubeListBuilder.create()
@@ -64,29 +64,29 @@ public class ModelElephant<T extends Entity> extends HierarchicalModel<T> {
 		cartDefinition.addOrReplaceChild("trunk",
 				CubeListBuilder.create()
 						.texOffs(26, 62).addBox(-2.0F, 0.0F, 0.0F, 4, 5, 7).mirror()
-				, PartPose.offsetAndRotation(0.0F, -8.0F, -13.0F,  -0.2618F, 0.0F, 0.0F));
+				, PartPose.offsetAndRotation(0.0F, -8.0F, -13.0F, -0.2618F, 0.0F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("right_ear",
 				CubeListBuilder.create()
 						.texOffs(36, 52).addBox(0.0F, -4.0F, 0.0F, 5, 8, 2)
-				, PartPose.offsetAndRotation(4.0F, -9.0F, -10.0F,  0.0F, -0.1745F, 0.0F));
+				, PartPose.offsetAndRotation(4.0F, -9.0F, -10.0F, 0.0F, -0.1745F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("left_ear",
 				CubeListBuilder.create()
 						.texOffs(36, 52).addBox(-5.0F, -4.0F, 0.0F, 5, 8, 2).mirror()
-				, PartPose.offsetAndRotation(-4.0F, -9.0F, -10.0F,  0.0F, 0.1745F, 0.0F));
+				, PartPose.offsetAndRotation(-4.0F, -9.0F, -10.0F, 0.0F, 0.1745F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("right_tusk",
 				CubeListBuilder.create()
 						.texOffs(0, 0).addBox(0.0F, 0.0F, -2.0F, 1, 1, 2)
-				, PartPose.offsetAndRotation(2.0F, -5.0F, -13.0F,  0.1745F, 0.0F, 0.0F));
+				, PartPose.offsetAndRotation(2.0F, -5.0F, -13.0F, 0.1745F, 0.0F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("left_tusk",
 				CubeListBuilder.create()
 						.texOffs(0, 0).addBox(-1.0F, 0.0F, -2.0F, 1, 1, 2)
-				, PartPose.offsetAndRotation(-2.0F, -5.0F, -13.0F,  0.1745F, 0.0F, 0.0F));
+				, PartPose.offsetAndRotation(-2.0F, -5.0F, -13.0F, 0.1745F, 0.0F, 0.0F));
 
-		return LayerDefinition.create(meshdefinition,  96,  96 );
+		return LayerDefinition.create(meshdefinition, 96, 96);
 	}
 
 	@Override

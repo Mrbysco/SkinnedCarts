@@ -24,7 +24,7 @@ public class ModelPufferFish<T extends Entity> extends HierarchicalModel<T> {
 
 		PartDefinition cartDefinition = partDefinition.addOrReplaceChild("cart",
 				CubeListBuilder.create()
-				, PartPose.offsetAndRotation(8.0F, 24.0F, 0.0F,  0.0F, -1.5708F, 0.0F));
+				, PartPose.offsetAndRotation(8.0F, 24.0F, 0.0F, 0.0F, -1.5708F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("back_wall",
 				CubeListBuilder.create()
@@ -34,17 +34,17 @@ public class ModelPufferFish<T extends Entity> extends HierarchicalModel<T> {
 		cartDefinition.addOrReplaceChild("front_wall",
 				CubeListBuilder.create()
 						.texOffs(46, 22).addBox(-8.0F, -4.0F, -1.0F, 16.0F, 8.0F, 2.0F)
-				, PartPose.offsetAndRotation(0.0F, -6.0F, -1.0F,  0.0F, 3.1416F, 0.0F));
+				, PartPose.offsetAndRotation(0.0F, -6.0F, -1.0F, 0.0F, 3.1416F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("right_wall",
 				CubeListBuilder.create()
 						.texOffs(36, 42).addBox(-8.0F, -4.0F, -1.0F, 16.0F, 8.0F, 2.0F)
-				, PartPose.offsetAndRotation(-7.0F, -6.0F, 8.0F,  0.0F, -1.5708F, 0.0F));
+				, PartPose.offsetAndRotation(-7.0F, -6.0F, 8.0F, 0.0F, -1.5708F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("left_wall",
 				CubeListBuilder.create()
 						.texOffs(0, 42).addBox(-8.0F, -4.0F, -1.0F, 16.0F, 8.0F, 2.0F)
-				, PartPose.offsetAndRotation(7.0F, -6.0F, 8.0F,  0.0F, 1.5708F, 0.0F));
+				, PartPose.offsetAndRotation(7.0F, -6.0F, 8.0F, 0.0F, 1.5708F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("bottom",
 				CubeListBuilder.create()
@@ -64,37 +64,37 @@ public class ModelPufferFish<T extends Entity> extends HierarchicalModel<T> {
 		cartDefinition.addOrReplaceChild("left_fin",
 				CubeListBuilder.create()
 						.texOffs(59, 52).addBox(-3.0F, -2.0F, -2.0F, 3.0F, 1.0F, 4.0F)
-				, PartPose.offsetAndRotation(-8.0F, -7.0F, 5.0F,  0.0F, 0.0F, 0.2618F));
+				, PartPose.offsetAndRotation(-8.0F, -7.0F, 5.0F, 0.0F, 0.0F, 0.2618F));
 
 		cartDefinition.addOrReplaceChild("right_fin",
 				CubeListBuilder.create()
 						.texOffs(46, 52).addBox(0.0F, -1.0F, -2.0F, 3.0F, 1.0F, 4.0F)
-				, PartPose.offsetAndRotation(8.0F, -7.0F, 5.0F,  0.0F, 0.0F, -0.2618F));
+				, PartPose.offsetAndRotation(8.0F, -7.0F, 5.0F, 0.0F, 0.0F, -0.2618F));
 
 		cartDefinition.addOrReplaceChild("left_spines_1",
 				CubeListBuilder.create()
 						.texOffs(16, 76).addBox(-1.0F, -5.0F, 0.0F, 1.0F, 10.0F, 0.0F)
-				, PartPose.offsetAndRotation(-8.0F, -5.0F, -2.0F,  0.0F, -0.7854F, 0.0F));
+				, PartPose.offsetAndRotation(-8.0F, -5.0F, -2.0F, 0.0F, -0.7854F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("right_spines_1",
 				CubeListBuilder.create()
 						.texOffs(16, 64).addBox(0.0F, -5.0F, 0.0F, 1.0F, 10.0F, 0.0F)
-				, PartPose.offsetAndRotation(8.0F, -5.0F, -2.0F,  0.0F, 0.7854F, 0.0F));
+				, PartPose.offsetAndRotation(8.0F, -5.0F, -2.0F, 0.0F, 0.7854F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("top_spines_1",
 				CubeListBuilder.create()
 						.texOffs(0, 62).addBox(-8.0F, -1.0F, 0.0F, 16.0F, 1.0F, 0.0F)
-				, PartPose.offsetAndRotation(0.0F, -10.0F, -2.0F,  0.7854F, 0.0F, 0.0F));
+				, PartPose.offsetAndRotation(0.0F, -10.0F, -2.0F, 0.7854F, 0.0F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("bottom_spines_1",
 				CubeListBuilder.create()
 						.texOffs(0, 74).addBox(-8.0F, 0.0F, 0.0F, 16.0F, 1.0F, 0.0F)
-				, PartPose.offsetAndRotation(0.0F, 0.0F, -2.0F,  -0.7854F, 0.0F, 0.0F));
+				, PartPose.offsetAndRotation(0.0F, 0.0F, -2.0F, -0.7854F, 0.0F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("top_spines_2",
 				CubeListBuilder.create()
 						.texOffs(0, 63).addBox(-8.0F, -1.0F, 0.0F, 16.0F, 1.0F, 0.0F)
-				, PartPose.offsetAndRotation(0.0F, -10.0F, 18.0F,  -0.7854F, 0.0F, 0.0F));
+				, PartPose.offsetAndRotation(0.0F, -10.0F, 18.0F, -0.7854F, 0.0F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("top_spines_left_1",
 				CubeListBuilder.create()
@@ -104,7 +104,7 @@ public class ModelPufferFish<T extends Entity> extends HierarchicalModel<T> {
 		cartDefinition.addOrReplaceChild("bottom_spines_2",
 				CubeListBuilder.create()
 						.texOffs(0, 75).addBox(-8.0F, 0.0F, 0.0F, 16.0F, 1.0F, 0.0F)
-				, PartPose.offsetAndRotation(0.0F, 0.0F, 18.0F,  0.7854F, 0.0F, 0.0F));
+				, PartPose.offsetAndRotation(0.0F, 0.0F, 18.0F, 0.7854F, 0.0F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("top_spines_left_2",
 				CubeListBuilder.create()
@@ -114,12 +114,12 @@ public class ModelPufferFish<T extends Entity> extends HierarchicalModel<T> {
 		cartDefinition.addOrReplaceChild("right_spines_4",
 				CubeListBuilder.create()
 						.texOffs(16, 76).addBox(0.0F, -5.0F, 0.0F, 1.0F, 10.0F, 0.0F)
-				, PartPose.offsetAndRotation(8.0F, -5.0F, 18.0F,  0.0F, -0.7854F, 0.0F));
+				, PartPose.offsetAndRotation(8.0F, -5.0F, 18.0F, 0.0F, -0.7854F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("left_spines_4",
 				CubeListBuilder.create()
 						.texOffs(16, 64).addBox(-1.0F, -5.0F, 0.0F, 1.0F, 10.0F, 0.0F)
-				, PartPose.offsetAndRotation(-8.0F, -5.0F, 18.0F,  0.0F, 0.7854F, 0.0F));
+				, PartPose.offsetAndRotation(-8.0F, -5.0F, 18.0F, 0.0F, 0.7854F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("top_spines_right_2",
 				CubeListBuilder.create()
@@ -151,7 +151,7 @@ public class ModelPufferFish<T extends Entity> extends HierarchicalModel<T> {
 						.texOffs(0, 76).addBox(-11.0F, -8.0F, -6.0F, 1.0F, 10.0F, 0.0F)
 				, PartPose.offset(2.0F, -2.0F, 18.0F));
 
-		return LayerDefinition.create(meshdefinition,  96,  96 );
+		return LayerDefinition.create(meshdefinition, 96, 96);
 	}
 
 	@Override

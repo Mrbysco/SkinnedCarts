@@ -8,7 +8,7 @@ import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.network.PlayMessages.SpawnEntity;
 
 public class PufferFishCartEntity extends AbstractSkinnedCart {
-	
+
 	public PufferFishCartEntity(EntityType<?> type, Level worldIn) {
 		super(type, worldIn);
 	}

@@ -24,7 +24,7 @@ public class ModelLadybug<T extends Entity> extends HierarchicalModel<T> {
 
 		PartDefinition cartDefinition = partDefinition.addOrReplaceChild("cart",
 				CubeListBuilder.create()
-				, PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F,  0.0F, -1.5708F, 0.0F));
+				, PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.0F, -1.5708F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("back_wall",
 				CubeListBuilder.create()
@@ -64,14 +64,14 @@ public class ModelLadybug<T extends Entity> extends HierarchicalModel<T> {
 		headDefinition.addOrReplaceChild("antenna",
 				CubeListBuilder.create()
 						.texOffs(74, 10).addBox(0.0F, -4.0F, -0.5F, 0.0F, 5.0F, 1.0F)
-				, PartPose.offsetAndRotation(-3.0F, -10.5F, -11.0F,  0.0F, -0.3054F, -0.3054F));
+				, PartPose.offsetAndRotation(-3.0F, -10.5F, -11.0F, 0.0F, -0.3054F, -0.3054F));
 
 		headDefinition.addOrReplaceChild("antenna2",
 				CubeListBuilder.create()
 						.texOffs(74, 10).addBox(0.0F, -4.0F, -0.5F, 0.0F, 5.0F, 1.0F).mirror()
-				, PartPose.offsetAndRotation(3.0F, -10.5F, -11.0F,  0.0F, 0.3054F, 0.3054F));
+				, PartPose.offsetAndRotation(3.0F, -10.5F, -11.0F, 0.0F, 0.3054F, 0.3054F));
 
-		return LayerDefinition.create(meshdefinition,  96,  96 );
+		return LayerDefinition.create(meshdefinition, 96, 96);
 	}
 
 	@Override

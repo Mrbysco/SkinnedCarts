@@ -8,7 +8,7 @@ import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.network.PlayMessages.SpawnEntity;
 
 public class TurtleCartEntity extends AbstractSkinnedCart {
-	
+
 	public TurtleCartEntity(EntityType<?> type, Level worldIn) {
 		super(type, worldIn);
 	}

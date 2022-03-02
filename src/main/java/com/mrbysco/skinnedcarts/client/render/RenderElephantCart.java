@@ -7,17 +7,17 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
 public class RenderElephantCart<T extends AbstractSkinnedCart> extends RenderSkinnedCart<T> {
-    private static ResourceLocation CART_TEXTURES = createLocation("minecart_elephant");
+	private static ResourceLocation CART_TEXTURES = createLocation("minecart_elephant");
 
-    public RenderElephantCart(EntityRendererProvider.Context context) {
-        super(context, new ModelElephant<>(context.bakeLayer(ClientHandler.ELEPHANT_CART)));
-    }
+	public RenderElephantCart(EntityRendererProvider.Context context) {
+		super(context, new ModelElephant<>(context.bakeLayer(ClientHandler.ELEPHANT_CART)));
+	}
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
-    @Override
-    public ResourceLocation getTextureLocation(T entity) {
-        return CART_TEXTURES;
-    }
+	/**
+	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
+	 */
+	@Override
+	public ResourceLocation getTextureLocation(T entity) {
+		return CART_TEXTURES;
+	}
 }

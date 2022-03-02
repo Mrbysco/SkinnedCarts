@@ -34,11 +34,11 @@ public class CartConfig {
 
 	@SubscribeEvent
 	public static void onLoad(final ModConfigEvent.Loading configEvent) {
-		SkinnedCarts.logger.debug("Loaded SkinnedCart's config file {}", configEvent.getConfig().getFileName());
+		SkinnedCarts.LOGGER.debug("Loaded SkinnedCart's config file {}", configEvent.getConfig().getFileName());
 	}
 
 	@SubscribeEvent
 	public static void onFileChange(final ModConfigEvent.Reloading configEvent) {
-		SkinnedCarts.logger.debug("SkinnedCart's config just got changed on the file system!");
+		SkinnedCarts.LOGGER.debug("SkinnedCart's config just got changed on the file system!");
 	}
 }

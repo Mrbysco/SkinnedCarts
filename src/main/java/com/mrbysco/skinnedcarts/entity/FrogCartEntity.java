@@ -9,6 +9,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
@@ -31,13 +32,23 @@ public class FrogCartEntity extends AbstractSkinnedCart {
 	}
 
 	@Override
+	public EntityType<?> getType() {
+		return CartRegistry.FROG_CART.get();
+	}
+
+	@Override
 	public Packet<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
 	@Override
-	Type getSkinCartType() {
+	public AbstractSkinnedCart.Type getSkinCartType() {
 		return Type.FROG;
+	}
+
+	@Override
+	protected Item getReturnItem() {
+		return CartRegistry.FROG_CART_ITEM.get();
 	}
 
 	private void playLivingSound() {

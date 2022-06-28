@@ -73,7 +73,7 @@ public class ModelWombat<T extends Entity> extends HierarchicalModel<T> {
 
 		HeadDefinition.addOrReplaceChild("ear2",
 				CubeListBuilder.create()
-						.texOffs(54, 0).addBox(-1.1263F, -1.1082F, -0.9715F, 2.0F, 2.0F, 1.0F).mirror()
+						.texOffs(54, 0).mirror().addBox(-1.1263F, -1.1082F, -0.9715F, 2.0F, 2.0F, 1.0F).mirror(false)
 				, PartPose.offsetAndRotation(-3.5F, -6.875F, -5.125F, 0.0F, 1.309F, -0.2182F));
 
 		PartDefinition backlegsDefinition = cartDefinition.addOrReplaceChild("backlegs",
@@ -83,27 +83,27 @@ public class ModelWombat<T extends Entity> extends HierarchicalModel<T> {
 
 		backlegsDefinition.addOrReplaceChild("bone",
 				CubeListBuilder.create()
-						.texOffs(79, 0).addBox(-1.7757F, -1.0536F, -2.0695F, 3.0F, 1.0F, 4.0F).mirror()
+						.texOffs(79, 0).addBox(-1.7757F, -1.0536F, -2.0695F, 3.0F, 1.0F, 4.0F)
 				, PartPose.offsetAndRotation(-1.1946F, 1.8612F, -4.2109F, -0.1309F, 0.0F, 0.0F));
 
 		PartDefinition backlegs2Definition = cartDefinition.addOrReplaceChild("backlegs2",
 				CubeListBuilder.create()
-						.texOffs(61, 0).addBox(-0.1736F, -5.7451F, -3.5487F, 3.0F, 7.0F, 6.0F).mirror()
+						.texOffs(61, 0).mirror().addBox(-0.1736F, -5.7451F, -3.5487F, 3.0F, 7.0F, 6.0F).mirror(false)
 				, PartPose.offsetAndRotation(-9.0F, -3.0F, 7.5F, 0.2618F, 0.1745F, 0.0F));
 
 		backlegs2Definition.addOrReplaceChild("bone2",
 				CubeListBuilder.create()
-						.texOffs(79, 0).addBox(-0.9466F, -0.1244F, -2.9003F, 3.0F, 1.0F, 4.0F).mirror()
+						.texOffs(79, 0).mirror().addBox(-0.9466F, -0.1244F, -2.9003F, 3.0F, 1.0F, 4.0F).mirror(false)
 				, PartPose.offsetAndRotation(0.6876F, 1.0452F, -2.8926F, -0.1309F, -0.1309F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("frontleg",
 				CubeListBuilder.create()
 						.texOffs(11, 0).addBox(-0.8264F, 0.829F, -0.0302F, 2.0F, 5.0F, 2.0F)
-				, PartPose.offsetAndRotation(-8.0F, -6.0F, -10.0F, -0.1745F, 0.1745F, 0.1309F));
+				, PartPose.offsetAndRotation(-8.0F, -6.0F, -10.0F, -0.1745F, -0.1745F, -0.1309F));
 
 		cartDefinition.addOrReplaceChild("frontleg2",
 				CubeListBuilder.create()
-						.texOffs(11, 0).addBox(-1.1736F, 0.829F, -0.0302F, 2.0F, 5.0F, 2.0F).mirror()
+						.texOffs(11, 0).mirror().addBox(-1.1736F, 0.829F, -0.0302F, 2.0F, 5.0F, 2.0F).mirror(false)
 				, PartPose.offsetAndRotation(8.0F, -6.0F, -10.0F, -0.1745F, 0.1745F, 0.1309F));
 
 		cartDefinition.addOrReplaceChild("frontshoulder",
@@ -113,7 +113,7 @@ public class ModelWombat<T extends Entity> extends HierarchicalModel<T> {
 
 		cartDefinition.addOrReplaceChild("frontshoulder2",
 				CubeListBuilder.create()
-						.texOffs(80, 6).addBox(-3.4976F, -3.4829F, -2.2171F, 2.0F, 4.0F, 5.0F).mirror()
+						.texOffs(80, 6).mirror().addBox(-3.4976F, -3.4829F, -2.2171F, 2.0F, 4.0F, 5.0F).mirror(false)
 				, PartPose.offsetAndRotation(-5.0F, -4.5F, -7.5F, 0.3054F, -0.0436F, 0.0F));
 
 		cartDefinition.addOrReplaceChild("tail",

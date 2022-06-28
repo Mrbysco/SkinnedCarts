@@ -3,6 +3,7 @@ package com.mrbysco.skinnedcarts.entity;
 import com.mrbysco.skinnedcarts.init.CartRegistry;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.network.PlayMessages.SpawnEntity;
@@ -22,12 +23,22 @@ public class SnailCartEntity extends AbstractSkinnedCart {
 	}
 
 	@Override
+	public EntityType<?> getType() {
+		return CartRegistry.SNAIL_CART.get();
+	}
+
+	@Override
 	public Packet<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
 	@Override
-	Type getSkinCartType() {
+	public AbstractSkinnedCart.Type getSkinCartType() {
 		return Type.SNAIL;
+	}
+
+	@Override
+	protected Item getReturnItem() {
+		return CartRegistry.SNAIL_CART_ITEM.get();
 	}
 }

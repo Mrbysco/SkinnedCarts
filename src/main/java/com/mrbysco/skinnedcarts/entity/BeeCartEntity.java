@@ -3,6 +3,9 @@ package com.mrbysco.skinnedcarts.entity;
 import com.mrbysco.skinnedcarts.init.CartRegistry;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.vehicle.AbstractMinecart;
+import net.minecraft.world.entity.vehicle.AbstractMinecart.Type;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.network.PlayMessages.SpawnEntity;
@@ -22,12 +25,22 @@ public class BeeCartEntity extends AbstractSkinnedCart {
 	}
 
 	@Override
+	public EntityType<?> getType() {
+		return CartRegistry.BEE_CART.get();
+	}
+
+	@Override
 	public Packet<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
 	@Override
-	Type getSkinCartType() {
+	public AbstractSkinnedCart.Type getSkinCartType() {
 		return Type.BEE;
+	}
+
+	@Override
+	protected Item getReturnItem() {
+		return CartRegistry.BEE_CART_ITEM.get();
 	}
 }

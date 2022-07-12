@@ -3,8 +3,6 @@ package com.mrbysco.skinnedcarts.entity;
 import com.mrbysco.skinnedcarts.init.CartRegistry;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.vehicle.AbstractMinecart;
-import net.minecraft.world.entity.vehicle.AbstractMinecart.Type;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;

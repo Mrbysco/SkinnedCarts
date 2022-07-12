@@ -24,7 +24,7 @@ public class SkinnedCarts {
 		eventBus.register(CartConfig.class);
 
 		CartRegistry.ITEMS.register(eventBus);
-		CartRegistry.ENTITIES.register(eventBus);
+		CartRegistry.ENTITY_TYPES.register(eventBus);
 		CartRegistry.SOUND_EVENTS.register(eventBus);
 
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {

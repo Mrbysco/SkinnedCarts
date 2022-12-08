@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
+    "parent": "minecraft:item/generated",
     "textures": {
-        "layer0": "skinnedcarts:items/turtle_minecart"
+        "layer0": "skinnedcarts:item/turtle_minecart"
     }
 }

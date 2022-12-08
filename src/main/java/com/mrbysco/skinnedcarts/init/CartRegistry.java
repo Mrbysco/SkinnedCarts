@@ -43,7 +43,8 @@ public class CartRegistry {
 	public static final RegistryObject<Item> PENGUIN_CART_ITEM = ITEMS.register("penguin_minecart", () -> new CustomCartItem(Type.PENGUIN, itemBuilder()));
 	public static final RegistryObject<Item> WOMBAT_CART_ITEM = ITEMS.register("wombat_minecart", () -> new CustomCartItem(Type.WOMBAT, itemBuilder()));
 
-	public static final RegistryObject<SoundEvent> WEDNESDAY_FROG_CART = SOUND_EVENTS.register("minecart.wednesday.frog", () -> new SoundEvent(new ResourceLocation(Reference.MOD_ID, "minecart.wednesday.frog")));
+	public static final RegistryObject<SoundEvent> WEDNESDAY_FROG_CART = SOUND_EVENTS.register("minecart.wednesday.frog", () ->
+			SoundEvent.createVariableRangeEvent(new ResourceLocation(Reference.MOD_ID, "minecart.wednesday.frog")));
 
 	private static Item.Properties itemBuilder() {
 		return new Item.Properties();

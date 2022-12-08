@@ -1,6 +1,5 @@
 package com.mrbysco.skinnedcarts.items;
 
-import com.mrbysco.skinnedcarts.CartTab;
 import com.mrbysco.skinnedcarts.entity.AbstractSkinnedCart;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
@@ -9,7 +8,6 @@ import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -18,9 +16,6 @@ import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.RailShape;
-
-import java.util.Arrays;
-import java.util.Collection;
 
 public class CustomCartItem extends Item {
 
@@ -83,11 +78,6 @@ public class CustomCartItem extends Item {
 		super(properties.stacksTo(1));
 		this.cartType = type;
 		DispenserBlock.registerBehavior(this, MINECART_DISPENSER_BEHAVIOR);
-	}
-
-	@Override
-	public Collection<CreativeModeTab> getCreativeTabs() {
-		return Arrays.asList(CreativeModeTab.TAB_TRANSPORTATION, CartTab.CART_TAB);
 	}
 
 	/**

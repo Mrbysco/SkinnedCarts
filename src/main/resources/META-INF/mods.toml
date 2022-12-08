@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[41,)"
+loaderVersion="[44,)"
 issueTrackerURL="https://github.com/Mrbysco/SkinnedCarts"
 license="MIT"
 
@@ -16,12 +16,6 @@ credits="Gentleman_Gnu for the idea"
 [[dependencies.skinnedcarts]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.19,1.20)"
-ordering="NONE"
-side="BOTH"
-[[dependencies.skinnedcarts]]
-modId="forge"
-mandatory=true
-versionRange="[41.0.94,)"
+versionRange="[1.19.3,1.20)"
 ordering="NONE"
 side="BOTH"

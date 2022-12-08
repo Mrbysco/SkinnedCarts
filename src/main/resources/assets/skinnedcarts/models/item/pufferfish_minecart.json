@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
+    "parent": "minecraft:item/generated",
     "textures": {
-        "layer0": "skinnedcarts:items/pufferfish_minecart"
+        "layer0": "skinnedcarts:item/pufferfish_minecart"
     }
 }

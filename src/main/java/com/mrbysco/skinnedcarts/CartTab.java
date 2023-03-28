@@ -19,7 +19,7 @@ public class CartTab {
 		CART_TAB = event.registerCreativeModeTab(new ResourceLocation(Reference.MOD_ID, "tab"), builder ->
 				builder.icon(() -> new ItemStack(Items.MINECART))
 						.title(Component.translatable("itemGroup.skinnedcarts.tab"))
-						.displayItems((features, output, hasPermissions) -> {
+						.displayItems((features, output) -> {
 							List<ItemStack> stacks = CartRegistry.ITEMS.getEntries().stream().map(reg -> new ItemStack(reg.get())).toList();
 							output.acceptAll(stacks);
 						}));

@@ -73,7 +73,7 @@ public class FrogCartEntity extends AbstractSkinnedCart {
 	@Override
 	public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
 		if (CartConfig.SERVER.WednesdayFrogCart.get() && itsWednesday()) {
-			if (!level.isClientSide) {
+			if (!level().isClientSide) {
 				this.playLivingSound();
 			}
 		}

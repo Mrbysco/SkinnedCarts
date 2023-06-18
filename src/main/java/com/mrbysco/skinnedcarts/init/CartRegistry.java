@@ -15,20 +15,28 @@ import com.mrbysco.skinnedcarts.entity.SnailCartEntity;
 import com.mrbysco.skinnedcarts.entity.TurtleCartEntity;
 import com.mrbysco.skinnedcarts.entity.WombatCartEntity;
 import com.mrbysco.skinnedcarts.items.CustomCartItem;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.List;
 
 public class CartRegistry {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Reference.MOD_ID);
 	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Reference.MOD_ID);
 	public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Reference.MOD_ID);
+	public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Reference.MOD_ID);
 
 	public static final RegistryObject<Item> ELEPHANT_CART_ITEM = ITEMS.register("elephant_minecart", () -> new CustomCartItem(Type.ELEPHANT, itemBuilder()));
 	public static final RegistryObject<Item> FROG_CART_ITEM = ITEMS.register("frog_minecart", () -> new CustomCartItem(Type.FROG, itemBuilder()));
@@ -42,6 +50,14 @@ public class CartRegistry {
 	public static final RegistryObject<Item> LADYBUG_CART_ITEM = ITEMS.register("ladybug_minecart", () -> new CustomCartItem(Type.LADYBUG, itemBuilder()));
 	public static final RegistryObject<Item> PENGUIN_CART_ITEM = ITEMS.register("penguin_minecart", () -> new CustomCartItem(Type.PENGUIN, itemBuilder()));
 	public static final RegistryObject<Item> WOMBAT_CART_ITEM = ITEMS.register("wombat_minecart", () -> new CustomCartItem(Type.WOMBAT, itemBuilder()));
+
+	public static final RegistryObject<CreativeModeTab> CART_TAB = CREATIVE_MODE_TABS.register("tab", () -> CreativeModeTab.builder()
+			.icon(() -> new ItemStack(Items.MINECART))
+			.title(Component.translatable("itemGroup.skinnedcarts.tab"))
+			.displayItems((features, output) -> {
+				List<ItemStack> stacks = CartRegistry.ITEMS.getEntries().stream().map(reg -> new ItemStack(reg.get())).toList();
+				output.acceptAll(stacks);
+			}).build());
 
 	public static final RegistryObject<SoundEvent> WEDNESDAY_FROG_CART = SOUND_EVENTS.register("minecart.wednesday.frog", () ->
 			SoundEvent.createVariableRangeEvent(new ResourceLocation(Reference.MOD_ID, "minecart.wednesday.frog")));

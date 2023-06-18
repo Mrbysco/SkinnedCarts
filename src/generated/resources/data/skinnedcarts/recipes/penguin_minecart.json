@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:black_wool"
+    },
+    "M": {
+      "item": "minecraft:minecart"
+    },
+    "W": {
+      "item": "minecraft:white_wool"
+    },
+    "Y": {
+      "item": "minecraft:yellow_wool"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "YMY",
+    "WWW"
+  ],
+  "result": {
+    "item": "skinnedcarts:penguin_minecart"
+  },
+  "show_notification": true
+}

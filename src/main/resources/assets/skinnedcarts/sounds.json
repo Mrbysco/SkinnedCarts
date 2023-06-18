@@ -1,9 +1,0 @@
-{
-    "minecart.wednesday.frog" : {
-    "category" : "neutral",
-	"subtitle": "skinnedcarts:wednesday.title",
-        "sounds": [
-            "skinnedcarts:wednesday"
-        ]
-    }
-}

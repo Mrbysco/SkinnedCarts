@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:green_wool"
+    },
+    "M": {
+      "item": "minecraft:minecart"
+    },
+    "Y": {
+      "item": "minecraft:yellow_wool"
+    }
+  },
+  "pattern": [
+    "GGG",
+    "GMG",
+    "YYY"
+  ],
+  "result": {
+    "item": "skinnedcarts:turtle_minecart"
+  },
+  "show_notification": true
+}

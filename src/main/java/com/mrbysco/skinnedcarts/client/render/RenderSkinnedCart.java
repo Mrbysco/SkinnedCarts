@@ -3,7 +3,7 @@ package com.mrbysco.skinnedcarts.client.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import com.mrbysco.skinnedcarts.Reference;
+import com.mrbysco.skinnedcarts.SkinnedCarts;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -16,6 +16,7 @@ import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.client.model.data.ModelData;
 
 public class RenderSkinnedCart<T extends AbstractMinecart> extends EntityRenderer<T> {
 	private static ResourceLocation CART_TEXTURES = createLocation("minecart_frog");
@@ -28,16 +29,13 @@ public class RenderSkinnedCart<T extends AbstractMinecart> extends EntityRendere
 	}
 
 	public static ResourceLocation createLocation(String cartName) {
-		return new ResourceLocation(Reference.MOD_PREFIX + "textures/entity/" + cartName + ".png");
+		return new ResourceLocation(SkinnedCarts.MOD_ID, "textures/entity/" + cartName + ".png");
 	}
 
 	protected void renderBlockState(T entityIn, float partialTicks, BlockState stateIn, PoseStack poseStack, MultiBufferSource bufferSource, int packedLightIn) {
-		Minecraft.getInstance().getBlockRenderer().renderSingleBlock(stateIn, poseStack, bufferSource, packedLightIn, OverlayTexture.NO_OVERLAY);
+		Minecraft.getInstance().getBlockRenderer().renderSingleBlock(stateIn, poseStack, bufferSource, packedLightIn, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, null);
 	}
 
-	/**
-	 * Renders the desired {@code T} type Entity.
-	 */
 	/**
 	 * Renders the desired {@code T} type Entity.
 	 */

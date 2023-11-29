@@ -1,6 +1,6 @@
 modLoader="javafml"
-loaderVersion="[46,)"
-issueTrackerURL="https://github.com/Mrbysco/SkinnedCarts"
+loaderVersion="[1,)"
+issueTrackerURL="https://github.com/Mrbysco/SkinnedCarts/issues"
 license="MIT"
 
 [[mods]]
@@ -16,6 +16,12 @@ credits="Gentleman_Gnu for the idea"
 [[dependencies.skinnedcarts]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.20,1.21)"
+versionRange="[1.20.2,1.21)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.skinnedcarts]]
+modId="neoforge"
+mandatory=true
+versionRange="[20.2.64-beta,)"
 ordering="NONE"
 side="BOTH"

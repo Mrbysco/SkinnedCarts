@@ -2,8 +2,8 @@ package com.mrbysco.skinnedcarts.items;
 
 import com.mrbysco.skinnedcarts.entity.AbstractSkinnedCart;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
+import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.tags.BlockTags;
@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.RailShape;
+import net.minecraft.world.phys.Vec3;
 
 public class CustomCartItem extends Item {
 
@@ -26,14 +27,15 @@ public class CustomCartItem extends Item {
 		 * Dispense the specified stack, play the dispense sound and spawn particles.
 		 */
 		public ItemStack execute(BlockSource source, ItemStack stack) {
-			Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
-			Level world = source.getLevel();
-			double d0 = source.x() + (double) direction.getStepX() * 1.125D;
-			double d1 = Math.floor(source.y()) + (double) direction.getStepY();
-			double d2 = source.z() + (double) direction.getStepZ() * 1.125D;
-			BlockPos blockpos = source.getPos().relative(direction);
-			BlockState blockstate = world.getBlockState(blockpos);
-			RailShape railshape = blockstate.getBlock() instanceof BaseRailBlock ? ((BaseRailBlock) blockstate.getBlock()).getRailDirection(blockstate, world, blockpos, null) : RailShape.NORTH_SOUTH;
+			Direction direction = source.state().getValue(DispenserBlock.FACING);
+			Level level = source.level();
+			Vec3 center = source.center();
+			double d0 = center.x() + (double) direction.getStepX() * 1.125D;
+			double d1 = Math.floor(center.y()) + (double) direction.getStepY();
+			double d2 = center.z() + (double) direction.getStepZ() * 1.125D;
+			BlockPos blockpos = source.pos().relative(direction);
+			BlockState blockstate = level.getBlockState(blockpos);
+			RailShape railshape = blockstate.getBlock() instanceof BaseRailBlock ? ((BaseRailBlock) blockstate.getBlock()).getRailDirection(blockstate, level, blockpos, null) : RailShape.NORTH_SOUTH;
 			double d3;
 			if (blockstate.is(BlockTags.RAILS)) {
 				if (railshape.isAscending()) {
@@ -42,12 +44,12 @@ public class CustomCartItem extends Item {
 					d3 = 0.1D;
 				}
 			} else {
-				if (!blockstate.isAir() || !world.getBlockState(blockpos.below()).is(BlockTags.RAILS)) {
+				if (!blockstate.isAir() || !level.getBlockState(blockpos.below()).is(BlockTags.RAILS)) {
 					return this.behaviourDefaultDispenseItem.dispense(source, stack);
 				}
 
-				BlockState blockstate1 = world.getBlockState(blockpos.below());
-				RailShape railshape1 = blockstate1.getBlock() instanceof BaseRailBlock ? ((BaseRailBlock) blockstate1.getBlock()).getRailDirection(blockstate1, world, blockpos.below(), null) : RailShape.NORTH_SOUTH;
+				BlockState blockstate1 = level.getBlockState(blockpos.below());
+				RailShape railshape1 = blockstate1.getBlock() instanceof BaseRailBlock ? ((BaseRailBlock) blockstate1.getBlock()).getRailDirection(blockstate1, level, blockpos.below(), null) : RailShape.NORTH_SOUTH;
 				if (direction != Direction.DOWN && railshape1.isAscending()) {
 					d3 = -0.4D;
 				} else {
@@ -55,11 +57,11 @@ public class CustomCartItem extends Item {
 				}
 			}
 
-			AbstractSkinnedCart skinnedCart = AbstractSkinnedCart.create(world, d0, d1 + d3, d2, ((CustomCartItem) stack.getItem()).cartType);
+			AbstractSkinnedCart skinnedCart = AbstractSkinnedCart.create(level, d0, d1 + d3, d2, ((CustomCartItem) stack.getItem()).cartType);
 			if (stack.hasCustomHoverName()) {
 				skinnedCart.setCustomName(stack.getHoverName());
 			}
-			world.addFreshEntity(skinnedCart);
+			level.addFreshEntity(skinnedCart);
 			stack.shrink(1);
 
 			return stack;
@@ -69,7 +71,7 @@ public class CustomCartItem extends Item {
 		 * Play the dispense sound from the specified block.
 		 */
 		protected void playSound(BlockSource source) {
-			source.getLevel().levelEvent(1000, source.getPos(), 0);
+			source.level().levelEvent(1000, source.pos(), 0);
 		}
 	};
 	private final AbstractSkinnedCart.Type cartType;

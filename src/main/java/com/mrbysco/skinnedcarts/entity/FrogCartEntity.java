@@ -13,8 +13,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.network.NetworkHooks;
-import net.minecraftforge.network.PlayMessages.SpawnEntity;
+import net.neoforged.neoforge.network.NetworkHooks;
+import net.neoforged.neoforge.network.PlayMessages.SpawnEntity;
 
 import java.util.Calendar;
 
@@ -72,7 +72,7 @@ public class FrogCartEntity extends AbstractSkinnedCart {
 
 	@Override
 	public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
-		if (CartConfig.SERVER.WednesdayFrogCart.get() && itsWednesday()) {
+		if (CartConfig.SERVER.wednesdayFrogCart.get() && itsWednesday()) {
 			if (!level().isClientSide) {
 				this.playLivingSound();
 			}

@@ -1,27 +1,28 @@
 package com.mrbysco.skinnedcarts.datagen;
 
-import com.mrbysco.skinnedcarts.Reference;
+import com.mrbysco.skinnedcarts.SkinnedCarts;
 import com.mrbysco.skinnedcarts.init.CartRegistry;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.LanguageProvider;
-import net.minecraftforge.common.data.SoundDefinitionsProvider;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.LanguageProvider;
+import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.Objects;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CartDatagen {
@@ -32,7 +33,7 @@ public class CartDatagen {
 		ExistingFileHelper helper = event.getExistingFileHelper();
 
 		if (event.includeServer()) {
-			generator.addProvider(true, new Recipes(packOutput));
+			generator.addProvider(true, new Recipes(packOutput, event.getLookupProvider()));
 		}
 		if (event.includeClient()) {
 			generator.addProvider(true, new Language(packOutput));
@@ -42,12 +43,12 @@ public class CartDatagen {
 	}
 
 	private static class Recipes extends RecipeProvider {
-		public Recipes(PackOutput packOutput) {
-			super(packOutput);
+		public Recipes(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+			super(packOutput, lookupProvider);
 		}
 
 		@Override
-		protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
+		protected void buildRecipes(RecipeOutput recipeOutput) {
 			ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, CartRegistry.BEE_CART_ITEM.get())
 					.pattern("YBY")
 					.pattern("BMB")
@@ -56,7 +57,7 @@ public class CartDatagen {
 					.define('B', Items.BLACK_WOOL)
 					.define('Y', Items.YELLOW_WOOL)
 					.unlockedBy("has_minecart", has(Items.MINECART))
-					.save(consumer);
+					.save(recipeOutput);
 
 			ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, CartRegistry.ELEPHANT_CART_ITEM.get())
 					.pattern("GGG")
@@ -65,7 +66,7 @@ public class CartDatagen {
 					.define('M', Items.MINECART)
 					.define('G', Items.GRAY_WOOL)
 					.unlockedBy("has_minecart", has(Items.MINECART))
-					.save(consumer);
+					.save(recipeOutput);
 
 			ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, CartRegistry.FROG_CART_ITEM.get())
 					.pattern("GGG")
@@ -74,7 +75,7 @@ public class CartDatagen {
 					.define('M', Items.MINECART)
 					.define('G', Items.LIGHT_GRAY_WOOL)
 					.unlockedBy("has_minecart", has(Items.MINECART))
-					.save(consumer);
+					.save(recipeOutput);
 
 			ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, CartRegistry.GREEN_FROG_CART_ITEM.get())
 					.pattern("GGG")
@@ -84,7 +85,7 @@ public class CartDatagen {
 					.define('G', Items.GREEN_WOOL)
 					.define('W', Items.WHITE_WOOL)
 					.unlockedBy("has_minecart", has(Items.MINECART))
-					.save(consumer);
+					.save(recipeOutput);
 
 			ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, CartRegistry.LADYBUG_CART_ITEM.get())
 					.pattern("RRR")
@@ -94,7 +95,7 @@ public class CartDatagen {
 					.define('R', Items.RED_WOOL)
 					.define('B', Items.BLACK_WOOL)
 					.unlockedBy("has_minecart", has(Items.MINECART))
-					.save(consumer);
+					.save(recipeOutput);
 
 			ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, CartRegistry.PANDA_CART_ITEM.get())
 					.pattern("BWB")
@@ -104,7 +105,7 @@ public class CartDatagen {
 					.define('B', Items.BLACK_WOOL)
 					.define('W', Items.WHITE_WOOL)
 					.unlockedBy("has_minecart", has(Items.MINECART))
-					.save(consumer);
+					.save(recipeOutput);
 
 			ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, CartRegistry.PELICAN_CART_ITEM.get())
 					.pattern("WWW")
@@ -114,7 +115,7 @@ public class CartDatagen {
 					.define('W', Items.WHITE_WOOL)
 					.define('Y', Items.YELLOW_WOOL)
 					.unlockedBy("has_minecart", has(Items.MINECART))
-					.save(consumer);
+					.save(recipeOutput);
 
 			ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, CartRegistry.PENGUIN_CART_ITEM.get())
 					.pattern("BBB")
@@ -125,7 +126,7 @@ public class CartDatagen {
 					.define('Y', Items.YELLOW_WOOL)
 					.define('W', Items.WHITE_WOOL)
 					.unlockedBy("has_minecart", has(Items.MINECART))
-					.save(consumer);
+					.save(recipeOutput);
 
 			ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, CartRegistry.PUFFERFISH_CART_ITEM.get())
 					.pattern("YWY")
@@ -135,7 +136,7 @@ public class CartDatagen {
 					.define('W', Items.WHITE_WOOL)
 					.define('Y', Items.YELLOW_WOOL)
 					.unlockedBy("has_minecart", has(Items.MINECART))
-					.save(consumer);
+					.save(recipeOutput);
 
 			ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, CartRegistry.SNAIL_CART_ITEM.get())
 					.pattern("BBB")
@@ -145,7 +146,7 @@ public class CartDatagen {
 					.define('B', Items.BROWN_WOOL)
 					.define('G', Items.LIGHT_GRAY_WOOL)
 					.unlockedBy("has_minecart", has(Items.MINECART))
-					.save(consumer);
+					.save(recipeOutput);
 
 			ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, CartRegistry.TURTLE_CART_ITEM.get())
 					.pattern("GGG")
@@ -155,7 +156,7 @@ public class CartDatagen {
 					.define('G', Items.GREEN_WOOL)
 					.define('Y', Items.YELLOW_WOOL)
 					.unlockedBy("has_minecart", has(Items.MINECART))
-					.save(consumer);
+					.save(recipeOutput);
 
 			ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, CartRegistry.WOMBAT_CART_ITEM.get())
 					.pattern("BBB")
@@ -164,13 +165,13 @@ public class CartDatagen {
 					.define('M', Items.MINECART)
 					.define('B', Items.BROWN_WOOL)
 					.unlockedBy("has_minecart", has(Items.MINECART))
-					.save(consumer);
+					.save(recipeOutput);
 		}
 	}
 
 	private static class Language extends LanguageProvider {
 		public Language(PackOutput packOutput) {
-			super(packOutput, Reference.MOD_ID, "en_us");
+			super(packOutput, SkinnedCarts.MOD_ID, "en_us");
 		}
 
 		@Override
@@ -208,19 +209,19 @@ public class CartDatagen {
 			addSubtitle(CartRegistry.WEDNESDAY_FROG_CART, "It's wednesday");
 		}
 
-		public void addSubtitle(RegistryObject<SoundEvent> sound, String name) {
+		public void addSubtitle(Supplier<SoundEvent> sound, String name) {
 			this.addSubtitle(sound.get(), name);
 		}
 
 		public void addSubtitle(SoundEvent sound, String name) {
-			String path = Reference.MOD_ID + ".subtitle." + sound.getLocation().getPath();
+			String path = SkinnedCarts.MOD_ID + ".subtitle." + sound.getLocation().getPath();
 			this.add(path, name);
 		}
 	}
 
 	private static class SoundDefinitions extends SoundDefinitionsProvider {
 		public SoundDefinitions(PackOutput packOutput, ExistingFileHelper helper) {
-			super(packOutput, Reference.MOD_ID, helper);
+			super(packOutput, SkinnedCarts.MOD_ID, helper);
 		}
 
 		@Override
@@ -231,13 +232,13 @@ public class CartDatagen {
 		}
 
 		public String modSubtitle(ResourceLocation id) {
-			return Reference.MOD_ID + ".subtitle." + id.getPath();
+			return SkinnedCarts.MOD_ID + ".subtitle." + id.getPath();
 		}
 	}
 
 	private static class ItemModels extends ItemModelProvider {
 		public ItemModels(PackOutput packOutput, ExistingFileHelper helper) {
-			super(packOutput, Reference.MOD_ID, helper);
+			super(packOutput, SkinnedCarts.MOD_ID, helper);
 		}
 
 		@Override

@@ -1,9 +1,9 @@
 package com.mrbysco.skinnedcarts.config;
 
 import com.mrbysco.skinnedcarts.SkinnedCarts;
-import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.config.ModConfigEvent;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.common.ModConfigSpec.BooleanValue;
 import org.apache.commons.lang3.tuple.Pair;
 

@@ -20,7 +20,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class CustomCartItem extends Item {
 
-	private static final DispenseItemBehavior MINECART_DISPENSER_BEHAVIOR = new DefaultDispenseItemBehavior() {
+	public static final DispenseItemBehavior MINECART_DISPENSER_BEHAVIOR = new DefaultDispenseItemBehavior() {
 		private final DefaultDispenseItemBehavior behaviourDefaultDispenseItem = new DefaultDispenseItemBehavior();
 
 		/**
@@ -79,12 +79,12 @@ public class CustomCartItem extends Item {
 	public CustomCartItem(AbstractSkinnedCart.Type type, Properties properties) {
 		super(properties.stacksTo(1));
 		this.cartType = type;
-		DispenserBlock.registerBehavior(this, MINECART_DISPENSER_BEHAVIOR);
 	}
 
 	/**
 	 * Called when a Block is right-clicked with this Item
 	 */
+	@Override
 	public InteractionResult useOn(UseOnContext context) {
 		Level level = context.getLevel();
 		BlockPos pos = context.getClickedPos();

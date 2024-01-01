@@ -10,8 +10,8 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.world.entity.Entity;
 
 public class ModelElephant<T extends Entity> extends HierarchicalModel<T> {
-	public ModelPart root;
-	public ModelPart cart;
+	public final ModelPart root;
+	public final ModelPart cart;
 
 	public ModelElephant(final ModelPart part) {
 		this.root = part;

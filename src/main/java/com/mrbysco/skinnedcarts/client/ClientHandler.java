@@ -60,17 +60,17 @@ public class ClientHandler {
 	}
 
 	public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-		event.registerLayerDefinition(BEE_CART, () -> ModelBee.createMesh());
-		event.registerLayerDefinition(ELEPHANT_CART, () -> ModelElephant.createMesh());
-		event.registerLayerDefinition(FROG_CART, () -> ModelFrog.createMesh());
-		event.registerLayerDefinition(GREEN_FROG_CART, () -> ModelGreenFrog.createMesh());
-		event.registerLayerDefinition(LADYBUG_CART, () -> ModelLadybug.createMesh());
-		event.registerLayerDefinition(PANDA_CART, () -> ModelPanda.createMesh());
-		event.registerLayerDefinition(PELICAN_CART, () -> ModelPelican.createMesh());
-		event.registerLayerDefinition(PENGUIN_CART, () -> ModelPenguin.createMesh());
-		event.registerLayerDefinition(PUFFERFISH_CART, () -> ModelPufferFish.createMesh());
-		event.registerLayerDefinition(SNAIL_CART, () -> ModelSnail.createMesh());
-		event.registerLayerDefinition(TURTLE_CART, () -> ModelTurtle.createMesh());
-		event.registerLayerDefinition(WOMBAT_CART, () -> ModelWombat.createMesh());
+		event.registerLayerDefinition(BEE_CART, ModelBee::createMesh);
+		event.registerLayerDefinition(ELEPHANT_CART, ModelElephant::createMesh);
+		event.registerLayerDefinition(FROG_CART, ModelFrog::createMesh);
+		event.registerLayerDefinition(GREEN_FROG_CART, ModelGreenFrog::createMesh);
+		event.registerLayerDefinition(LADYBUG_CART, ModelLadybug::createMesh);
+		event.registerLayerDefinition(PANDA_CART, ModelPanda::createMesh);
+		event.registerLayerDefinition(PELICAN_CART, ModelPelican::createMesh);
+		event.registerLayerDefinition(PENGUIN_CART, ModelPenguin::createMesh);
+		event.registerLayerDefinition(PUFFERFISH_CART, ModelPufferFish::createMesh);
+		event.registerLayerDefinition(SNAIL_CART, ModelSnail::createMesh);
+		event.registerLayerDefinition(TURTLE_CART, ModelTurtle::createMesh);
+		event.registerLayerDefinition(WOMBAT_CART, ModelWombat::createMesh);
 	}
 }

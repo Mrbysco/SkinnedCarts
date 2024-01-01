@@ -243,7 +243,7 @@ public class CartDatagen {
 
 		@Override
 		protected void registerModels() {
-			CartRegistry.ITEMS.getEntries().stream()
+			CartRegistry.ITEMS.getEntries()
 					.forEach(item -> {
 						String path = Objects.requireNonNull(item.getId()).getPath();
 						singleTexture(path, mcLoc("item/generated"), "layer0", modLoc("item/" + path));

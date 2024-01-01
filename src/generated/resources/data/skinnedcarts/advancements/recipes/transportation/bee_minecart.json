@@ -30,6 +30,5 @@
     "recipes": [
       "skinnedcarts:bee_minecart"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

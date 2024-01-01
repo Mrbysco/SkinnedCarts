@@ -4,7 +4,6 @@ import com.mrbysco.skinnedcarts.config.CartConfig;
 import com.mrbysco.skinnedcarts.init.CartRegistry;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -39,7 +38,7 @@ public class FrogCartEntity extends AbstractSkinnedCart {
 
 	@Override
 	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return (Packet<ClientGamePacketListener>) NetworkHooks.getEntitySpawningPacket(this);
+		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
 	@Override
@@ -53,8 +52,7 @@ public class FrogCartEntity extends AbstractSkinnedCart {
 	}
 
 	private void playLivingSound() {
-		SoundEvent sound = CartRegistry.WEDNESDAY_FROG_CART.get();
-		this.playSound(sound, this.getSoundVolume(), this.getSoundPitch());
+		this.playSound(CartRegistry.WEDNESDAY_FROG_CART.get(), this.getSoundVolume(), this.getSoundPitch());
 	}
 
 	protected float getSoundVolume() {

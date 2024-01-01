@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
 public class RenderLadybugCart<T extends AbstractSkinnedCart> extends RenderSkinnedCart<T> {
-	private static ResourceLocation CART_TEXTURES = createLocation("minecart_ladybug");
+	private static final ResourceLocation CART_TEXTURES = createLocation("minecart_ladybug");
 
 	public RenderLadybugCart(EntityRendererProvider.Context context) {
 		super(context, new ModelLadybug<>(context.bakeLayer(ClientHandler.LADYBUG_CART)));
@@ -17,7 +17,7 @@ public class RenderLadybugCart<T extends AbstractSkinnedCart> extends RenderSkin
 	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
 	 */
 	@Override
-	public ResourceLocation getTextureLocation(T entity) {
+	public ResourceLocation getTextureLocation(T cart) {
 		return CART_TEXTURES;
 	}
 }

@@ -17,9 +17,10 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.model.data.ModelData;
+import org.jetbrains.annotations.NotNull;
 
 public class RenderSkinnedCart<T extends AbstractMinecart> extends EntityRenderer<T> {
-	private static ResourceLocation CART_TEXTURES = createLocation("minecart_frog");
+	private static final ResourceLocation CART_TEXTURES = createLocation("minecart_frog");
 	private final EntityModel<T> modelMinecart;
 
 	public RenderSkinnedCart(EntityRendererProvider.Context context, EntityModel<T> model) {
@@ -39,38 +40,37 @@ public class RenderSkinnedCart<T extends AbstractMinecart> extends EntityRendere
 	/**
 	 * Renders the desired {@code T} type Entity.
 	 */
-	public void render(T entityIn, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int packedLightIn) {
-		super.render(entityIn, entityYaw, partialTicks, poseStack, bufferSource, packedLightIn);
+	public void render(T cart, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int packedLightIn) {
+		super.render(cart, entityYaw, partialTicks, poseStack, bufferSource, packedLightIn);
 		poseStack.pushPose();
-		long i = (long) entityIn.getId() * 493286711L;
+		long i = (long) cart.getId() * 493286711L;
 		i = i * i * 4392167121L + i * 98761L;
 		float f = (((float) (i >> 16 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
 		float f1 = (((float) (i >> 20 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
 		float f2 = (((float) (i >> 24 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
 		poseStack.translate((double) f, (double) f1, (double) f2);
-		double d0 = Mth.lerp((double) partialTicks, entityIn.xOld, entityIn.getX());
-		double d1 = Mth.lerp((double) partialTicks, entityIn.yOld, entityIn.getY());
-		double d2 = Mth.lerp((double) partialTicks, entityIn.zOld, entityIn.getZ());
-		double d3 = (double) 0.3F;
-		Vec3 Vector3d = entityIn.getPos(d0, d1, d2);
-		float f3 = Mth.lerp(partialTicks, entityIn.xRotO, entityIn.getXRot());
-		if (Vector3d != null) {
-			Vec3 Vector3d1 = entityIn.getPosOffs(d0, d1, d2, (double) 0.3F);
-			Vec3 Vector3d2 = entityIn.getPosOffs(d0, d1, d2, (double) -0.3F);
-			if (Vector3d1 == null) {
-				Vector3d1 = Vector3d;
+		double xLerp = Mth.lerp((double) partialTicks, cart.xOld, cart.getX());
+		double yLerp = Mth.lerp((double) partialTicks, cart.yOld, cart.getY());
+		double zLerp = Mth.lerp((double) partialTicks, cart.zOld, cart.getZ());
+		Vec3 vec3 = cart.getPos(xLerp, yLerp, zLerp);
+		float f3 = Mth.lerp(partialTicks, cart.xRotO, cart.getXRot());
+		if (vec3 != null) {
+			Vec3 vec31 = cart.getPosOffs(xLerp, yLerp, zLerp, (double) 0.3F);
+			Vec3 vec32 = cart.getPosOffs(xLerp, yLerp, zLerp, (double) -0.3F);
+			if (vec31 == null) {
+				vec31 = vec3;
 			}
 
-			if (Vector3d2 == null) {
-				Vector3d2 = Vector3d;
+			if (vec32 == null) {
+				vec32 = vec3;
 			}
 
-			poseStack.translate(Vector3d.x - d0, (Vector3d1.y + Vector3d2.y) / 2.0D - d1, Vector3d.z - d2);
-			Vec3 Vector3d3 = Vector3d2.add(-Vector3d1.x, -Vector3d1.y, -Vector3d1.z);
-			if (Vector3d3.length() != 0.0D) {
-				Vector3d3 = Vector3d3.normalize();
-				entityYaw = (float) (Math.atan2(Vector3d3.z, Vector3d3.x) * 180.0D / Math.PI);
-				f3 = (float) (Math.atan(Vector3d3.y) * 73.0D);
+			poseStack.translate(vec3.x - xLerp, (vec31.y + vec32.y) / 2.0D - yLerp, vec3.z - zLerp);
+			Vec3 vec33 = vec32.add(-vec31.x, -vec31.y, -vec31.z);
+			if (vec33.length() != 0.0D) {
+				vec33 = vec33.normalize();
+				entityYaw = (float) (Math.atan2(vec33.z, vec33.x) * 180.0D / Math.PI);
+				f3 = (float) (Math.atan(vec33.y) * 73.0D);
 			}
 		}
 
@@ -79,7 +79,7 @@ public class RenderSkinnedCart<T extends AbstractMinecart> extends EntityRendere
 			entityYaw += 360;
 		entityYaw += 360;
 
-		double serverYaw = entityIn.getYRot();
+		double serverYaw = cart.getYRot();
 		serverYaw += 180;
 		serverYaw %= 360;
 		if (serverYaw < 0)
@@ -94,14 +94,14 @@ public class RenderSkinnedCart<T extends AbstractMinecart> extends EntityRendere
 		poseStack.translate(0.0D, 0.375D, 0.0D);
 		poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - entityYaw));
 		poseStack.mulPose(Axis.ZP.rotationDegrees(-f3));
-		float f5 = (float) entityIn.getHurtTime() - partialTicks;
-		float f6 = entityIn.getDamage() - partialTicks;
+		float f5 = (float) cart.getHurtTime() - partialTicks;
+		float f6 = cart.getDamage() - partialTicks;
 		if (f6 < 0.0F) {
 			f6 = 0.0F;
 		}
 
 		if (f5 > 0.0F) {
-			poseStack.mulPose(Axis.XP.rotationDegrees(Mth.sin(f5) * f5 * f6 / 10.0F * (float) entityIn.getHurtDir()));
+			poseStack.mulPose(Axis.XP.rotationDegrees(Mth.sin(f5) * f5 * f6 / 10.0F * (float) cart.getHurtDir()));
 		}
 //        if (f5 > 0.0F) {
 //            float angle = (MathHelper.sin(f5) * f5 * f6) / 10F;
@@ -111,30 +111,29 @@ public class RenderSkinnedCart<T extends AbstractMinecart> extends EntityRendere
 //            matrixStackIn.rotate(Vector3f.XP.rotationDegrees(angle));
 //        }
 
-		int j = entityIn.getDisplayOffset();
-		BlockState blockstate = entityIn.getDisplayBlockState();
+		int j = cart.getDisplayOffset();
+		BlockState blockstate = cart.getDisplayBlockState();
 		if (blockstate.getRenderShape() != RenderShape.INVISIBLE) {
 			poseStack.pushPose();
-			float f4 = 0.75F;
 			poseStack.scale(0.75F, 0.75F, 0.75F);
 			poseStack.translate(-0.5D, (double) ((float) (j - 8) / 16.0F), 0.5D);
 			poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
-			this.renderBlockState(entityIn, partialTicks, blockstate, poseStack, bufferSource, packedLightIn);
+			this.renderBlockState(cart, partialTicks, blockstate, poseStack, bufferSource, packedLightIn);
 			poseStack.popPose();
 		}
 
 		poseStack.scale(-1.0F, -1.0F, 1.0F);
-		this.modelMinecart.setupAnim(entityIn, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F);
-		VertexConsumer vertexConsumer = bufferSource.getBuffer(this.modelMinecart.renderType(this.getTextureLocation(entityIn)));
+		this.modelMinecart.setupAnim(cart, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F);
+		VertexConsumer vertexConsumer = bufferSource.getBuffer(this.modelMinecart.renderType(this.getTextureLocation(cart)));
 		this.modelMinecart.renderToBuffer(poseStack, vertexConsumer, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 		poseStack.popPose();
 	}
 
 	/**
-	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
+	 * Returns the location of a cart's texture.
 	 */
 	@Override
-	public ResourceLocation getTextureLocation(T entity) {
-		return this.CART_TEXTURES;
+	public ResourceLocation getTextureLocation(@NotNull T cart) {
+		return CART_TEXTURES;
 	}
 }

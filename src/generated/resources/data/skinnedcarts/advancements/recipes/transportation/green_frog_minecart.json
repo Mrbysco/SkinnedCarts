@@ -30,6 +30,5 @@
     "recipes": [
       "skinnedcarts:green_frog_minecart"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

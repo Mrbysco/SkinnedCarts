@@ -1,36 +1,23 @@
 package com.mrbysco.skinnedcarts.entity;
 
 import com.mrbysco.skinnedcarts.init.CartRegistry;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.network.NetworkHooks;
-import net.neoforged.neoforge.network.PlayMessages.SpawnEntity;
 
 public class WombatCartEntity extends AbstractSkinnedCart {
 
-	public WombatCartEntity(EntityType<?> type, Level worldIn) {
-		super(type, worldIn);
+	public WombatCartEntity(EntityType<?> type, Level level) {
+		super(type, level);
 	}
 
-	public WombatCartEntity(EntityType<?> type, Level worldIn, double x, double y, double z) {
-		super(type, worldIn, x, y, z);
-	}
-
-	public WombatCartEntity(SpawnEntity spawnEntity, Level worldIn) {
-		this(CartRegistry.WOMBAT_CART.get(), worldIn);
+	public WombatCartEntity(EntityType<?> type, Level level, double x, double y, double z) {
+		super(type, level, x, y, z);
 	}
 
 	@Override
 	public EntityType<?> getType() {
 		return CartRegistry.WOMBAT_CART.get();
-	}
-
-	@Override
-	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
 	@Override

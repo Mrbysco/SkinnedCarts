@@ -2,8 +2,6 @@ package com.mrbysco.skinnedcarts.entity;
 
 import com.mrbysco.skinnedcarts.config.CartConfig;
 import com.mrbysco.skinnedcarts.init.CartRegistry;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -12,33 +10,22 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.network.NetworkHooks;
-import net.neoforged.neoforge.network.PlayMessages.SpawnEntity;
 
 import java.util.Calendar;
 
 public class FrogCartEntity extends AbstractSkinnedCart {
 
-	public FrogCartEntity(EntityType<?> type, Level worldIn) {
-		super(type, worldIn);
+	public FrogCartEntity(EntityType<?> type, Level level) {
+		super(type, level);
 	}
 
-	public FrogCartEntity(EntityType<?> type, Level worldIn, double x, double y, double z) {
-		super(type, worldIn, x, y, z);
-	}
-
-	public FrogCartEntity(SpawnEntity spawnEntity, Level worldIn) {
-		this(CartRegistry.FROG_CART.get(), worldIn);
+	public FrogCartEntity(EntityType<?> type, Level level, double x, double y, double z) {
+		super(type, level, x, y, z);
 	}
 
 	@Override
 	public EntityType<?> getType() {
 		return CartRegistry.FROG_CART.get();
-	}
-
-	@Override
-	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
 	@Override

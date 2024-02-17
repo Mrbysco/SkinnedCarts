@@ -70,29 +70,29 @@ public class CartRegistry {
 	}
 
 	public static final Supplier<EntityType<ElephantCartEntity>> ELEPHANT_CART = ENTITY_TYPES.register("elephant_minecart", () -> register("elephant_minecart", EntityType.Builder.<ElephantCartEntity>of(ElephantCartEntity::new, MobCategory.MISC)
-			.sized(0.98F, 0.7F).setCustomClientFactory(ElephantCartEntity::new)));
+			.sized(0.98F, 0.7F)));
 	public static final Supplier<EntityType<FrogCartEntity>> FROG_CART = ENTITY_TYPES.register("frog_minecart", () -> register("frog_minecart", EntityType.Builder.<FrogCartEntity>of(FrogCartEntity::new, MobCategory.MISC)
-			.sized(0.98F, 0.7F).setCustomClientFactory(FrogCartEntity::new)));
+			.sized(0.98F, 0.7F)));
 	public static final Supplier<EntityType<PandaCartEntity>> PANDA_CART = ENTITY_TYPES.register("panda_minecart", () -> register("panda_minecart", EntityType.Builder.<PandaCartEntity>of(PandaCartEntity::new, MobCategory.MISC)
-			.sized(0.98F, 0.7F).setCustomClientFactory(PandaCartEntity::new)));
+			.sized(0.98F, 0.7F)));
 	public static final Supplier<EntityType<PelicanCartEntity>> PELICAN_CART = ENTITY_TYPES.register("pelican_minecart", () -> register("pelican_minecart", EntityType.Builder.<PelicanCartEntity>of(PelicanCartEntity::new, MobCategory.MISC)
-			.sized(0.98F, 0.7F).setCustomClientFactory(PelicanCartEntity::new)));
+			.sized(0.98F, 0.7F)));
 	public static final Supplier<EntityType<PufferFishCartEntity>> PUFFERFISH_CART = ENTITY_TYPES.register("pufferfish_minecart", () -> register("pufferfish_minecart", EntityType.Builder.<PufferFishCartEntity>of(PufferFishCartEntity::new, MobCategory.MISC)
-			.sized(0.98F, 0.7F).setCustomClientFactory(PufferFishCartEntity::new)));
+			.sized(0.98F, 0.7F)));
 	public static final Supplier<EntityType<SnailCartEntity>> SNAIL_CART = ENTITY_TYPES.register("snail_minecart", () -> register("snail_minecart", EntityType.Builder.<SnailCartEntity>of(SnailCartEntity::new, MobCategory.MISC)
-			.sized(0.98F, 0.7F).setCustomClientFactory(SnailCartEntity::new)));
+			.sized(0.98F, 0.7F)));
 	public static final Supplier<EntityType<TurtleCartEntity>> TURTLE_CART = ENTITY_TYPES.register("turtle_minecart", () -> register("turtle_minecart", EntityType.Builder.<TurtleCartEntity>of(TurtleCartEntity::new, MobCategory.MISC)
-			.sized(0.98F, 0.7F).setCustomClientFactory(TurtleCartEntity::new)));
+			.sized(0.98F, 0.7F)));
 	public static final Supplier<EntityType<BeeCartEntity>> BEE_CART = ENTITY_TYPES.register("bee_minecart", () -> register("bee_minecart", EntityType.Builder.<BeeCartEntity>of(BeeCartEntity::new, MobCategory.MISC)
-			.sized(0.98F, 0.7F).setCustomClientFactory(BeeCartEntity::new)));
+			.sized(0.98F, 0.7F)));
 	public static final Supplier<EntityType<GreenFrogCartEntity>> GREEN_FROG_CART = ENTITY_TYPES.register("green_frog_minecart", () -> register("green_frog_minecart", EntityType.Builder.<GreenFrogCartEntity>of(GreenFrogCartEntity::new, MobCategory.MISC)
-			.sized(0.98F, 0.7F).setCustomClientFactory(GreenFrogCartEntity::new)));
+			.sized(0.98F, 0.7F)));
 	public static final Supplier<EntityType<LadybugCartEntity>> LADYBUG_CART = ENTITY_TYPES.register("ladybug_minecart", () -> register("ladybug_minecart", EntityType.Builder.<LadybugCartEntity>of(LadybugCartEntity::new, MobCategory.MISC)
-			.sized(0.98F, 0.7F).setCustomClientFactory(LadybugCartEntity::new)));
+			.sized(0.98F, 0.7F)));
 	public static final Supplier<EntityType<PenguinCartEntity>> PENGUIN_CART = ENTITY_TYPES.register("penguin_minecart", () -> register("penguin_minecart", EntityType.Builder.<PenguinCartEntity>of(PenguinCartEntity::new, MobCategory.MISC)
-			.sized(0.98F, 0.7F).setCustomClientFactory(PenguinCartEntity::new)));
+			.sized(0.98F, 0.7F)));
 	public static final Supplier<EntityType<WombatCartEntity>> WOMBAT_CART = ENTITY_TYPES.register("wombat_minecart", () -> register("wombat_minecart", EntityType.Builder.<WombatCartEntity>of(WombatCartEntity::new, MobCategory.MISC)
-			.sized(0.98F, 0.7F).setCustomClientFactory(WombatCartEntity::new)));
+			.sized(0.98F, 0.7F)));
 
 	public static <T extends Entity> EntityType<T> register(String id, EntityType.Builder<T> builder) {
 		return builder.build(id);

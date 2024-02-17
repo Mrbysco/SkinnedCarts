@@ -33,7 +33,7 @@ public class CartDatagen {
 		ExistingFileHelper helper = event.getExistingFileHelper();
 
 		if (event.includeServer()) {
-			generator.addProvider(true, new Recipes(packOutput, event.getLookupProvider()));
+			generator.addProvider(true, new Recipes(packOutput));
 		}
 		if (event.includeClient()) {
 			generator.addProvider(true, new Language(packOutput));
@@ -43,8 +43,8 @@ public class CartDatagen {
 	}
 
 	private static class Recipes extends RecipeProvider {
-		public Recipes(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-			super(packOutput, lookupProvider);
+		public Recipes(PackOutput packOutput) {
+			super(packOutput);
 		}
 
 		@Override

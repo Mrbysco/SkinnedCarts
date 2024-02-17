@@ -22,6 +22,6 @@ side="BOTH"
 [[dependencies.skinnedcarts]]
 modId="neoforge"
 type="REQUIRED"
-versionRange="[20.4.60-beta,)"
+versionRange="[20.4.131-beta,)"
 ordering="NONE"
 side="BOTH"

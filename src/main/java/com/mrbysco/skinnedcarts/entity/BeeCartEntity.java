@@ -1,36 +1,23 @@
 package com.mrbysco.skinnedcarts.entity;
 
 import com.mrbysco.skinnedcarts.init.CartRegistry;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.network.NetworkHooks;
-import net.neoforged.neoforge.network.PlayMessages.SpawnEntity;
 
 public class BeeCartEntity extends AbstractSkinnedCart {
 
-	public BeeCartEntity(EntityType<?> type, Level worldIn) {
-		super(type, worldIn);
+	public BeeCartEntity(EntityType<?> type, Level level) {
+		super(type, level);
 	}
 
-	public BeeCartEntity(EntityType<?> type, Level worldIn, double x, double y, double z) {
-		super(type, worldIn, x, y, z);
-	}
-
-	public BeeCartEntity(SpawnEntity spawnEntity, Level worldIn) {
-		this(CartRegistry.BEE_CART.get(), worldIn);
+	public BeeCartEntity(EntityType<?> type, Level level, double x, double y, double z) {
+		super(type, level, x, y, z);
 	}
 
 	@Override
 	public EntityType<?> getType() {
 		return CartRegistry.BEE_CART.get();
-	}
-
-	@Override
-	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
 	@Override

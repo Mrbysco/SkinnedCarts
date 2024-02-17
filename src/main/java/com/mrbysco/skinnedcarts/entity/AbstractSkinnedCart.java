@@ -9,12 +9,12 @@ import net.minecraft.world.level.Level;
 
 public abstract class AbstractSkinnedCart extends Minecart {
 
-	public AbstractSkinnedCart(EntityType<?> type, Level worldIn) {
-		super(type, worldIn);
+	public AbstractSkinnedCart(EntityType<?> type, Level level) {
+		super(type, level);
 	}
 
-	public AbstractSkinnedCart(EntityType<?> type, Level worldIn, double x, double y, double z) {
-		super(worldIn, x, y, z);
+	public AbstractSkinnedCart(EntityType<?> type, Level level, double x, double y, double z) {
+		super(level, x, y, z);
 	}
 
 	protected abstract Item getReturnItem();
@@ -36,20 +36,20 @@ public abstract class AbstractSkinnedCart extends Minecart {
 		return false;
 	}
 
-	public static AbstractSkinnedCart create(Level worldIn, double x, double y, double z, AbstractSkinnedCart.Type typeIn) {
+	public static AbstractSkinnedCart create(Level level, double x, double y, double z, AbstractSkinnedCart.Type typeIn) {
 		AbstractSkinnedCart cart = switch (typeIn) {
-			default -> new TurtleCartEntity(CartRegistry.TURTLE_CART.get(), worldIn, x, y, z);
-			case ELEPHANT -> new ElephantCartEntity(CartRegistry.ELEPHANT_CART.get(), worldIn, x, y, z);
-			case FROG -> new FrogCartEntity(CartRegistry.FROG_CART.get(), worldIn, x, y, z);
-			case PANDA -> new PandaCartEntity(CartRegistry.PANDA_CART.get(), worldIn, x, y, z);
-			case PELICAN -> new PelicanCartEntity(CartRegistry.PELICAN_CART.get(), worldIn, x, y, z);
-			case PUFFERFISH -> new PufferFishCartEntity(CartRegistry.PUFFERFISH_CART.get(), worldIn, x, y, z);
-			case SNAIL -> new SnailCartEntity(CartRegistry.SNAIL_CART.get(), worldIn, x, y, z);
-			case BEE -> new BeeCartEntity(CartRegistry.BEE_CART.get(), worldIn, x, y, z);
-			case GREEN_FROG -> new GreenFrogCartEntity(CartRegistry.GREEN_FROG_CART.get(), worldIn, x, y, z);
-			case LADYBUG -> new LadybugCartEntity(CartRegistry.LADYBUG_CART.get(), worldIn, x, y, z);
-			case PENGUIN -> new PenguinCartEntity(CartRegistry.PENGUIN_CART.get(), worldIn, x, y, z);
-			case WOMBAT -> new WombatCartEntity(CartRegistry.WOMBAT_CART.get(), worldIn, x, y, z);
+			default -> new TurtleCartEntity(CartRegistry.TURTLE_CART.get(), level, x, y, z);
+			case ELEPHANT -> new ElephantCartEntity(CartRegistry.ELEPHANT_CART.get(), level, x, y, z);
+			case FROG -> new FrogCartEntity(CartRegistry.FROG_CART.get(), level, x, y, z);
+			case PANDA -> new PandaCartEntity(CartRegistry.PANDA_CART.get(), level, x, y, z);
+			case PELICAN -> new PelicanCartEntity(CartRegistry.PELICAN_CART.get(), level, x, y, z);
+			case PUFFERFISH -> new PufferFishCartEntity(CartRegistry.PUFFERFISH_CART.get(), level, x, y, z);
+			case SNAIL -> new SnailCartEntity(CartRegistry.SNAIL_CART.get(), level, x, y, z);
+			case BEE -> new BeeCartEntity(CartRegistry.BEE_CART.get(), level, x, y, z);
+			case GREEN_FROG -> new GreenFrogCartEntity(CartRegistry.GREEN_FROG_CART.get(), level, x, y, z);
+			case LADYBUG -> new LadybugCartEntity(CartRegistry.LADYBUG_CART.get(), level, x, y, z);
+			case PENGUIN -> new PenguinCartEntity(CartRegistry.PENGUIN_CART.get(), level, x, y, z);
+			case WOMBAT -> new WombatCartEntity(CartRegistry.WOMBAT_CART.get(), level, x, y, z);
 		};
 
 		return cart;

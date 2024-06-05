@@ -4,9 +4,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.mrbysco.skinnedcarts.SkinnedCarts;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -16,15 +16,16 @@ import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 
 public class RenderSkinnedCart<T extends AbstractMinecart> extends EntityRenderer<T> {
 	private static final ResourceLocation CART_TEXTURES = createLocation("minecart_frog");
+	private final BlockRenderDispatcher blockRenderer;
 	private final EntityModel<T> modelMinecart;
 
 	public RenderSkinnedCart(EntityRendererProvider.Context context, EntityModel<T> model) {
 		super(context);
+		this.blockRenderer = context.getBlockRenderDispatcher();
 		this.modelMinecart = model;
 		this.shadowRadius = 0.7F;
 	}
@@ -33,8 +34,9 @@ public class RenderSkinnedCart<T extends AbstractMinecart> extends EntityRendere
 		return new ResourceLocation(SkinnedCarts.MOD_ID, "textures/entity/" + cartName + ".png");
 	}
 
-	protected void renderBlockState(T entityIn, float partialTicks, BlockState stateIn, PoseStack poseStack, MultiBufferSource bufferSource, int packedLightIn) {
-		Minecraft.getInstance().getBlockRenderer().renderSingleBlock(stateIn, poseStack, bufferSource, packedLightIn, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, null);
+	protected void renderMinecartContents(T cart, float partialTicks, BlockState state, PoseStack poseStack,
+	                                      MultiBufferSource bufferSource, int packedLight) {
+		this.blockRenderer.renderSingleBlock(state, poseStack, bufferSource, packedLight, OverlayTexture.NO_OVERLAY);
 	}
 
 	/**
@@ -48,7 +50,7 @@ public class RenderSkinnedCart<T extends AbstractMinecart> extends EntityRendere
 		float f = (((float) (i >> 16 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
 		float f1 = (((float) (i >> 20 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
 		float f2 = (((float) (i >> 24 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
-		poseStack.translate((double) f, (double) f1, (double) f2);
+		poseStack.translate(f, f1, f2);
 		double xLerp = Mth.lerp((double) partialTicks, cart.xOld, cart.getX());
 		double yLerp = Mth.lerp((double) partialTicks, cart.yOld, cart.getY());
 		double zLerp = Mth.lerp((double) partialTicks, cart.zOld, cart.getZ());
@@ -65,33 +67,16 @@ public class RenderSkinnedCart<T extends AbstractMinecart> extends EntityRendere
 				vec32 = vec3;
 			}
 
-			poseStack.translate(vec3.x - xLerp, (vec31.y + vec32.y) / 2.0D - yLerp, vec3.z - zLerp);
+			poseStack.translate(vec3.x - xLerp, (vec31.y + vec32.y) / 2.0 - yLerp, vec3.z - zLerp);
 			Vec3 vec33 = vec32.add(-vec31.x, -vec31.y, -vec31.z);
 			if (vec33.length() != 0.0D) {
 				vec33 = vec33.normalize();
-				entityYaw = (float) (Math.atan2(vec33.z, vec33.x) * 180.0D / Math.PI);
-				f3 = (float) (Math.atan(vec33.y) * 73.0D);
+				entityYaw = (float) (Math.atan2(vec33.z, vec33.x) * 180.0 / Math.PI);
+				f3 = (float) (Math.atan(vec33.y) * 73.0);
 			}
 		}
 
-		entityYaw %= 360;
-		if (entityYaw < 0)
-			entityYaw += 360;
-		entityYaw += 360;
-
-		double serverYaw = cart.getYRot();
-		serverYaw += 180;
-		serverYaw %= 360;
-		if (serverYaw < 0)
-			serverYaw += 360;
-		serverYaw += 360;
-
-		if (Math.abs(entityYaw - serverYaw) > 90) {
-			entityYaw += 180;
-			f3 = -f3;
-		}
-
-		poseStack.translate(0.0D, 0.375D, 0.0D);
+		poseStack.translate(0.0F, 0.375F, 0.0F);
 		poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - entityYaw));
 		poseStack.mulPose(Axis.ZP.rotationDegrees(-f3));
 		float f5 = (float) cart.getHurtTime() - partialTicks;
@@ -116,9 +101,9 @@ public class RenderSkinnedCart<T extends AbstractMinecart> extends EntityRendere
 		if (blockstate.getRenderShape() != RenderShape.INVISIBLE) {
 			poseStack.pushPose();
 			poseStack.scale(0.75F, 0.75F, 0.75F);
-			poseStack.translate(-0.5D, (double) ((float) (j - 8) / 16.0F), 0.5D);
+			poseStack.translate(-0.5F, (float) (j - 8) / 16.0F, 0.5F);
 			poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
-			this.renderBlockState(cart, partialTicks, blockstate, poseStack, bufferSource, packedLightIn);
+			this.renderMinecartContents(cart, partialTicks, blockstate, poseStack, bufferSource, packedLightIn);
 			poseStack.popPose();
 		}
 

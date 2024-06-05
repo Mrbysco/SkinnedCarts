@@ -3,6 +3,7 @@ package com.mrbysco.skinnedcarts.items;
 import com.mrbysco.skinnedcarts.entity.AbstractSkinnedCart;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
@@ -58,7 +59,7 @@ public class CustomCartItem extends Item {
 			}
 
 			AbstractSkinnedCart skinnedCart = AbstractSkinnedCart.create(level, d0, d1 + d3, d2, ((CustomCartItem) stack.getItem()).cartType);
-			if (stack.hasCustomHoverName()) {
+			if (stack.has(DataComponents.CUSTOM_NAME)) {
 				skinnedCart.setCustomName(stack.getHoverName());
 			}
 			level.addFreshEntity(skinnedCart);
@@ -101,7 +102,7 @@ public class CustomCartItem extends Item {
 				}
 
 				AbstractSkinnedCart skinnedCart = AbstractSkinnedCart.create(level, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.0625D + d0, (double) pos.getZ() + 0.5D, this.cartType);
-				if (itemstack.hasCustomHoverName()) {
+				if (itemstack.has(DataComponents.CUSTOM_NAME)) {
 					skinnedCart.setCustomName(itemstack.getHoverName());
 				}
 

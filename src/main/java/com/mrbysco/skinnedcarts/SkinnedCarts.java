@@ -7,12 +7,12 @@ import com.mrbysco.skinnedcarts.init.CartRegistry;
 import com.mrbysco.skinnedcarts.items.CustomCartItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.DispenserBlock;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.slf4j.Logger;
 
@@ -21,8 +21,8 @@ public class SkinnedCarts {
 	public static final Logger LOGGER = LogUtils.getLogger();
 	public static final String MOD_ID = "skinnedcarts";
 
-	public SkinnedCarts(IEventBus eventBus) {
-		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, CartConfig.serverSpec);
+	public SkinnedCarts(IEventBus eventBus, ModContainer container, Dist dist) {
+		container.registerConfig(ModConfig.Type.SERVER, CartConfig.serverSpec);
 		eventBus.register(CartConfig.class);
 
 		eventBus.addListener(this::setup);
@@ -32,7 +32,7 @@ public class SkinnedCarts {
 		CartRegistry.ENTITY_TYPES.register(eventBus);
 		CartRegistry.SOUND_EVENTS.register(eventBus);
 
-		if (FMLEnvironment.dist.isClient()) {
+		if (dist.isClient()) {
 			eventBus.addListener(ClientHandler::registerEntityRenders);
 			eventBus.addListener(ClientHandler::registerLayerDefinitions);
 		}

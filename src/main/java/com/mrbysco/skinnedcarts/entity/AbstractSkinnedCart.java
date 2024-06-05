@@ -37,7 +37,7 @@ public abstract class AbstractSkinnedCart extends Minecart {
 	}
 
 	public static AbstractSkinnedCart create(Level level, double x, double y, double z, AbstractSkinnedCart.Type typeIn) {
-		AbstractSkinnedCart cart = switch (typeIn) {
+		return switch (typeIn) {
 			default -> new TurtleCartEntity(CartRegistry.TURTLE_CART.get(), level, x, y, z);
 			case ELEPHANT -> new ElephantCartEntity(CartRegistry.ELEPHANT_CART.get(), level, x, y, z);
 			case FROG -> new FrogCartEntity(CartRegistry.FROG_CART.get(), level, x, y, z);
@@ -51,8 +51,6 @@ public abstract class AbstractSkinnedCart extends Minecart {
 			case PENGUIN -> new PenguinCartEntity(CartRegistry.PENGUIN_CART.get(), level, x, y, z);
 			case WOMBAT -> new WombatCartEntity(CartRegistry.WOMBAT_CART.get(), level, x, y, z);
 		};
-
-		return cart;
 	}
 
 	public enum Type {
@@ -67,6 +65,6 @@ public abstract class AbstractSkinnedCart extends Minecart {
 		GREEN_FROG,
 		LADYBUG,
 		PENGUIN,
-		WOMBAT;
+		WOMBAT
 	}
 }

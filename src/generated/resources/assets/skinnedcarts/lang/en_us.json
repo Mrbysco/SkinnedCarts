@@ -25,5 +25,10 @@
   "item.skinnedcarts.wombat_minecart": "Wombat Minecart",
   "itemGroup.skinnedcarts.tab": "Skinned Carts",
   "skinnedcarts.config.title": "Skinned Carts config",
+  "skinnedcarts.configuration.general": "General",
+  "skinnedcarts.configuration.general.tooltip": "General Settings",
+  "skinnedcarts.configuration.title": "Skinned Carts Config",
+  "skinnedcarts.configuration.wednesdayFrogCart": "Wednesday Frog Cart",
+  "skinnedcarts.configuration.wednesdayFrogCart.tooltip": "Setting this to true occasionally makes the frog carts acknowledge the day (Default: false)",
   "skinnedcarts.subtitle.minecart.wednesday.frog": "It's wednesday"
 }

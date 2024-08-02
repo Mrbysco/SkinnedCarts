@@ -19,6 +19,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
@@ -208,6 +209,10 @@ public class CartDatagen {
 			this.addEntityType(CartRegistry.WOMBAT_CART, "Wombat Minecart");
 
 			addSubtitle(CartRegistry.WEDNESDAY_FROG_CART, "It's wednesday");
+
+			addConfig("title", "Skinned Carts Config", null);
+			addConfig("general", "General", "General Settings");
+			addConfig("wednesdayFrogCart", "Wednesday Frog Cart", "Setting this to true occasionally makes the frog carts acknowledge the day (Default: false)");
 		}
 
 		public void addSubtitle(Supplier<SoundEvent> sound, String name) {
@@ -217,6 +222,19 @@ public class CartDatagen {
 		public void addSubtitle(SoundEvent sound, String name) {
 			String path = SkinnedCarts.MOD_ID + ".subtitle." + sound.getLocation().getPath();
 			this.add(path, name);
+		}
+
+		/**
+		 * Add the translation for a config entry
+		 *
+		 * @param path        The path of the config entry
+		 * @param name        The name of the config entry
+		 * @param description The description of the config entry (optional in case of targeting "title" or similar entries that have no tooltip)
+		 */
+		private void addConfig(String path, String name, @Nullable String description) {
+			this.add("skinnedcarts.configuration." + path, name);
+			if (description != null && !description.isEmpty())
+				this.add("skinnedcarts.configuration." + path + ".tooltip", description);
 		}
 	}
 

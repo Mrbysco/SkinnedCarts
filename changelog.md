@@ -1,1 +1,1 @@
-* initial update to 1.21
+* Add in-game config support

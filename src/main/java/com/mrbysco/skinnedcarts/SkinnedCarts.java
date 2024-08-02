@@ -5,6 +5,7 @@ import com.mrbysco.skinnedcarts.client.ClientHandler;
 import com.mrbysco.skinnedcarts.config.CartConfig;
 import com.mrbysco.skinnedcarts.init.CartRegistry;
 import com.mrbysco.skinnedcarts.items.CustomCartItem;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.neoforged.api.distmarker.Dist;
@@ -46,5 +47,9 @@ public class SkinnedCarts {
 				}
 			}
 		});
+	}
+
+	public static ResourceLocation modLoc(String path) {
+		return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
 	}
 }

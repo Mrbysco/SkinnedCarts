@@ -31,7 +31,7 @@ public class RenderSkinnedCart<T extends AbstractMinecart> extends EntityRendere
 	}
 
 	public static ResourceLocation createLocation(String cartName) {
-		return new ResourceLocation(SkinnedCarts.MOD_ID, "textures/entity/" + cartName + ".png");
+		return SkinnedCarts.modLoc("textures/entity/" + cartName + ".png");
 	}
 
 	protected void renderMinecartContents(T cart, float partialTicks, BlockState state, PoseStack poseStack,
@@ -42,6 +42,7 @@ public class RenderSkinnedCart<T extends AbstractMinecart> extends EntityRendere
 	/**
 	 * Renders the desired {@code T} type Entity.
 	 */
+	@Override
 	public void render(T cart, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int packedLightIn) {
 		super.render(cart, entityYaw, partialTicks, poseStack, bufferSource, packedLightIn);
 		poseStack.pushPose();
@@ -110,7 +111,7 @@ public class RenderSkinnedCart<T extends AbstractMinecart> extends EntityRendere
 		poseStack.scale(-1.0F, -1.0F, 1.0F);
 		this.modelMinecart.setupAnim(cart, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F);
 		VertexConsumer vertexConsumer = bufferSource.getBuffer(this.modelMinecart.renderType(this.getTextureLocation(cart)));
-		this.modelMinecart.renderToBuffer(poseStack, vertexConsumer, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+		this.modelMinecart.renderToBuffer(poseStack, vertexConsumer, packedLightIn, OverlayTexture.NO_OVERLAY, -1);
 		poseStack.popPose();
 	}
 

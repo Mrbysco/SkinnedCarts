@@ -229,7 +229,7 @@ public class CartDatagen {
 		public void registerSounds() {
 			this.add(CartRegistry.WEDNESDAY_FROG_CART, definition()
 					.subtitle(modSubtitle(CartRegistry.WEDNESDAY_FROG_CART.getId()))
-					.with(sound(new ResourceLocation("skinnedcarts", "wednesday"))));
+					.with(sound(SkinnedCarts.modLoc("wednesday"))));
 		}
 
 		public String modSubtitle(ResourceLocation id) {

@@ -27,22 +27,21 @@ import com.mrbysco.skinnedcarts.client.render.model.ModelTurtle;
 import com.mrbysco.skinnedcarts.client.render.model.ModelWombat;
 import com.mrbysco.skinnedcarts.init.CartRegistry;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 public class ClientHandler {
-	public static final ModelLayerLocation ELEPHANT_CART = new ModelLayerLocation(new ResourceLocation(SkinnedCarts.MOD_ID, "elephant_cart"), "main");
-	public static final ModelLayerLocation FROG_CART = new ModelLayerLocation(new ResourceLocation(SkinnedCarts.MOD_ID, "frog_cart"), "main");
-	public static final ModelLayerLocation PANDA_CART = new ModelLayerLocation(new ResourceLocation(SkinnedCarts.MOD_ID, "panda_cart"), "main");
-	public static final ModelLayerLocation PELICAN_CART = new ModelLayerLocation(new ResourceLocation(SkinnedCarts.MOD_ID, "pelican_cart"), "main");
-	public static final ModelLayerLocation PUFFERFISH_CART = new ModelLayerLocation(new ResourceLocation(SkinnedCarts.MOD_ID, "pufferfish_cart"), "main");
-	public static final ModelLayerLocation SNAIL_CART = new ModelLayerLocation(new ResourceLocation(SkinnedCarts.MOD_ID, "snail_cart"), "main");
-	public static final ModelLayerLocation TURTLE_CART = new ModelLayerLocation(new ResourceLocation(SkinnedCarts.MOD_ID, "turtle_cart"), "main");
-	public static final ModelLayerLocation BEE_CART = new ModelLayerLocation(new ResourceLocation(SkinnedCarts.MOD_ID, "bee_cart"), "main");
-	public static final ModelLayerLocation GREEN_FROG_CART = new ModelLayerLocation(new ResourceLocation(SkinnedCarts.MOD_ID, "green_frog_cart"), "main");
-	public static final ModelLayerLocation LADYBUG_CART = new ModelLayerLocation(new ResourceLocation(SkinnedCarts.MOD_ID, "ladybug_cart"), "main");
-	public static final ModelLayerLocation PENGUIN_CART = new ModelLayerLocation(new ResourceLocation(SkinnedCarts.MOD_ID, "penguin_cart"), "main");
-	public static final ModelLayerLocation WOMBAT_CART = new ModelLayerLocation(new ResourceLocation(SkinnedCarts.MOD_ID, "wombat_cart"), "main");
+	public static final ModelLayerLocation ELEPHANT_CART = new ModelLayerLocation(SkinnedCarts.modLoc("elephant_cart"), "main");
+	public static final ModelLayerLocation FROG_CART = new ModelLayerLocation(SkinnedCarts.modLoc("frog_cart"), "main");
+	public static final ModelLayerLocation PANDA_CART = new ModelLayerLocation(SkinnedCarts.modLoc("panda_cart"), "main");
+	public static final ModelLayerLocation PELICAN_CART = new ModelLayerLocation(SkinnedCarts.modLoc("pelican_cart"), "main");
+	public static final ModelLayerLocation PUFFERFISH_CART = new ModelLayerLocation(SkinnedCarts.modLoc("pufferfish_cart"), "main");
+	public static final ModelLayerLocation SNAIL_CART = new ModelLayerLocation(SkinnedCarts.modLoc("snail_cart"), "main");
+	public static final ModelLayerLocation TURTLE_CART = new ModelLayerLocation(SkinnedCarts.modLoc("turtle_cart"), "main");
+	public static final ModelLayerLocation BEE_CART = new ModelLayerLocation(SkinnedCarts.modLoc("bee_cart"), "main");
+	public static final ModelLayerLocation GREEN_FROG_CART = new ModelLayerLocation(SkinnedCarts.modLoc("green_frog_cart"), "main");
+	public static final ModelLayerLocation LADYBUG_CART = new ModelLayerLocation(SkinnedCarts.modLoc("ladybug_cart"), "main");
+	public static final ModelLayerLocation PENGUIN_CART = new ModelLayerLocation(SkinnedCarts.modLoc("penguin_cart"), "main");
+	public static final ModelLayerLocation WOMBAT_CART = new ModelLayerLocation(SkinnedCarts.modLoc("wombat_cart"), "main");
 
 	public static void registerEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(CartRegistry.BEE_CART.get(), RenderBeeCart::new);

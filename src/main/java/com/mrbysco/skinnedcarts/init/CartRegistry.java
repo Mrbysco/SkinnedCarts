@@ -17,7 +17,6 @@ import com.mrbysco.skinnedcarts.entity.WombatCartEntity;
 import com.mrbysco.skinnedcarts.items.CustomCartItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -63,7 +62,7 @@ public class CartRegistry {
 			}).build());
 
 	public static final DeferredHolder<SoundEvent, SoundEvent> WEDNESDAY_FROG_CART = SOUND_EVENTS.register("minecart.wednesday.frog", () ->
-			SoundEvent.createVariableRangeEvent(new ResourceLocation(SkinnedCarts.MOD_ID, "minecart.wednesday.frog")));
+			SoundEvent.createVariableRangeEvent(SkinnedCarts.modLoc("minecart.wednesday.frog")));
 
 	private static Item.Properties itemBuilder() {
 		return new Item.Properties();

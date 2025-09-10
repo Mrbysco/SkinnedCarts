@@ -169,7 +169,7 @@ public abstract class RenderSkinnedCart<T extends AbstractMinecart, S extends Mi
 
 	protected AABB getBoundingBoxForCulling(T cart) {
 		AABB aabb = super.getBoundingBoxForCulling(cart);
-		return cart.hasCustomDisplay() ? aabb.inflate((double) Math.abs(cart.getDisplayOffset()) / 16.0) : aabb;
+		return !cart.getDisplayBlockState().isAir() ? aabb.expandTowards(0.0, cart.getDisplayOffset() * 0.75F / 16.0F, 0.0) : aabb;
 	}
 
 	public Vec3 getRenderOffset(S renderState) {

@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public class CartDatagen {
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent.Client event) {

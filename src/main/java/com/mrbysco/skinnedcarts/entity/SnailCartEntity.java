@@ -11,18 +11,9 @@ public class SnailCartEntity extends AbstractSkinnedCart {
 		super(type, level);
 	}
 
-	public SnailCartEntity(EntityType<?> type, Level level, double x, double y, double z) {
-		super(type, level, x, y, z);
-	}
-
 	@Override
 	public EntityType<?> getType() {
 		return CartRegistry.SNAIL_CART.get();
-	}
-
-	@Override
-	public AbstractSkinnedCart.Type getSkinCartType() {
-		return Type.SNAIL;
 	}
 
 	@Override

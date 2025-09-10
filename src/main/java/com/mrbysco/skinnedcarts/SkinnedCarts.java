@@ -4,9 +4,10 @@ import com.mojang.logging.LogUtils;
 import com.mrbysco.skinnedcarts.client.ClientHandler;
 import com.mrbysco.skinnedcarts.config.CartConfig;
 import com.mrbysco.skinnedcarts.init.CartRegistry;
-import com.mrbysco.skinnedcarts.items.CustomCartItem;
+import net.minecraft.core.dispenser.MinecartDispenseItemBehavior;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.MinecartItem;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -45,8 +46,8 @@ public class SkinnedCarts {
 	private void setup(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			for (DeferredHolder<Item, ? extends Item> deferredHolder : CartRegistry.ITEMS.getEntries()) {
-				if (deferredHolder.get() instanceof CustomCartItem cart) {
-					DispenserBlock.registerBehavior(cart, CustomCartItem.MINECART_DISPENSER_BEHAVIOR);
+				if (deferredHolder.get() instanceof MinecartItem cart) {
+					DispenserBlock.registerBehavior(cart, new MinecartDispenseItemBehavior(cart.type));
 				}
 			}
 		});

@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "minecraft:brown_wool"
-    },
-    "M": {
-      "item": "minecraft:minecart"
-    }
+    "B": "minecraft:brown_wool",
+    "M": "minecraft:minecart"
   },
   "pattern": [
     "BBB",

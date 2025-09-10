@@ -1,21 +1,20 @@
 package com.mrbysco.skinnedcarts.client.render.model;
 
-import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.client.renderer.entity.state.MinecartRenderState;
 
-public class ModelSnail<T extends Entity> extends HierarchicalModel<T> {
-	private final ModelPart root;
+public class ModelSnail extends EntityModel<MinecartRenderState> {
 	private final ModelPart cart;
 
-	public ModelSnail(final ModelPart part) {
-		this.root = part;
-		this.cart = part.getChild("cart");
+	public ModelSnail(final ModelPart root) {
+		super(root);
+		this.cart = root.getChild("cart");
 	}
 
 	public static LayerDefinition createMesh() {
@@ -90,12 +89,8 @@ public class ModelSnail<T extends Entity> extends HierarchicalModel<T> {
 	}
 
 	@Override
-	public void setupAnim(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.cart.y = 4.0F - ageInTicks;
-	}
-
-	@Override
-	public ModelPart root() {
-		return this.root;
+	public void setupAnim(MinecartRenderState renderState) {
+		super.setupAnim(renderState);
+		this.cart.y = 4.0F;
 	}
 }

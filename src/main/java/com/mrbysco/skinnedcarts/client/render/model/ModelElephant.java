@@ -1,20 +1,19 @@
 package com.mrbysco.skinnedcarts.client.render.model;
 
-import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.client.renderer.entity.state.MinecartRenderState;
 
-public class ModelElephant<T extends Entity> extends HierarchicalModel<T> {
-	public final ModelPart root;
+public class ModelElephant extends EntityModel<MinecartRenderState> {
 	public final ModelPart cart;
 
 	public ModelElephant(final ModelPart part) {
-		this.root = part;
+		super(part);
 		this.cart = part.getChild("cart");
 	}
 
@@ -90,12 +89,8 @@ public class ModelElephant<T extends Entity> extends HierarchicalModel<T> {
 	}
 
 	@Override
-	public void setupAnim(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.cart.y = 4.0F - ageInTicks;
-	}
-
-	@Override
-	public ModelPart root() {
-		return this.root;
+	public void setupAnim(MinecartRenderState renderState) {
+		super.setupAnim(renderState);
+		this.cart.y = 4.0F;
 	}
 }

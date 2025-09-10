@@ -1,22 +1,22 @@
 package com.mrbysco.skinnedcarts.client.render.model;
 
-import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.client.renderer.entity.state.MinecartRenderState;
+import net.minecraft.util.Mth;
 
-public class ModelBee<T extends Entity> extends HierarchicalModel<T> {
+public class ModelBee extends EntityModel<MinecartRenderState> {
 
-	private final ModelPart root;
 	private final ModelPart cart;
 
-	public ModelBee(final ModelPart part) {
-		this.root = part;
-		this.cart = part.getChild("cart");
+	public ModelBee(final ModelPart root) {
+		super(root);
+		this.cart = root.getChild("cart");
 	}
 
 	public static LayerDefinition createMesh() {
@@ -96,12 +96,10 @@ public class ModelBee<T extends Entity> extends HierarchicalModel<T> {
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.cart.y = 4.0F - ageInTicks;
-	}
-
-	@Override
-	public ModelPart root() {
-		return this.root;
+	public void setupAnim(MinecartRenderState renderState) {
+		super.setupAnim(renderState);
+		float f2 = renderState.ageInTicks * 2.0F * (float) (Math.PI / 180.0);
+		float f3 = Mth.cos(f2) * (float) Math.PI * 0.15F;
+		this.cart.y = 4.0F + f3;
 	}
 }

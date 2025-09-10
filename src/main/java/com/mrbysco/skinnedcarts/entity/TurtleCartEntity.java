@@ -11,18 +11,9 @@ public class TurtleCartEntity extends AbstractSkinnedCart {
 		super(type, level);
 	}
 
-	public TurtleCartEntity(EntityType<?> type, Level level, double x, double y, double z) {
-		super(type, level, x, y, z);
-	}
-
 	@Override
 	public EntityType<?> getType() {
 		return CartRegistry.TURTLE_CART.get();
-	}
-
-	@Override
-	public AbstractSkinnedCart.Type getSkinCartType() {
-		return Type.TURTLE;
 	}
 
 	@Override

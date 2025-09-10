@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "G": {
-      "item": "minecraft:gray_wool"
-    },
-    "M": {
-      "item": "minecraft:minecart"
-    }
+    "G": "minecraft:gray_wool",
+    "M": "minecraft:minecart"
   },
   "pattern": [
     "GGG",

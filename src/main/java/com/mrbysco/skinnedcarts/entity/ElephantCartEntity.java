@@ -11,22 +11,14 @@ public class ElephantCartEntity extends AbstractSkinnedCart {
 		super(type, level);
 	}
 
-	public ElephantCartEntity(EntityType<?> type, Level level, double x, double y, double z) {
-		super(type, level, x, y, z);
-	}
-
 	@Override
 	public EntityType<?> getType() {
 		return CartRegistry.ELEPHANT_CART.get();
 	}
 
 	@Override
-	public AbstractSkinnedCart.Type getSkinCartType() {
-		return Type.ELEPHANT;
-	}
-
-	@Override
 	protected Item getReturnItem() {
 		return CartRegistry.ELEPHANT_CART_ITEM.get();
 	}
+
 }

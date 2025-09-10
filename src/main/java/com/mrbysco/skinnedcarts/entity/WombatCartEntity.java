@@ -11,18 +11,9 @@ public class WombatCartEntity extends AbstractSkinnedCart {
 		super(type, level);
 	}
 
-	public WombatCartEntity(EntityType<?> type, Level level, double x, double y, double z) {
-		super(type, level, x, y, z);
-	}
-
 	@Override
 	public EntityType<?> getType() {
 		return CartRegistry.WOMBAT_CART.get();
-	}
-
-	@Override
-	public AbstractSkinnedCart.Type getSkinCartType() {
-		return Type.WOMBAT;
 	}
 
 	@Override

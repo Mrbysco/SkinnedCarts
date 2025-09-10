@@ -11,18 +11,9 @@ public class PufferFishCartEntity extends AbstractSkinnedCart {
 		super(type, level);
 	}
 
-	public PufferFishCartEntity(EntityType<?> type, Level level, double x, double y, double z) {
-		super(type, level, x, y, z);
-	}
-
 	@Override
 	public EntityType<?> getType() {
 		return CartRegistry.PUFFERFISH_CART.get();
-	}
-
-	@Override
-	public AbstractSkinnedCart.Type getSkinCartType() {
-		return Type.PUFFERFISH;
 	}
 
 	@Override

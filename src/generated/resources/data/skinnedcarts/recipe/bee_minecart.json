@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "minecraft:black_wool"
-    },
-    "M": {
-      "item": "minecraft:minecart"
-    },
-    "Y": {
-      "item": "minecraft:yellow_wool"
-    }
+    "B": "minecraft:black_wool",
+    "M": "minecraft:minecart",
+    "Y": "minecraft:yellow_wool"
   },
   "pattern": [
     "YBY",

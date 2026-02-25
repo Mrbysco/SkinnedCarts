@@ -5,10 +5,10 @@ import com.mrbysco.skinnedcarts.client.render.model.ModelGreenFrog;
 import com.mrbysco.skinnedcarts.entity.AbstractSkinnedCart;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.MinecartRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class RenderGreenFrogCart<T extends AbstractSkinnedCart> extends RenderSkinnedCart<T, MinecartRenderState> {
-	private static final ResourceLocation CART_TEXTURES = createLocation("minecart_greenfrog");
+	private static final Identifier CART_TEXTURES = createLocation("minecart_greenfrog");
 
 	public RenderGreenFrogCart(EntityRendererProvider.Context context) {
 		super(context, new ModelGreenFrog(context.bakeLayer(ClientHandler.GREEN_FROG_CART)));
@@ -20,7 +20,7 @@ public class RenderGreenFrogCart<T extends AbstractSkinnedCart> extends RenderSk
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation() {
+	public Identifier getTextureLocation() {
 		return CART_TEXTURES;
 	}
 }

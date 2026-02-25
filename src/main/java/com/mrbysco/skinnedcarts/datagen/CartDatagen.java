@@ -12,7 +12,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -262,7 +262,7 @@ public class CartDatagen {
 					.with(sound(SkinnedCarts.modLoc("wednesday"))));
 		}
 
-		public String modSubtitle(ResourceLocation id) {
+		public String modSubtitle(Identifier id) {
 			return SkinnedCarts.MOD_ID + ".subtitle." + id.getPath();
 		}
 	}

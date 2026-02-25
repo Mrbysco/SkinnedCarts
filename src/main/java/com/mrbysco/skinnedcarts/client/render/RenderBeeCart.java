@@ -5,10 +5,10 @@ import com.mrbysco.skinnedcarts.client.render.model.ModelBee;
 import com.mrbysco.skinnedcarts.entity.AbstractSkinnedCart;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.MinecartRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class RenderBeeCart<T extends AbstractSkinnedCart> extends RenderSkinnedCart<T, MinecartRenderState> {
-	private static final ResourceLocation CART_TEXTURES = createLocation("minecart_bee");
+	private static final Identifier CART_TEXTURES = createLocation("minecart_bee");
 
 	public RenderBeeCart(EntityRendererProvider.Context context) {
 		super(context, new ModelBee(context.bakeLayer(ClientHandler.BEE_CART)));
@@ -20,7 +20,7 @@ public class RenderBeeCart<T extends AbstractSkinnedCart> extends RenderSkinnedC
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation() {
+	public Identifier getTextureLocation() {
 		return CART_TEXTURES;
 	}
 }

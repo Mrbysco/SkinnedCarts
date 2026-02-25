@@ -5,7 +5,7 @@ import com.mrbysco.skinnedcarts.client.ClientHandler;
 import com.mrbysco.skinnedcarts.config.CartConfig;
 import com.mrbysco.skinnedcarts.init.CartRegistry;
 import net.minecraft.core.dispenser.MinecartDispenseItemBehavior;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.MinecartItem;
 import net.minecraft.world.level.block.DispenserBlock;
@@ -53,7 +53,7 @@ public class SkinnedCarts {
 		});
 	}
 
-	public static ResourceLocation modLoc(String path) {
-		return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+	public static Identifier modLoc(String path) {
+		return Identifier.fromNamespaceAndPath(MOD_ID, path);
 	}
 }

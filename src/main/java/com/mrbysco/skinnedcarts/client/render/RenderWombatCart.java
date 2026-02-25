@@ -5,10 +5,10 @@ import com.mrbysco.skinnedcarts.client.render.model.ModelWombat;
 import com.mrbysco.skinnedcarts.entity.AbstractSkinnedCart;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.MinecartRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class RenderWombatCart<T extends AbstractSkinnedCart> extends RenderSkinnedCart<T, MinecartRenderState> {
-	private static final ResourceLocation CART_TEXTURES = createLocation("minecart_wombat");
+	private static final Identifier CART_TEXTURES = createLocation("minecart_wombat");
 
 	public RenderWombatCart(EntityRendererProvider.Context context) {
 		super(context, new ModelWombat(context.bakeLayer(ClientHandler.WOMBAT_CART)));
@@ -20,7 +20,7 @@ public class RenderWombatCart<T extends AbstractSkinnedCart> extends RenderSkinn
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation() {
+	public Identifier getTextureLocation() {
 		return CART_TEXTURES;
 	}
 }

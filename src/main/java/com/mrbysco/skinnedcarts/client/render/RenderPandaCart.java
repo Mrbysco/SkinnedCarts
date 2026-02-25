@@ -5,10 +5,10 @@ import com.mrbysco.skinnedcarts.client.render.model.ModelPanda;
 import com.mrbysco.skinnedcarts.entity.AbstractSkinnedCart;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.MinecartRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class RenderPandaCart<T extends AbstractSkinnedCart> extends RenderSkinnedCart<T, MinecartRenderState> {
-	private static final ResourceLocation CART_TEXTURES = createLocation("minecart_panda");
+	private static final Identifier CART_TEXTURES = createLocation("minecart_panda");
 
 	public RenderPandaCart(EntityRendererProvider.Context context) {
 		super(context, new ModelPanda(context.bakeLayer(ClientHandler.PANDA_CART)));
@@ -20,7 +20,7 @@ public class RenderPandaCart<T extends AbstractSkinnedCart> extends RenderSkinne
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation() {
+	public Identifier getTextureLocation() {
 		return CART_TEXTURES;
 	}
 }

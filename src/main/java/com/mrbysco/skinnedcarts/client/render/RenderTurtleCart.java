@@ -5,10 +5,10 @@ import com.mrbysco.skinnedcarts.client.render.model.ModelTurtle;
 import com.mrbysco.skinnedcarts.entity.AbstractSkinnedCart;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.MinecartRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class RenderTurtleCart<T extends AbstractSkinnedCart> extends RenderSkinnedCart<T, MinecartRenderState> {
-	private static final ResourceLocation CART_TEXTURES = createLocation("minecart_turtle");
+	private static final Identifier CART_TEXTURES = createLocation("minecart_turtle");
 
 	public RenderTurtleCart(EntityRendererProvider.Context context) {
 		super(context, new ModelTurtle(context.bakeLayer(ClientHandler.TURTLE_CART)));
@@ -20,7 +20,7 @@ public class RenderTurtleCart<T extends AbstractSkinnedCart> extends RenderSkinn
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation() {
+	public Identifier getTextureLocation() {
 		return CART_TEXTURES;
 	}
 }

@@ -1,21 +1,24 @@
 package com.mrbysco.skinnedcarts.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.mrbysco.skinnedcarts.SkinnedCarts;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
-import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.AbstractMinecartRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.entity.state.MinecartRenderState;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.vehicle.AbstractMinecart;
-import net.minecraft.world.entity.vehicle.NewMinecartBehavior;
-import net.minecraft.world.entity.vehicle.OldMinecartBehavior;
+import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
+import net.minecraft.world.entity.vehicle.minecart.NewMinecartBehavior;
+import net.minecraft.world.entity.vehicle.minecart.OldMinecartBehavior;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -23,25 +26,31 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.Objects;
 
-public abstract class RenderSkinnedCart<T extends AbstractMinecart, S extends MinecartRenderState> extends EntityRenderer<T, S> {
-	private static final ResourceLocation CART_TEXTURES = createLocation("minecart_frog");
+public abstract class RenderSkinnedCart<T extends AbstractMinecart, S extends MinecartRenderState> extends AbstractMinecartRenderer<T, S> {
+	private static final Identifier CART_TEXTURES = createLocation("minecart_frog");
 	private final BlockRenderDispatcher blockRenderer;
 	private final EntityModel<S> cartModel;
 
 	public RenderSkinnedCart(EntityRendererProvider.Context context, EntityModel<S> model) {
-		super(context);
+		super(context, ModelLayers.MINECART);
 		this.blockRenderer = context.getBlockRenderDispatcher();
 		this.cartModel = model;
 		this.shadowRadius = 0.7F;
 	}
 
-	public static ResourceLocation createLocation(String cartName) {
+	public static Identifier createLocation(String cartName) {
 		return SkinnedCarts.modLoc("textures/entity/" + cartName + ".png");
 	}
 
-	@Override
-	public void render(S renderState, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-		super.render(renderState, poseStack, bufferSource, packedLight);
+	public void submit(S renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector, CameraRenderState cameraRenderState) {
+		if (renderState.leashStates != null) {
+			for (EntityRenderState.LeashState entityrenderstate$leashstate : renderState.leashStates) {
+				nodeCollector.submitLeash(poseStack, entityrenderstate$leashstate);
+			}
+		}
+
+		this.submitNameTag(renderState, poseStack, nodeCollector, cameraRenderState);
+
 		poseStack.pushPose();
 		long i = renderState.offsetSeed;
 		float f = (((float) (i >> 16 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
@@ -56,24 +65,31 @@ public abstract class RenderSkinnedCart<T extends AbstractMinecart, S extends Mi
 
 		float f3 = renderState.hurtTime;
 		if (f3 > 0.0F) {
-			poseStack.mulPose(Axis.XP.rotationDegrees(Mth.sin(f3) * f3 * renderState.damageTime / 10.0F * (float) renderState.hurtDir));
+			poseStack.mulPose(Axis.XP.rotationDegrees(Mth.sin(f3) * f3 * renderState.damageTime / 10.0F * renderState.hurtDir));
 		}
 
 		BlockState blockstate = renderState.displayBlockState;
 		if (blockstate.getRenderShape() != RenderShape.INVISIBLE) {
 			poseStack.pushPose();
-			float f4 = 0.75F;
 			poseStack.scale(0.75F, 0.75F, 0.75F);
-			poseStack.translate(-0.5F, (float) (renderState.displayOffset - 8) / 16.0F, 0.5F);
+			poseStack.translate(-0.5F, (renderState.displayOffset - 8) / 16.0F, 0.5F);
 			poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
-			this.renderMinecartContents(renderState, blockstate, poseStack, bufferSource, packedLight);
+			this.submitMinecartContents(renderState, blockstate, poseStack, nodeCollector, renderState.lightCoords);
 			poseStack.popPose();
 		}
 
 		poseStack.scale(-1.0F, -1.0F, 1.0F);
 		this.cartModel.setupAnim(renderState);
-		VertexConsumer vertexconsumer = bufferSource.getBuffer(this.cartModel.renderType(this.getTextureLocation()));
-		this.cartModel.renderToBuffer(poseStack, vertexconsumer, packedLight, OverlayTexture.NO_OVERLAY);
+		nodeCollector.submitModel(
+				this.cartModel,
+				renderState,
+				poseStack,
+				this.cartModel.renderType(this.getTextureLocation()),
+				renderState.lightCoords,
+				OverlayTexture.NO_OVERLAY,
+				renderState.outlineColor,
+				null
+		);
 		poseStack.popPose();
 	}
 
@@ -179,7 +195,7 @@ public abstract class RenderSkinnedCart<T extends AbstractMinecart, S extends Mi
 				: vec3;
 	}
 
-	public ResourceLocation getTextureLocation() {
+	public Identifier getTextureLocation() {
 		return CART_TEXTURES;
 	}
 }

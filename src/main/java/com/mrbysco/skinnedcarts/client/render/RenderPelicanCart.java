@@ -5,10 +5,10 @@ import com.mrbysco.skinnedcarts.client.render.model.ModelPelican;
 import com.mrbysco.skinnedcarts.entity.AbstractSkinnedCart;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.MinecartRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class RenderPelicanCart<T extends AbstractSkinnedCart> extends RenderSkinnedCart<T, MinecartRenderState> {
-	private static final ResourceLocation CART_TEXTURES = createLocation("minecart_pelican");
+	private static final Identifier CART_TEXTURES = createLocation("minecart_pelican");
 
 	public RenderPelicanCart(EntityRendererProvider.Context context) {
 		super(context, new ModelPelican(context.bakeLayer(ClientHandler.PELICAN_CART)));
@@ -20,7 +20,7 @@ public class RenderPelicanCart<T extends AbstractSkinnedCart> extends RenderSkin
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation() {
+	public Identifier getTextureLocation() {
 		return CART_TEXTURES;
 	}
 }

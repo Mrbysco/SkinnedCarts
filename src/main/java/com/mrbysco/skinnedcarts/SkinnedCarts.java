@@ -1,7 +1,6 @@
 package com.mrbysco.skinnedcarts;
 
 import com.mojang.logging.LogUtils;
-import com.mrbysco.skinnedcarts.client.ClientHandler;
 import com.mrbysco.skinnedcarts.config.CartConfig;
 import com.mrbysco.skinnedcarts.init.CartRegistry;
 import net.minecraft.core.dispenser.MinecartDispenseItemBehavior;
@@ -38,8 +37,6 @@ public class SkinnedCarts {
 
 		if (dist.isClient()) {
 			container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
-			eventBus.addListener(ClientHandler::registerEntityRenders);
-			eventBus.addListener(ClientHandler::registerLayerDefinitions);
 		}
 	}
 

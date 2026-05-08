@@ -5,22 +5,20 @@ import com.mojang.math.Axis;
 import com.mrbysco.skinnedcarts.SkinnedCarts;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.SubmitNodeCollector;
-import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.client.renderer.block.BlockModelRenderState;
+import net.minecraft.client.renderer.block.BlockModelResolver;
 import net.minecraft.client.renderer.entity.AbstractMinecartRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.entity.state.MinecartRenderState;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
 import net.minecraft.world.entity.vehicle.minecart.NewMinecartBehavior;
 import net.minecraft.world.entity.vehicle.minecart.OldMinecartBehavior;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
@@ -28,12 +26,12 @@ import java.util.Objects;
 
 public abstract class RenderSkinnedCart<T extends AbstractMinecart, S extends MinecartRenderState> extends AbstractMinecartRenderer<T, S> {
 	private static final Identifier CART_TEXTURES = createLocation("minecart_frog");
-	private final BlockRenderDispatcher blockRenderer;
 	private final EntityModel<S> cartModel;
+	private final BlockModelResolver blockModelResolver;
 
 	public RenderSkinnedCart(EntityRendererProvider.Context context, EntityModel<S> model) {
 		super(context, ModelLayers.MINECART);
-		this.blockRenderer = context.getBlockRenderDispatcher();
+		this.blockModelResolver = context.getBlockModelResolver();
 		this.cartModel = model;
 		this.shadowRadius = 0.7F;
 	}
@@ -48,8 +46,6 @@ public abstract class RenderSkinnedCart<T extends AbstractMinecart, S extends Mi
 				nodeCollector.submitLeash(poseStack, entityrenderstate$leashstate);
 			}
 		}
-
-		this.submitNameTag(renderState, poseStack, nodeCollector, cameraRenderState);
 
 		poseStack.pushPose();
 		long i = renderState.offsetSeed;
@@ -68,13 +64,13 @@ public abstract class RenderSkinnedCart<T extends AbstractMinecart, S extends Mi
 			poseStack.mulPose(Axis.XP.rotationDegrees(Mth.sin(f3) * f3 * renderState.damageTime / 10.0F * renderState.hurtDir));
 		}
 
-		BlockState blockstate = renderState.displayBlockState;
-		if (blockstate.getRenderShape() != RenderShape.INVISIBLE) {
+		BlockModelRenderState displayBlockModel = renderState.displayBlockModel;
+		if (!displayBlockModel.isEmpty()) {
 			poseStack.pushPose();
 			poseStack.scale(0.75F, 0.75F, 0.75F);
 			poseStack.translate(-0.5F, (renderState.displayOffset - 8) / 16.0F, 0.5F);
 			poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
-			this.submitMinecartContents(renderState, blockstate, poseStack, nodeCollector, renderState.lightCoords);
+			this.submitMinecartContents(renderState, displayBlockModel, poseStack, nodeCollector, renderState.lightCoords);
 			poseStack.popPose();
 		}
 
@@ -139,7 +135,7 @@ public abstract class RenderSkinnedCart<T extends AbstractMinecart, S extends Mi
 		renderState.hurtDir = cart.getHurtDir();
 		renderState.damageTime = Math.max(cart.getDamage() - partialTick, 0.0F);
 		renderState.displayOffset = cart.getDisplayOffset();
-		renderState.displayBlockState = cart.getDisplayBlockState();
+		this.blockModelResolver.update(renderState.displayBlockModel, cart.getDisplayBlockState(), BLOCK_DISPLAY_CONTEXT);
 	}
 
 	private static <T extends AbstractMinecart, S extends MinecartRenderState> void newExtractState(
@@ -159,7 +155,6 @@ public abstract class RenderSkinnedCart<T extends AbstractMinecart, S extends Mi
 	private static <T extends AbstractMinecart, S extends MinecartRenderState> void oldExtractState(
 			T minecart, OldMinecartBehavior behavior, S renderState, float partialTick
 	) {
-		float f = 0.3F;
 		renderState.xRot = minecart.getXRot(partialTick);
 		renderState.yRot = minecart.getYRot(partialTick);
 		double d0 = renderState.x;
@@ -177,10 +172,6 @@ public abstract class RenderSkinnedCart<T extends AbstractMinecart, S extends Mi
 			renderState.frontPos = null;
 			renderState.backPos = null;
 		}
-	}
-
-	protected void renderMinecartContents(S renderState, BlockState state, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-		this.blockRenderer.renderSingleBlock(state, poseStack, bufferSource, packedLight, OverlayTexture.NO_OVERLAY);
 	}
 
 	protected AABB getBoundingBoxForCulling(T cart) {

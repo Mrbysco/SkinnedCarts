@@ -27,8 +27,12 @@ import com.mrbysco.skinnedcarts.client.render.model.ModelTurtle;
 import com.mrbysco.skinnedcarts.client.render.model.ModelWombat;
 import com.mrbysco.skinnedcarts.init.CartRegistry;
 import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
+@EventBusSubscriber(Dist.CLIENT)
 public class ClientHandler {
 	public static final ModelLayerLocation ELEPHANT_CART = new ModelLayerLocation(SkinnedCarts.modLoc("elephant_cart"), "main");
 	public static final ModelLayerLocation FROG_CART = new ModelLayerLocation(SkinnedCarts.modLoc("frog_cart"), "main");
@@ -43,6 +47,7 @@ public class ClientHandler {
 	public static final ModelLayerLocation PENGUIN_CART = new ModelLayerLocation(SkinnedCarts.modLoc("penguin_cart"), "main");
 	public static final ModelLayerLocation WOMBAT_CART = new ModelLayerLocation(SkinnedCarts.modLoc("wombat_cart"), "main");
 
+	@SubscribeEvent
 	public static void registerEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(CartRegistry.BEE_CART.get(), RenderBeeCart::new);
 		event.registerEntityRenderer(CartRegistry.ELEPHANT_CART.get(), RenderElephantCart::new);
@@ -58,6 +63,7 @@ public class ClientHandler {
 		event.registerEntityRenderer(CartRegistry.WOMBAT_CART.get(), RenderWombatCart::new);
 	}
 
+	@SubscribeEvent
 	public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		event.registerLayerDefinition(BEE_CART, ModelBee::createMesh);
 		event.registerLayerDefinition(ELEPHANT_CART, ModelElephant::createMesh);
